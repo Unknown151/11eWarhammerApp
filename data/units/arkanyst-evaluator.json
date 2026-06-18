@@ -4,7 +4,7 @@
   "type": ["Character", "Infantry"],
   "keywords": ["INFANTRY", "CHARACTER", "ARKANYST EVALUATOR"],
   "isLeader": false,
-  "points": 65,
+  "points": 70,
   "models": 1,
   "stats": {
     "m": "5\"",

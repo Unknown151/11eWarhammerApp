@@ -5,7 +5,7 @@
   "keywords": ["INFANTRY", "CHARACTER", "EPIC HERO", "KÂHL", "ÛTHAR THE DESTINED"],
   "isLeader": true,
   "isEpicHero": true,
-  "points": 95,
+  "points": 90,
   "models": 1,
   "stats": {
     "m": "5\"",

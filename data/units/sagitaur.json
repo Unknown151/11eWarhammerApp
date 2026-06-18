@@ -4,7 +4,7 @@
   "type": ["Dedicated Transport", "Vehicle"],
   "keywords": ["VEHICLE", "TRANSPORT", "DEDICATED TRANSPORT", "SAGITAUR"],
   "isLeader": false,
-  "points": 90,
+  "points": 85,
   "models": 1,
   "stats": {
     "m": "12\"",

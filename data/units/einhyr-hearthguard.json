@@ -4,11 +4,18 @@
   "type": ["Infantry", "Exo-armour"],
   "keywords": ["INFANTRY", "EXO-ARMOUR", "EINHYR HEARTHGUARD"],
   "isLeader": false,
-  "points": 135,
+  "points": 130,
   "models": 5,
   "baseModels": 5,
   "maxModels": 10,
   "modelBreakdown": "1 Hesyr + 4 Hearthguard",
+  "costing": {
+    "escalationAfter": 2,
+    "tiers": [
+      [{ "models": 5, "points": 130 }, { "models": 10, "points": 270 }],
+      [{ "models": 5, "points": 140 }, { "models": 10, "points": 280 }]
+    ]
+  },
   "stats": {
     "m": "5\"",
     "t": 5,

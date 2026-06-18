@@ -2335,17 +2335,18 @@ function renderArmyInstance(instance) {
 
     let bodyContent = '';
 
-    // Model count - use baseModels as min and maxModels as max if available
-    const minModels = unit.baseModels || 1;
-    const maxModels = unit.maxModels || unit.models || 20;
-    bodyContent += `
-        <div class="model-count-row">
-            <span class="model-count-label">Models:</span>
-            <button class="weapon-count-btn" onclick="event.preventDefault();adjustModelCount('${instance.instanceId}',-1,${minModels},${maxModels})">−</button>
-            <span class="weapon-count-display">${instance.modelCount}</span>
-            <button class="weapon-count-btn" onclick="event.preventDefault();adjustModelCount('${instance.instanceId}',1,${minModels},${maxModels})">+</button>
-        </div>
-    `;
+    // Model count - stepper snaps between the unit's valid sizes (only shown if >1 size)
+    const unitSizes = getUnitSizes(unit);
+    if (unitSizes.length > 1) {
+        bodyContent += `
+            <div class="model-count-row">
+                <span class="model-count-label">Models:</span>
+                <button class="weapon-count-btn" onclick="event.preventDefault();adjustModelCount('${instance.instanceId}',-1)">−</button>
+                <span class="weapon-count-display">${instance.modelCount}</span>
+                <button class="weapon-count-btn" onclick="event.preventDefault();adjustModelCount('${instance.instanceId}',1)">+</button>
+            </div>
+        `;
+    }
 
     // Leader assignment dropdown (for non-leader units that can be led)
     if (!isLeader && canBeLeadBy.length > 0) {
@@ -2415,7 +2416,7 @@ function renderArmyInstance(instance) {
                     <div class="army-instance-name">${escHtml(unit.name)}</div>
                     <div class="army-instance-details">${instance.modelCount}x ${escHtml(unit.name)} • ${escHtml(weaponDetails)}</div>
                 </div>
-                <div class="army-instance-points">${instancePoints} pts</div>
+                <div class="army-instance-points"${isInstanceEscalated(instance) ? ' title="Escalated cost — this is a higher-tier copy of this datasheet in your army"' : ''}>${instancePoints} pts${isInstanceEscalated(instance) ? ' ↑' : ''}</div>
                 <div class="inst-actions">
                     <button class="inst-actions-btn" onclick="toggleInstanceMenu('${instance.instanceId}', event)" aria-label="Unit actions">⋮</button>
                     <div class="inst-actions-menu" id="inst-menu-${instance.instanceId}">
@@ -2451,16 +2452,57 @@ function getWeaponSummary(instance) {
     return weapons.slice(0, 2).join(', ') + (weapons.length > 2 ? '...' : '') || 'No weapons';
 }
 
+// Ascending list of valid model counts for a unit (drawn from its costing tiers)
+function getUnitSizes(unit) {
+    if (unit?.costing?.tiers?.length) {
+        return unit.costing.tiers[0].map(s => s.models);
+    }
+    return [unit?.models || 1];
+}
+
+// 1-based position of this instance among instances of the same datasheet (army order)
+function getUnitCopyIndex(instance) {
+    let idx = 0;
+    for (const inst of armyList) {
+        if (inst.unitId === instance.unitId) {
+            idx++;
+            if (inst.instanceId === instance.instanceId) return idx;
+        }
+    }
+    return idx > 0 ? idx : 1;
+}
+
+// Whether this instance is charged the escalated (3rd+ / 2nd+) rate
+function isInstanceEscalated(instance) {
+    const unit = units[instance.unitId];
+    const after = unit?.costing?.escalationAfter;
+    if (!after || (unit.costing.tiers?.length || 0) < 2) return false;
+    return getUnitCopyIndex(instance) > after;
+}
+
+// Base unit cost for a given model count and copy index, honouring escalating costs
+function getUnitSizePoints(unit, modelCount, copyIndex) {
+    if (unit?.costing?.tiers?.length) {
+        const tiers = unit.costing.tiers;
+        const after = unit.costing.escalationAfter;
+        const tierIdx = (after && copyIndex > after) ? tiers.length - 1 : 0;
+        const sizes = tiers[tierIdx];
+        // smallest size that can hold modelCount (sizes are ascending), else the largest
+        const fit = sizes.find(s => s.models >= modelCount) || sizes[sizes.length - 1];
+        return fit.points;
+    }
+    // Legacy fallback: double when above baseModels
+    let points = unit?.points || 0;
+    if (unit?.baseModels && modelCount > unit.baseModels) points *= 2;
+    return points;
+}
+
 // Calculate points for an instance
 function calculateInstancePoints(instance) {
     const unit = units[instance.unitId];
     if (!unit) return 0;
 
-    // Tier-based points: if unit has baseModels and modelCount exceeds it, double the points
-    let points = unit.points || 0;
-    if (unit.baseModels && instance.modelCount > unit.baseModels) {
-        points = points * 2;
-    }
+    let points = getUnitSizePoints(unit, instance.modelCount, getUnitCopyIndex(instance));
 
     // Add leader points if attached
     if (instance.leaderId && units[instance.leaderId]) {
@@ -2722,15 +2764,22 @@ function setInstanceModelCount(instanceId, count) {
 }
 
 // Adjust model count by delta (+1 or -1) with min/max constraints
-function adjustModelCount(instanceId, delta, min, max) {
+function adjustModelCount(instanceId, delta) {
     const instance = armyList.find(i => i.instanceId === instanceId);
-    if (instance) {
-        const newCount = Math.min(max, Math.max(min, instance.modelCount + delta));
-        instance.modelCount = newCount;
-        saveArmyList();
-        renderConfigurationTab();
-        renderUnits();
+    if (!instance) return;
+    const unit = units[instance.unitId];
+    const sizes = getUnitSizes(unit); // ascending model counts
+    let idx = sizes.indexOf(instance.modelCount);
+    if (idx === -1) {
+        // current count isn't an exact size (e.g. legacy data) — snap to nearest valid bracket
+        idx = sizes.findIndex(s => s >= instance.modelCount);
+        if (idx === -1) idx = sizes.length - 1;
     }
+    idx = Math.min(sizes.length - 1, Math.max(0, idx + delta));
+    instance.modelCount = sizes[idx];
+    saveArmyList();
+    renderConfigurationTab();
+    renderUnits();
 }
 
 // Set instance weapon equipped state

@@ -4,8 +4,15 @@
   "type": ["Vehicle"],
   "keywords": ["VEHICLE", "TRANSPORT", "HEKATON LAND FORTRESS"],
   "isLeader": false,
-  "points": 240,
+  "points": 250,
   "models": 1,
+  "costing": {
+    "escalationAfter": 1,
+    "tiers": [
+      [{ "models": 1, "points": 250 }],
+      [{ "models": 1, "points": 265 }]
+    ]
+  },
   "stats": {
     "m": "10\"",
     "t": 12,

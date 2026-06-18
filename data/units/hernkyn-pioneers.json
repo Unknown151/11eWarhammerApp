@@ -6,6 +6,15 @@
   "isLeader": false,
   "points": 80,
   "models": 3,
+  "baseModels": 3,
+  "maxModels": 6,
+  "costing": {
+    "escalationAfter": 2,
+    "tiers": [
+      [{ "models": 3, "points": 80 }, { "models": 6, "points": 160 }],
+      [{ "models": 3, "points": 90 }, { "models": 6, "points": 170 }]
+    ]
+  },
   "stats": {
     "m": "12\"",
     "t": 6,

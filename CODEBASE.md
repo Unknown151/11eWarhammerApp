@@ -421,10 +421,24 @@ Displays: `name` as title, `type` as subtitle, `description` as HTML body.
 ## Points Calculation
 
 **`calculateInstancePoints(instance)`**:
-- Base: `unit.points` (for `baseModels` count)
-- Scale: if `modelCount > baseModels` → points × 2 (or `+ (modelCount - baseModels) * unit.pointsPerModel` if defined)
+- Base: `getUnitSizePoints(unit, modelCount, copyIndex)` — looks up the exact cost for the chosen model count from `unit.costing.tiers`
 - Add: enhancement points (`enhancements[enhancementId].points`)
 - Add: leader points (if `leaderId` is set, add leader unit's `points`)
+
+**`unit.costing`** (escalating / per-size pricing):
+```json
+"costing": {
+  "escalationAfter": 2,                 // optional; copies beyond this index pay the last tier
+  "tiers": [
+    [{ "models": 3, "points": 80 }, { "models": 6, "points": 160 }],   // 1st–2nd copy
+    [{ "models": 3, "points": 90 }, { "models": 6, "points": 170 }]    // 3rd+ copy
+  ]
+}
+```
+- Each tier lists explicit `{ models, points }` sizes (no doubling — the 10-model price can differ from 2× the 5-model price).
+- `getUnitCopyIndex(instance)` returns the 1-based position of the instance among same-datasheet instances (army-list order). When it exceeds `escalationAfter`, the last tier is used (e.g. Hekaton uses `escalationAfter: 1` → the 2nd+ copy costs more).
+- Units without `costing` fall back to legacy `unit.points` (doubled when `modelCount > baseModels`).
+- The model-count stepper (`adjustModelCount`) snaps between the sizes defined in the first tier; it's hidden for single-size units.
 
 **`updateConfigPoints()`**: sums all instances, updates the points display, and (if `pointsLimit > 0`) colours the total green/amber/red, shows `/ XXXX` label, and fills a progress bar.
 
@@ -544,5 +558,6 @@ See the **Adding a stratagem effect to weapon rendering** section above.
 
 ### Add scalable model counts (e.g. 5 or 10 models)
 1. Set `"baseModels": 5, "maxModels": 10` in the unit JSON
-2. Points double when `modelCount > baseModels` (handled by `calculateInstancePoints`)
-3. Weapon counts scale automatically if set to match `baseModels` in the JSON
+2. Add a `costing` block with the explicit per-size prices (see **Points Calculation**). The stepper snaps between the sizes listed in `tiers[0]`.
+3. For escalating costs (a copy beyond the Nth costs more), add `"escalationAfter": N` and a second tier.
+4. Weapon counts scale automatically if set to match `baseModels` in the JSON

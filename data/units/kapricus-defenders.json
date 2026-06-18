@@ -4,8 +4,15 @@
   "type": ["Vehicle"],
   "keywords": ["VEHICLE", "FLY", "HERNKYN", "KAPRICUS", "DEFENDERS"],
   "isLeader": false,
-  "points": 70,
+  "points": 65,
   "models": 1,
+  "baseModels": 1,
+  "maxModels": 2,
+  "costing": {
+    "tiers": [
+      [{ "models": 1, "points": 65 }, { "models": 2, "points": 130 }]
+    ]
+  },
   "stats": {
     "m": "12\"",
     "t": 7,
