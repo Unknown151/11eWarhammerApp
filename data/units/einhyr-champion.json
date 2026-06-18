@@ -4,7 +4,7 @@
   "type": ["Character", "Infantry", "Exo-armour"],
   "keywords": ["INFANTRY", "CHARACTER", "EXO-ARMOUR", "EINHYR CHAMPION"],
   "isLeader": true,
-  "points": 95,
+  "points": 70,
   "models": 1,
   "stats": {
     "m": "5\"",
