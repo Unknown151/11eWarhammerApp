@@ -3374,7 +3374,7 @@ function selectStratPhase(phase) {
 function renderStratCard(id, strat) {
     const isDet = !!strat.detachment;
     const costs = [];
-    if (strat.cpCost > 0 || strat.ypCost === 0) costs.push(`<span class="strat-card-cost cp">${strat.cpCost}CP</span>`);
+    if (!strat.isRule && (strat.cpCost > 0 || strat.ypCost === 0)) costs.push(`<span class="strat-card-cost cp">${strat.cpCost}CP</span>`);
     if (strat.ypCost > 0) costs.push(`<span class="strat-card-cost yp">${strat.ypCost}YP</span>`);
     const turnLabel = { either: 'Either', your: 'Your Turn', opponent: "Opp's Turn" }[strat.turn] || '';
     const turnClass = strat.turn || 'either';
