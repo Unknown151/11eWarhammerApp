@@ -1,0 +1,63 @@
+{
+  "id": "buri-aegnirssen",
+  "name": "Buri Aegnirssen",
+  "type": ["Character", "Infantry"],
+  "keywords": ["INFANTRY", "CHARACTER", "EPIC HERO", "BURI AEGNIRSSEN"],
+  "isLeader": false,
+  "isEpicHero": true,
+  "points": 95,
+  "models": 1,
+  "stats": {
+    "m": "5\"",
+    "t": 6,
+    "sv": "3+",
+    "w": 5,
+    "ld": "6+",
+    "oc": 1
+  },
+  "invulnerableSave": "4+",
+  "weapons": {
+    "ranged": [
+      {
+        "name": "Autoch-pattern bolt pistol",
+        "range": "12\"",
+        "a": "1",
+        "bs": "2+",
+        "s": "4",
+        "ap": "0",
+        "d": "1",
+        "abilities": ["pistol"],
+        "inheritedAbilities": []
+      }
+    ],
+    "melee": [
+      {
+        "name": "Bane – strike",
+        "a": "5",
+        "ws": "2+",
+        "s": "12",
+        "ap": "-3",
+        "d": "3",
+        "abilities": ["precision"],
+        "inheritedAbilities": [],
+        "weaponGroup": "bane",
+        "weaponGroupLabel": "Choose one profile per fight phase"
+      },
+      {
+        "name": "Bane – sweep",
+        "a": "10",
+        "ws": "2+",
+        "s": "6",
+        "ap": "-2",
+        "d": "1",
+        "abilities": [],
+        "inheritedAbilities": [],
+        "weaponGroup": "bane"
+      }
+    ]
+  },
+  "abilities": ["grudge-fuelled-fortitude", "unhinged-vengeance"],
+  "coreAbilities": ["lone-operative", "stealth"],
+  "wargear": [],
+  "wargearOptions": []
+}

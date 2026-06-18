@@ -1,0 +1,123 @@
+{
+  "id": "hekaton-land-fortress",
+  "name": "Hekaton Land Fortress",
+  "type": ["Vehicle"],
+  "keywords": ["VEHICLE", "TRANSPORT", "HEKATON LAND FORTRESS"],
+  "isLeader": false,
+  "points": 240,
+  "models": 1,
+  "stats": {
+    "m": "10\"",
+    "t": 12,
+    "sv": "2+",
+    "w": 16,
+    "ld": "7+",
+    "oc": 5
+  },
+  "invulnerableSave": null,
+  "transportCapacity": 14,
+  "damagedProfile": "1-5",
+  "weapons": {
+    "ranged": [
+      {
+        "name": "Cyclic ion cannon",
+        "range": "24\"",
+        "a": "D6+2",
+        "bs": "4+",
+        "s": "7",
+        "ap": "-2",
+        "d": "2",
+        "abilities": ["blast"],
+        "inheritedAbilities": ["reroll-hit-1", "multicog-targeting"]
+      },
+      {
+        "name": "Heavy magna-rail cannon",
+        "range": "30\"",
+        "a": "2",
+        "bs": "4+",
+        "s": "18",
+        "ap": "-4",
+        "d": "D6+4",
+        "abilities": ["devastating-wounds", "heavy"],
+        "inheritedAbilities": ["reroll-hit-1", "multicog-targeting"]
+      },
+      {
+        "name": "Hekaton warhead",
+        "range": "36\"",
+        "a": "D6+3",
+        "bs": "4+",
+        "s": "7",
+        "ap": "-2",
+        "d": "2",
+        "abilities": ["blast", "one-shot"],
+        "inheritedAbilities": ["reroll-hit-1", "multicog-targeting"]
+      },
+      {
+        "name": "MATR autocannon",
+        "range": "24\"",
+        "a": "6",
+        "bs": "4+",
+        "s": "7",
+        "ap": "-1",
+        "d": "2",
+        "abilities": ["assault", {"id": "sustained-hits", "display": "Sustained Hits 1"}],
+        "inheritedAbilities": ["reroll-hit-1", "multicog-targeting"]
+      },
+      {
+        "name": "SP heavy conversion beamer",
+        "range": "24\"",
+        "a": "4",
+        "bs": "4+",
+        "s": "10",
+        "ap": "-2",
+        "d": "4",
+        "abilities": ["conversion", "lethal-hits"],
+        "inheritedAbilities": ["reroll-hit-1", "multicog-targeting"]
+      },
+      {
+        "name": "Twin bolt cannon",
+        "range": "36\"",
+        "a": "3",
+        "bs": "4+",
+        "s": "6",
+        "ap": "-1",
+        "d": "2",
+        "abilities": [{"id": "sustained-hits", "display": "Sustained Hits 2"}, "twin-linked"],
+        "inheritedAbilities": ["reroll-hit-1", "multicog-targeting"]
+      },
+      {
+        "name": "Twin ion beamer",
+        "range": "18\"",
+        "a": "D3+1",
+        "bs": "4+",
+        "s": "8",
+        "ap": "-2",
+        "d": "1",
+        "abilities": ["blast", "twin-linked"],
+        "inheritedAbilities": ["reroll-hit-1", "multicog-targeting"]
+      }
+    ],
+    "melee": [
+      {
+        "name": "Armoured wheels",
+        "a": "6",
+        "ws": "4+",
+        "s": "8",
+        "ap": "0",
+        "d": "1",
+        "abilities": [],
+        "inheritedAbilities": []
+      }
+    ]
+  },
+  "abilities": ["multicog-targeting"],
+  "coreAbilities": ["deadly-demise-d6"],
+  "wargear": ["panspectral-scanner"],
+  "wargearOptions": [
+    "This model's 2 twin bolt cannons can be replaced with one of the following: 1 twin bolt cannon and 1 twin ion beamer.",
+    "This model's 2 twin bolt cannons can be replaced with one of the following: 2 twin ion beamers.",
+    "This model's cyclic ion cannon can be replaced with one of the following: 1 SP heavy conversion beamer.",
+    "This model's cyclic ion cannon can be replaced with one of the following: 1 heavy magna-rail cannon.",
+    "This model's panspectral scanner can be replaced with 1 Hekaton warhead."
+  ]
+}

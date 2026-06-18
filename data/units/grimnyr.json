@@ -1,0 +1,90 @@
+{
+  "id": "grimnyr",
+  "name": "Grimnyr",
+  "type": ["Character", "Infantry", "Psyker"],
+  "keywords": ["INFANTRY", "CHARACTER", "PSYKER", "GRIMNYR"],
+  "isLeader": true,
+  "points": 65,
+  "models": 2,
+  "modelBreakdown": "1 Grimnyr + 1 CORV",
+  "stats": {
+    "m": "5\"",
+    "t": 5,
+    "sv": "4+",
+    "w": 4,
+    "ld": "6+",
+    "oc": 1
+  },
+  "invulnerableSave": "4+",
+  "weapons": {
+    "ranged": [
+      {
+        "name": "Ancestral Wrath – witchfire",
+        "range": "24\"",
+        "a": "3",
+        "bs": "3+",
+        "s": "6",
+        "ap": "-2",
+        "d": "D3",
+        "abilities": ["psychic"],
+        "inheritedAbilities": [],
+        "weaponGroup": "ancestral-wrath",
+        "weaponGroupLabel": "Choose one profile per shooting phase"
+      },
+      {
+        "name": "Ancestral Wrath – focused witchfire",
+        "range": "24\"",
+        "a": "6",
+        "bs": "3+",
+        "s": "6",
+        "ap": "-2",
+        "d": "D3",
+        "abilities": ["hazardous", "psychic"],
+        "inheritedAbilities": [],
+        "weaponGroup": "ancestral-wrath"
+      },
+      {
+        "name": "Autoch-pattern bolter",
+        "range": "24\"",
+        "a": "2",
+        "bs": "4+",
+        "s": "4",
+        "ap": "0",
+        "d": "1",
+        "abilities": [],
+        "inheritedAbilities": []
+      }
+    ],
+    "melee": [
+      {
+        "name": "Ancestral ward stave",
+        "a": "2",
+        "ws": "3+",
+        "s": "7",
+        "ap": "-1",
+        "d": "D3",
+        "abilities": ["psychic"],
+        "inheritedAbilities": []
+      },
+      {
+        "name": "Close combat weapon",
+        "a": "1",
+        "ws": "4+",
+        "s": "3",
+        "ap": "0",
+        "d": "1",
+        "abilities": [],
+        "inheritedAbilities": []
+      }
+    ]
+  },
+  "abilities": ["fortify-psychic", "grimnyrs-regard"],
+  "coreAbilities": ["leader"],
+  "wargear": [],
+  "wargearOptions": [],
+  "leaderBonus": {
+    "text": "Feel No Pain 5+",
+    "grantsFnp": "feel-no-pain-5"
+  },
+  "canLead": ["hearthkyn-warriors"]
+}

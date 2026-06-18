@@ -1,0 +1,52 @@
+{
+  "id": "kahl",
+  "name": "Kâhl",
+  "type": ["Character", "Infantry"],
+  "keywords": ["INFANTRY", "CHARACTER", "KÂHL"],
+  "isLeader": true,
+  "points": 65,
+  "models": 1,
+  "stats": {
+    "m": "5\"",
+    "t": 5,
+    "sv": "3+",
+    "w": 4,
+    "ld": "7+",
+    "oc": 1
+  },
+  "invulnerableSave": "4+",
+  "weapons": {
+    "ranged": [
+      {
+        "name": "Volkanite disintegrator",
+        "range": "24\"",
+        "a": "3",
+        "bs": "2+",
+        "s": "5",
+        "ap": "0",
+        "d": "1",
+        "abilities": ["devastating-wounds"],
+        "inheritedAbilities": ["lethal-hits"]
+      }
+    ],
+    "melee": [
+      {
+        "name": "Mass gauntlet",
+        "a": "3",
+        "ws": "3+",
+        "s": "8",
+        "ap": "-3",
+        "d": "3",
+        "abilities": [],
+        "inheritedAbilities": ["lethal-hits"]
+      }
+    ]
+  },
+  "abilities": ["kindred-hero", "seized-opportunity"],
+  "wargearExclusiveChoices": ["rampart-crest", "teleport-crest"],
+  "leaderBonus": {
+    "text": "LETHAL HITS (all weapons)",
+    "grantsAbilities": ["lethal-hits"]
+  },
+  "canLead": ["einhyr-hearthguard", "hearthkyn-warriors"]
+}

@@ -1,0 +1,74 @@
+{
+  "id": "kapricus-defenders",
+  "name": "Kapricus Defenders",
+  "type": ["Vehicle"],
+  "keywords": ["VEHICLE", "FLY", "HERNKYN", "KAPRICUS", "DEFENDERS"],
+  "isLeader": false,
+  "points": 70,
+  "models": 1,
+  "stats": {
+    "m": "12\"",
+    "t": 7,
+    "sv": "4+",
+    "w": 7,
+    "ld": "7+",
+    "oc": 2
+  },
+  "invulnerableSave": null,
+  "weapons": {
+    "ranged": [
+      {
+        "name": "HYLas rotary cannon",
+        "range": "24\"",
+        "a": "6",
+        "bs": "4+",
+        "s": "6",
+        "ap": "-1",
+        "d": "2",
+        "abilities": [{"id": "sustained-hits", "display": "Sustained Hits 1"}],
+        "inheritedAbilities": []
+      },
+      {
+        "name": "Magna-rail cannon",
+        "range": "24\"",
+        "a": "1",
+        "bs": "4+",
+        "s": "14",
+        "ap": "-4",
+        "d": "D3+3",
+        "abilities": ["devastating-wounds", "heavy"],
+        "inheritedAbilities": []
+      },
+      {
+        "name": "Twin magna-coil autocannon",
+        "range": "24\"",
+        "a": "3",
+        "bs": "4+",
+        "s": "7",
+        "ap": "-1",
+        "d": "2",
+        "abilities": ["twin-linked"],
+        "inheritedAbilities": []
+      }
+    ],
+    "melee": [
+      {
+        "name": "Armoured hull",
+        "a": "3",
+        "ws": "4+",
+        "s": "6",
+        "ap": "0",
+        "d": "1",
+        "abilities": [],
+        "inheritedAbilities": []
+      }
+    ]
+  },
+  "abilities": ["opportunistic-manoeuvre"],
+  "coreAbilities": ["deadly-demise-1", "scouts-9"],
+  "wargear": ["smoke-launcher"],
+  "wargearOptions": [
+    "Any number of models in this unit can each have their magna-rail cannon replaced with 1 HYLas rotary cannon.",
+    "Any number of models can each be equipped with 1 smoke launcher."
+  ]
+}

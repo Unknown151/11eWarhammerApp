@@ -1,0 +1,143 @@
+{
+  "id": "iron-master",
+  "name": "Brôkhyr Iron-master",
+  "type": ["Character", "Infantry", "Brôkhyr"],
+  "keywords": ["INFANTRY", "CHARACTER", "BRÔKHYR", "IRON-MASTER"],
+  "isLeader": true,
+  "points": 75,
+  "models": 5,
+  "modelBreakdown": "Iron-master, Ironkin Assistant, 3 E-COGs",
+  "modelProfiles": [
+    {
+      "name": "Iron-master",
+      "count": 1,
+      "stats": {
+        "m": "5\"",
+        "t": 5,
+        "sv": "4+",
+        "w": 4,
+        "ld": "7+",
+        "oc": 1
+      }
+    },
+    {
+      "name": "Ironkin Assistant",
+      "count": 1,
+      "stats": {
+        "m": "5\"",
+        "t": 5,
+        "sv": "4+",
+        "w": 1,
+        "ld": "7+",
+        "oc": 1
+      }
+    },
+    {
+      "name": "E-COG",
+      "count": 3,
+      "stats": {
+        "m": "5\"",
+        "t": 5,
+        "sv": "4+",
+        "w": 1,
+        "ld": "7+",
+        "oc": 1
+      }
+    }
+  ],
+  "invulnerableSave": null,
+  "weapons": {
+    "ranged": [
+      {
+        "name": "Graviton rifle",
+        "model": "Iron-master",
+        "range": "18\"",
+        "a": "3",
+        "bs": "3+",
+        "s": "5",
+        "ap": "-1",
+        "d": "3",
+        "abilities": ["anti-vehicle", "anti-monster"],
+        "inheritedAbilities": ["reroll-wound-1"]
+      },
+      {
+        "name": "Las-beam cutter",
+        "model": "Ironkin",
+        "range": "6\"",
+        "a": "1",
+        "bs": "4+",
+        "s": "6",
+        "ap": "-3",
+        "d": "1",
+        "abilities": [],
+        "inheritedAbilities": ["reroll-wound-1"]
+      },
+      {
+        "name": "Autoch-pattern bolt pistol",
+        "model": "E-COG",
+        "range": "12\"",
+        "a": "1",
+        "bs": "3+",
+        "s": "4",
+        "ap": "0",
+        "d": "1",
+        "abilities": [],
+        "inheritedAbilities": ["reroll-wound-1"]
+      }
+    ],
+    "melee": [
+      {
+        "name": "Graviton hammer",
+        "model": "Iron-master",
+        "a": "3",
+        "ws": "4+",
+        "s": "9",
+        "ap": "-1",
+        "d": "3",
+        "abilities": ["anti-vehicle", "anti-monster"],
+        "inheritedAbilities": []
+      },
+      {
+        "name": "Close combat weapon",
+        "model": "Ironkin, E-COG",
+        "a": "1",
+        "ws": "4+",
+        "s": "3",
+        "ap": "0",
+        "d": "1",
+        "abilities": [],
+        "inheritedAbilities": []
+      },
+      {
+        "name": "Plasma torch",
+        "model": "E-COG",
+        "a": "1",
+        "ws": "4+",
+        "s": "6",
+        "ap": "-3",
+        "d": "2",
+        "abilities": [],
+        "inheritedAbilities": []
+      },
+      {
+        "name": "Manipulator arms",
+        "model": "E-COG",
+        "a": "3",
+        "ws": "4+",
+        "s": "3",
+        "ap": "0",
+        "d": "1",
+        "abilities": [],
+        "inheritedAbilities": []
+      }
+    ]
+  },
+  "abilities": ["brokhyr-guild-support", "multispectral-visor", "forgewrought-expertise"],
+  "wargear": [],
+  "leaderBonus": {
+    "text": "Re-roll Wound rolls of 1 (ranged)",
+    "grantsAbilities": ["reroll-wound-1"],
+    "appliesTo": "ranged"
+  },
+  "canLead": ["thunderkyn", "hearthkyn-warriors"]
+}

@@ -1,0 +1,50 @@
+{
+  "id": "memnyr-strategist",
+  "name": "Memnyr Strategist",
+  "type": ["Character", "Infantry"],
+  "keywords": ["INFANTRY", "CHARACTER", "MEMNYR STRATEGIST"],
+  "isLeader": true,
+  "points": 45,
+  "models": 1,
+  "stats": {
+    "m": "5\"",
+    "t": 5,
+    "sv": "4+",
+    "w": 4,
+    "ld": "7+",
+    "oc": 1
+  },
+  "invulnerableSave": null,
+  "weapons": {
+    "ranged": [
+      {
+        "name": "Autoch-pattern bolt pistol",
+        "range": "12\"",
+        "a": "1",
+        "bs": "4+",
+        "s": "4",
+        "ap": "0",
+        "d": "1",
+        "abilities": ["pistol"],
+        "inheritedAbilities": []
+      }
+    ],
+    "melee": [
+      {
+        "name": "Close combat weapon",
+        "a": "1",
+        "ws": "4+",
+        "s": "3",
+        "ap": "0",
+        "d": "1",
+        "abilities": [],
+        "inheritedAbilities": []
+      }
+    ]
+  },
+  "abilities": ["computational-mastermind", "predictive-guidance"],
+  "coreAbilities": ["leader"],
+  "wargear": [],
+  "wargearOptions": [],
+  "canLead": ["ironkin-steeljacks-heavy-volkanite", "ironkin-steeljacks-melee"]
+}

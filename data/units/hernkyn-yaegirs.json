@@ -1,0 +1,96 @@
+{
+  "id": "hernkyn-yaegirs",
+  "name": "Hernkyn Yaegirs",
+  "type": ["Infantry"],
+  "keywords": ["INFANTRY", "GRENADES", "HERNKYN", "YAEGIRS"],
+  "isLeader": false,
+  "points": 90,
+  "models": 10,
+  "stats": {
+    "m": "6\"",
+    "t": 5,
+    "sv": "5+",
+    "w": 1,
+    "ld": "7+",
+    "oc": 1
+  },
+  "invulnerableSave": null,
+  "weapons": {
+    "ranged": [
+      {
+        "name": "APM launcher",
+        "range": "24\"",
+        "a": "1",
+        "bs": "4+",
+        "s": "6",
+        "ap": "-2",
+        "d": "D6",
+        "abilities": ["anti-monster", "anti-vehicle"],
+        "inheritedAbilities": []
+      },
+      {
+        "name": "Bolt revolver",
+        "range": "12\"",
+        "a": "1",
+        "bs": "4+",
+        "s": "5",
+        "ap": "0",
+        "d": "1",
+        "abilities": ["pistol"],
+        "inheritedAbilities": []
+      },
+      {
+        "name": "Bolt shotgun",
+        "range": "18\"",
+        "a": "2",
+        "bs": "4+",
+        "s": "5",
+        "ap": "0",
+        "d": "1",
+        "abilities": ["assault"],
+        "inheritedAbilities": []
+      },
+      {
+        "name": "Magna-coil rifle",
+        "range": "24\"",
+        "a": "1",
+        "bs": "4+",
+        "s": "5",
+        "ap": "-2",
+        "d": "2",
+        "abilities": ["ignores-cover", "precision"],
+        "inheritedAbilities": []
+      }
+    ],
+    "melee": [
+      {
+        "name": "Close combat weapon",
+        "a": "1",
+        "ws": "4+",
+        "s": "4",
+        "ap": "0",
+        "d": "1",
+        "abilities": [],
+        "inheritedAbilities": []
+      },
+      {
+        "name": "Plasma knife",
+        "a": "2",
+        "ws": "4+",
+        "s": "4",
+        "ap": "-2",
+        "d": "1",
+        "abilities": [],
+        "inheritedAbilities": []
+      }
+    ]
+  },
+  "abilities": ["pragmatic-hunters"],
+  "coreAbilities": ["infiltrators"],
+  "wargear": [],
+  "wargearOptions": [
+    "All models in this unit can each have their bolt shotgun replaced with 1 bolt revolver and 1 plasma knife.",
+    "1 Hernkyn Yaegir can have its bolt revolver and plasma knife or its bolt shotgun replaced with 1 magna-coil rifle.",
+    "1 Hernkyn Yaegir can have its bolt revolver and plasma knife or its bolt shotgun replaced with 1 APM launcher."
+  ]
+}

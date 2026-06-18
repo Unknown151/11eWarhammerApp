@@ -1,0 +1,111 @@
+{
+  "id": "sagitaur",
+  "name": "Sagitaur",
+  "type": ["Dedicated Transport", "Vehicle"],
+  "keywords": ["VEHICLE", "TRANSPORT", "DEDICATED TRANSPORT", "SAGITAUR"],
+  "isLeader": false,
+  "points": 90,
+  "models": 1,
+  "stats": {
+    "m": "12\"",
+    "t": 9,
+    "sv": "3+",
+    "w": 9,
+    "ld": "7+",
+    "oc": 2
+  },
+  "invulnerableSave": null,
+  "transportCapacity": 6,
+  "weapons": {
+    "ranged": [
+      {
+        "name": "HYLas beam cannon",
+        "range": "24\"",
+        "a": "2",
+        "bs": "4+",
+        "s": "12",
+        "ap": "-3",
+        "d": "D6+1",
+        "abilities": [],
+        "inheritedAbilities": []
+      },
+      {
+        "name": "L7 missile launcher – blast",
+        "range": "36\"",
+        "a": "D6",
+        "bs": "4+",
+        "s": "4",
+        "ap": "0",
+        "d": "1",
+        "abilities": ["blast"],
+        "inheritedAbilities": [],
+        "weaponGroup": "l7-launcher",
+        "weaponGroupLabel": "Choose one profile per shooting phase"
+      },
+      {
+        "name": "L7 missile launcher – focused",
+        "range": "36\"",
+        "a": "1",
+        "bs": "4+",
+        "s": "9",
+        "ap": "-2",
+        "d": "D6",
+        "abilities": [],
+        "inheritedAbilities": [],
+        "weaponGroup": "l7-launcher"
+      },
+      {
+        "name": "MATR autocannon",
+        "range": "24\"",
+        "a": "6",
+        "bs": "4+",
+        "s": "7",
+        "ap": "-1",
+        "d": "2",
+        "abilities": ["assault", {"id": "sustained-hits", "display": "Sustained Hits 1"}],
+        "inheritedAbilities": []
+      },
+      {
+        "name": "Sagitaur missile launcher",
+        "range": "36\"",
+        "a": "2",
+        "bs": "4+",
+        "s": "10",
+        "ap": "-3",
+        "d": "3",
+        "abilities": [],
+        "inheritedAbilities": []
+      },
+      {
+        "name": "Twin bolt cannon",
+        "range": "36\"",
+        "a": "3",
+        "bs": "4+",
+        "s": "6",
+        "ap": "-1",
+        "d": "2",
+        "abilities": [{"id": "sustained-hits", "display": "Sustained Hits 2"}, "twin-linked"],
+        "inheritedAbilities": []
+      }
+    ],
+    "melee": [
+      {
+        "name": "Armoured wheels",
+        "a": "3",
+        "ws": "4+",
+        "s": "6",
+        "ap": "0",
+        "d": "1",
+        "abilities": [],
+        "inheritedAbilities": []
+      }
+    ]
+  },
+  "abilities": ["blistering-advance"],
+  "coreAbilities": ["deadly-demise-1"],
+  "wargear": [],
+  "wargearOptions": [
+    "This model's HYLas beam cannon can be replaced with one of the following: 1 L7 missile launcher and 1 Sagitaur missile launcher.",
+    "This model's HYLas beam cannon can be replaced with one of the following: 1 MATR autocannon."
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "id": "berehk-stornbrow",
+  "name": "Berehk Stornbröw",
+  "type": ["Character", "Epic Hero"],
+  "keywords": ["INFANTRY", "CHARACTER", "EPIC HERO", "CTHONIAN", "BEREHK STORNBRÖW"],
+  "isLeader": true,
+  "isEpicHero": true,
+  "points": 95,
+  "models": 1,
+  "stats": {
+    "m": "6\"",
+    "t": 6,
+    "sv": "5+",
+    "w": 5,
+    "ld": "7+",
+    "oc": 1
+  },
+  "invulnerableSave": "5+",
+  "weapons": {
+    "ranged": [],
+    "melee": [
+      {
+        "name": "Kromlôk's Revenge – graviton strikes",
+        "a": "4",
+        "ws": "2+",
+        "s": "10",
+        "ap": "-2",
+        "d": "4",
+        "abilities": ["anti-monster", "anti-vehicle"],
+        "inheritedAbilities": [],
+        "weaponGroup": "kromloks-revenge",
+        "weaponGroupLabel": "Choose one profile per fight phase"
+      },
+      {
+        "name": "Kromlôk's Revenge – plasma sweeps",
+        "a": "8",
+        "ws": "2+",
+        "s": "7",
+        "ap": "-2",
+        "d": "2",
+        "abilities": [],
+        "inheritedAbilities": [],
+        "weaponGroup": "kromloks-revenge"
+      },
+      {
+        "name": "Warforge gauntlets",
+        "a": "2",
+        "ws": "2+",
+        "s": "6",
+        "ap": "-2",
+        "d": "1",
+        "abilities": ["extra-attacks"],
+        "inheritedAbilities": []
+      }
+    ]
+  },
+  "abilities": ["break-the-foe", "relentless-avalanche"],
+  "coreAbilities": ["feel-no-pain-4"],
+  "wargear": [],
+  "leaderBonus": {
+    "text": "SUSTAINED HITS 1 (melee)",
+    "grantsAbilities": [{"id": "sustained-hits", "display": "Sustained Hits 1", "abilityAppliesTo": "melee"}]
+  },
+  "canLead": ["cthonian-beserks"]
+}

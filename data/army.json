@@ -1,0 +1,52 @@
+{
+  "name": "Leagues of Votann - Led Units",
+  "faction": "Leagues of Votann",
+  "detachment": {
+    "name": "Hearthband",
+    "rule": "prioritised-efficiency"
+  },
+  "totalPoints": 885,
+  "totalUnits": 4,
+  "ledUnits": [
+    {
+      "id": "kahl-hearthguard",
+      "leader": "kahl",
+      "bodyguard": "einhyr-hearthguard",
+      "enhancement": "quake-multigenerator",
+      "attachedBannerText": "Attached",
+      "totalWounds": 14,
+      "woundBreakdown": "4 + 10",
+      "combinedKeywords": ["INFANTRY", "EXO-ARMOUR", "EINHYR HEARTHGUARD", "KÂHL", "CHARACTER"]
+    },
+    {
+      "id": "champion-hearthguard",
+      "leader": "einhyr-champion",
+      "bodyguard": "einhyr-hearthguard",
+      "enhancement": "bastion-shield",
+      "attachedBannerText": "Attached",
+      "totalWounds": 15,
+      "woundBreakdown": "5 + 10",
+      "combinedKeywords": ["INFANTRY", "EXO-ARMOUR", "EINHYR HEARTHGUARD", "EINHYR CHAMPION", "CHARACTER"]
+    },
+    {
+      "id": "uthar-warriors",
+      "leader": "uthar",
+      "bodyguard": "hearthkyn-warriors",
+      "enhancement": null,
+      "attachedBannerText": "Attached Unit",
+      "totalWounds": 15,
+      "woundBreakdown": "5 + 10",
+      "combinedKeywords": ["INFANTRY", "BATTLELINE", "GRENADES", "HEARTHKYN WARRIORS", "KÂHL", "CHARACTER", "EPIC HERO"]
+    },
+    {
+      "id": "ironmaster-thunderkyn",
+      "leader": "iron-master",
+      "bodyguard": "thunderkyn",
+      "enhancement": "ironskein",
+      "attachedBannerText": "Attached Unit",
+      "totalWounds": 22,
+      "woundBreakdown": "10 + 12",
+      "combinedKeywords": ["INFANTRY", "EXO-FRAME", "BRÔKHYR", "THUNDERKYN", "IRON-MASTER", "CHARACTER"]
+    }
+  ]
+}

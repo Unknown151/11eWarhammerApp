@@ -1,0 +1,63 @@
+{
+  "id": "kapricus-carrier",
+  "name": "Kapricus Carrier",
+  "type": ["Dedicated Transport", "Vehicle"],
+  "keywords": ["VEHICLE", "FLY", "TRANSPORT", "DEDICATED TRANSPORT", "HERNKYN", "KAPRICUS", "CARRIER"],
+  "isLeader": false,
+  "points": 75,
+  "models": 1,
+  "stats": {
+    "m": "12\"",
+    "t": 7,
+    "sv": "4+",
+    "w": 7,
+    "ld": "7+",
+    "oc": 2
+  },
+  "invulnerableSave": null,
+  "transportCapacity": 5,
+  "weapons": {
+    "ranged": [
+      {
+        "name": "Magna-coil autocannon",
+        "range": "24\"",
+        "a": "3",
+        "bs": "4+",
+        "s": "7",
+        "ap": "-1",
+        "d": "2",
+        "abilities": [],
+        "inheritedAbilities": []
+      },
+      {
+        "name": "Twin magna-coil autocannon",
+        "range": "24\"",
+        "a": "3",
+        "bs": "4+",
+        "s": "7",
+        "ap": "-1",
+        "d": "2",
+        "abilities": ["twin-linked"],
+        "inheritedAbilities": []
+      }
+    ],
+    "melee": [
+      {
+        "name": "Armoured hull",
+        "a": "3",
+        "ws": "4+",
+        "s": "6",
+        "ap": "0",
+        "d": "1",
+        "abilities": [],
+        "inheritedAbilities": []
+      }
+    ]
+  },
+  "abilities": ["scanner-uplinks"],
+  "coreAbilities": ["deadly-demise-1", "firing-deck-5", "scouts-9"],
+  "wargear": ["smoke-launcher"],
+  "wargearOptions": [
+    "This model can be equipped with 1 smoke launcher."
+  ]
+}

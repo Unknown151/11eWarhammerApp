@@ -1,0 +1,52 @@
+{
+  "id": "einhyr-champion",
+  "name": "Einhyr Champion",
+  "type": ["Character", "Infantry", "Exo-armour"],
+  "keywords": ["INFANTRY", "CHARACTER", "EXO-ARMOUR", "EINHYR CHAMPION"],
+  "isLeader": true,
+  "points": 95,
+  "models": 1,
+  "stats": {
+    "m": "5\"",
+    "t": 5,
+    "sv": "2+",
+    "w": 5,
+    "ld": "7+",
+    "oc": 1
+  },
+  "invulnerableSave": null,
+  "weapons": {
+    "ranged": [
+      {
+        "name": "Autoch-pattern combi-bolter",
+        "range": "24\"",
+        "a": "4",
+        "bs": "2+",
+        "s": "4",
+        "ap": "0",
+        "d": "1",
+        "abilities": [],
+        "inheritedAbilities": []
+      }
+    ],
+    "melee": [
+      {
+        "name": "Mass hammer",
+        "a": "3",
+        "ws": "3+",
+        "s": "12",
+        "ap": "-3",
+        "d": "D6+1",
+        "abilities": [],
+        "inheritedAbilities": []
+      }
+    ]
+  },
+  "abilities": ["exemplar-of-the-einhyr", "mass-driver-accelerators"],
+  "wargear": ["teleport-crest"],
+  "leaderBonus": {
+    "text": "+1 Advance & Charge",
+    "grantsAbilities": []
+  },
+  "canLead": ["einhyr-hearthguard"]
+}

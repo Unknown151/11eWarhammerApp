@@ -1,0 +1,99 @@
+{
+  "id": "hernkyn-pioneers",
+  "name": "Hernkyn Pioneers",
+  "type": ["Mounted"],
+  "keywords": ["MOUNTED", "GRENADES", "FLY", "HERNKYN", "PIONEERS"],
+  "isLeader": false,
+  "points": 80,
+  "models": 3,
+  "stats": {
+    "m": "12\"",
+    "t": 6,
+    "sv": "4+",
+    "w": 3,
+    "ld": "7+",
+    "oc": 2
+  },
+  "invulnerableSave": null,
+  "weapons": {
+    "ranged": [
+      {
+        "name": "Bolt revolver",
+        "range": "12\"",
+        "a": "1",
+        "bs": "4+",
+        "s": "5",
+        "ap": "0",
+        "d": "1",
+        "abilities": ["pistol"],
+        "inheritedAbilities": []
+      },
+      {
+        "name": "Bolt shotgun",
+        "range": "18\"",
+        "a": "2",
+        "bs": "4+",
+        "s": "5",
+        "ap": "0",
+        "d": "1",
+        "abilities": ["assault"],
+        "inheritedAbilities": []
+      },
+      {
+        "name": "HYLas rotary cannon",
+        "range": "24\"",
+        "a": "6",
+        "bs": "4+",
+        "s": "6",
+        "ap": "-1",
+        "d": "1",
+        "abilities": [{"id": "sustained-hits", "display": "Sustained Hits 1"}],
+        "inheritedAbilities": []
+      },
+      {
+        "name": "Ion beamer",
+        "range": "18\"",
+        "a": "D3+1",
+        "bs": "4+",
+        "s": "8",
+        "ap": "-2",
+        "d": "1",
+        "abilities": ["blast"],
+        "inheritedAbilities": []
+      },
+      {
+        "name": "Magna-coil autocannon",
+        "range": "24\"",
+        "a": "3",
+        "bs": "4+",
+        "s": "7",
+        "ap": "-1",
+        "d": "2",
+        "abilities": [],
+        "inheritedAbilities": []
+      }
+    ],
+    "melee": [
+      {
+        "name": "Plasma knife",
+        "a": "2",
+        "ws": "4+",
+        "s": "4",
+        "ap": "-2",
+        "d": "1",
+        "abilities": [],
+        "inheritedAbilities": []
+      }
+    ]
+  },
+  "abilities": ["outflanking-mag-riders"],
+  "coreAbilities": ["scouts-9"],
+  "wargear": [],
+  "wargearChoices": ["panspectral-scanner", "multiwave-comms-array", "rollbar-searchlight"],
+  "wargearOptions": [
+    "For every 3 models in this unit, 1 model can be equipped with one of the following: 1 HYLas rotary cannon or 1 ion beamer.",
+    "1 model that is not equipped with either a HYLas rotary cannon or an ion beamer can be equipped with 1 multiwave comms array.",
+    "1 model that is not equipped with either a HYLas rotary cannon or an ion beamer can be equipped with 1 panspectral scanner.",
+    "1 model that is not equipped with either a HYLas rotary cannon or an ion beamer can be equipped with 1 rollbar searchlight."
+  ]
+}

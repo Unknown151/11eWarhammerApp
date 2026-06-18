@@ -1,0 +1,53 @@
+{
+  "id": "uthar",
+  "name": "Ûthar the Destined",
+  "type": ["Character", "Epic Hero", "Kâhl"],
+  "keywords": ["INFANTRY", "CHARACTER", "EPIC HERO", "KÂHL", "ÛTHAR THE DESTINED"],
+  "isLeader": true,
+  "isEpicHero": true,
+  "points": 95,
+  "models": 1,
+  "stats": {
+    "m": "5\"",
+    "t": 5,
+    "sv": "3+",
+    "w": 5,
+    "ld": "6+",
+    "oc": 1
+  },
+  "invulnerableSave": "4+",
+  "weapons": {
+    "ranged": [
+      {
+        "name": "Volkanite disintegrator",
+        "range": "24\"",
+        "a": "3",
+        "bs": "2+",
+        "s": "5",
+        "ap": "0",
+        "d": "1",
+        "abilities": ["devastating-wounds"],
+        "inheritedAbilities": []
+      }
+    ],
+    "melee": [
+      {
+        "name": "Blade of the Ancestors",
+        "a": "5",
+        "ws": "2+",
+        "s": "6",
+        "ap": "-3",
+        "d": "2",
+        "abilities": ["devastating-wounds"],
+        "inheritedAbilities": []
+      }
+    ]
+  },
+  "abilities": ["ancestral-fortune", "grim-efficiency"],
+  "wargear": ["rampart-crest"],
+  "leaderBonus": {
+    "text": "5+ Invulnerable Save • 1CP discount 1/round",
+    "grantsAbilities": ["invuln-5"]
+  },
+  "canLead": ["einhyr-hearthguard", "hearthkyn-warriors"]
+}

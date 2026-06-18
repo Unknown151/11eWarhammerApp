@@ -1,0 +1,93 @@
+{
+  "id": "hearthkyn-warriors",
+  "name": "Hearthkyn Warriors",
+  "type": ["Infantry", "Battleline"],
+  "keywords": ["INFANTRY", "BATTLELINE", "GRENADES", "HEARTHKYN WARRIORS"],
+  "isLeader": false,
+  "isBattleline": true,
+  "points": 100,
+  "models": 10,
+  "modelBreakdown": "1 Theyn + 9 Warriors",
+  "stats": {
+    "m": "5\"",
+    "t": 5,
+    "sv": "4+",
+    "w": 1,
+    "ld": "7+",
+    "oc": 2
+  },
+  "invulnerableSave": "5+",
+  "invulnerableSource": "weavefield-crest-theyn",
+  "weapons": {
+    "ranged": [
+      {
+        "name": "Autoch-pattern bolter",
+        "count": 8,
+        "range": "24\"",
+        "a": "2",
+        "bs": "4+",
+        "s": "4",
+        "ap": "0",
+        "d": "1",
+        "abilities": [],
+        "inheritedAbilities": [{ "id": "panspectral-scanning", "display": "Re-roll Hit 1" }]
+      },
+      {
+        "name": "L7 missile launcher – Blast",
+        "count": 1,
+        "range": "24\"",
+        "a": "D6",
+        "bs": "4+",
+        "s": "4",
+        "ap": "0",
+        "d": "1",
+        "abilities": ["blast"],
+        "inheritedAbilities": [{ "id": "panspectral-scanning", "display": "Re-roll Hit 1" }],
+        "weaponGroup": "l7-launcher",
+        "weaponGroupLabel": "Choose one profile per shooting phase"
+      },
+      {
+        "name": "L7 missile launcher – Focused",
+        "count": 1,
+        "range": "24\"",
+        "a": "1",
+        "bs": "4+",
+        "s": "9",
+        "ap": "-2",
+        "d": "D6",
+        "abilities": [],
+        "inheritedAbilities": [{ "id": "panspectral-scanning", "display": "Re-roll Hit 1" }],
+        "weaponGroup": "l7-launcher"
+      },
+      {
+        "name": "Magna-rail rifle",
+        "count": 1,
+        "range": "18\"",
+        "a": "1",
+        "bs": "5+",
+        "s": "12",
+        "ap": "-3",
+        "d": "D3+3",
+        "abilities": ["devastating-wounds", "heavy"],
+        "inheritedAbilities": [{ "id": "panspectral-scanning", "display": "Re-roll Hit 1" }]
+      }
+    ],
+    "melee": [
+      {
+        "name": "Close combat weapon",
+        "count": 10,
+        "a": "1",
+        "ws": "4+",
+        "s": "4",
+        "ap": "0",
+        "d": "1",
+        "abilities": [],
+        "inheritedAbilities": []
+      }
+    ]
+  },
+  "abilities": ["panspectral-scanning", "luck-has-need-keeps-toil-earns"],
+  "coreAbilities": ["feel-no-pain"],
+  "wargear": ["weavefield-crest-theyn"],
+  "canBeLeadBy": ["kahl", "uthar", "grimnyr", "iron-master"]
+}

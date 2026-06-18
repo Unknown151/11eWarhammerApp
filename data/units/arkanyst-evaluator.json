@@ -1,0 +1,75 @@
+{
+  "id": "arkanyst-evaluator",
+  "name": "Arkanyst Evaluator",
+  "type": ["Character", "Infantry"],
+  "keywords": ["INFANTRY", "CHARACTER", "ARKANYST EVALUATOR"],
+  "isLeader": false,
+  "points": 65,
+  "models": 1,
+  "stats": {
+    "m": "5\"",
+    "t": 5,
+    "sv": "3+",
+    "w": 4,
+    "ld": "7+",
+    "oc": 1
+  },
+  "invulnerableSave": null,
+  "weapons": {
+    "ranged": [
+      {
+        "name": "Transmatter inverter – half charge",
+        "range": "12\"",
+        "a": "3",
+        "bs": "2+",
+        "s": "8",
+        "ap": "-1",
+        "d": "1",
+        "abilities": [{"id": "rapid-fire", "display": "Rapid Fire 1"}],
+        "inheritedAbilities": [],
+        "weaponGroup": "transmatter-inverter",
+        "weaponGroupLabel": "Choose one profile per shooting phase"
+      },
+      {
+        "name": "Transmatter inverter – full charge",
+        "range": "18\"",
+        "a": "3",
+        "bs": "2+",
+        "s": "8",
+        "ap": "-2",
+        "d": "2",
+        "abilities": ["hazardous", {"id": "rapid-fire", "display": "Rapid Fire 2"}],
+        "inheritedAbilities": [],
+        "weaponGroup": "transmatter-inverter"
+      },
+      {
+        "name": "Transmatter inverter – overcharge",
+        "range": "24\"",
+        "a": "3",
+        "bs": "2+",
+        "s": "8",
+        "ap": "-3",
+        "d": "3",
+        "abilities": ["hazardous", "overcharge", {"id": "rapid-fire", "display": "Rapid Fire 3"}],
+        "inheritedAbilities": [],
+        "weaponGroup": "transmatter-inverter"
+      }
+    ],
+    "melee": [
+      {
+        "name": "Close combat weapon",
+        "a": "1",
+        "ws": "4+",
+        "s": "3",
+        "ap": "0",
+        "d": "1",
+        "abilities": [],
+        "inheritedAbilities": []
+      }
+    ]
+  },
+  "abilities": ["science-guild-support", "resource-transmutation"],
+  "coreAbilities": ["deadly-demise-1"],
+  "wargear": [],
+  "wargearOptions": []
+}
