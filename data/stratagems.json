@@ -104,27 +104,12 @@
     ],
     "cpCost": 1,
     "ypCost": 0,
-    "summary": "Shoot at an advancing enemy using Snap Shooting (only hits on unmodified 6s).",
+    "summary": "Shoot at an advancing enemy unit using a Snap Shooting action (only hits on unmodified 6s).",
     "when": "End of your opponent's Movement phase.",
     "target": "One friendly unengaged unit (excluding TITANIC units).",
-    "effect": "Your unit shoots using Snap Shooting (see Snap Shooting): it can target only one visible enemy unit within 24\", and each attack only hits on an unmodified Hit roll of 6.",
-    "detachment": null
-  },
-  "snap-shooting": {
-    "name": "Snap Shooting",
-    "type": "Core Rule",
-    "turn": "either",
-    "phases": [
-      "movement",
-      "shooting"
-    ],
-    "cpCost": 0,
-    "ypCost": 0,
-    "summary": "The shooting type used by Fire Overwatch — only hits on unmodified Hit rolls of 6.",
-    "effect": "Eligible if allowed by the rule using this shooting type. Your unit shoots as described in Making Attacks. While shooting: you can only target one visible enemy unit within 24\" of your unit (and only if it is an eligible target); each attack only hits on an unmodified Hit roll of 6 (irrespective of the attacking weapon's BS characteristic or any modifiers); you cannot re-roll Hit rolls.",
-    "restrictions": "After shooting: until the end of the phase, your unit is not eligible to start an Action.",
+    "effect": "Your unit shoots using a Snap Shooting action. While snap shooting: you can only target one visible enemy unit within 24\" of your unit (and only if it is an eligible target); each attack only hits on an unmodified Hit roll of 6 (irrespective of the attacking weapon's BS characteristic or any modifiers); and you cannot re-roll Hit rolls.",
     "detachment": null,
-    "isRule": true
+    "restrictions": "After shooting, until the end of the phase your unit is not eligible to start an Action."
   },
   "smokescreen": {
     "name": "Smokescreen",
