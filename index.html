@@ -461,8 +461,23 @@
         .detachment-option{padding:.35rem .85rem;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:.75rem;cursor:pointer;transition:all .15s}
         .detachment-option:hover{border-color:var(--gold-dark);color:var(--text)}
         .detachment-option.active{background:var(--gold);color:#000;border-color:var(--gold);font-weight:700}
-        .detachment-rule-preview{font-size:.72rem;color:var(--text2);line-height:1.4;border-top:1px solid var(--border);padding-top:.5rem;cursor:pointer}
+        .detachment-rule-preview{font-size:.72rem;color:var(--text2);line-height:1.4;border-top:1px solid var(--border);padding-top:.5rem;margin-top:.5rem;cursor:pointer}
         .detachment-rule-preview strong{color:var(--gold-bright)}
+        .detachment-customizer-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem}
+        .dp-counter{font-family:'Share Tech Mono',monospace;font-size:.75rem;color:var(--gold);background:rgba(212,168,75,.12);padding:.15rem .55rem;border-radius:4px}
+        .dp-counter.over{color:var(--red);background:rgba(204,0,68,.12)}
+        .det-card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.5rem}
+        .det-card{position:relative;text-align:left;padding:0;border:1px solid var(--border);border-radius:6px;background:var(--bg3);cursor:pointer;overflow:hidden;transition:all .15s;color:var(--text)}
+        .det-card:hover{border-color:var(--gold-dark)}
+        .det-card.active{border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold)}
+        .det-card.blocked{opacity:.4;cursor:not-allowed}
+        .det-card-bar{font-family:'Orbitron',sans-serif;font-size:.5rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff;padding:.22rem .5rem;text-shadow:0 1px 1px rgba(0,0,0,.4)}
+        .det-card-body{display:flex;justify-content:space-between;align-items:center;gap:.4rem;padding:.4rem .55rem}
+        .det-card-name{font-size:.72rem;font-weight:600;line-height:1.15}
+        .det-card-dp{font-family:'Share Tech Mono',monospace;font-size:.65rem;color:var(--gold);white-space:nowrap}
+        .det-card.active .det-card-dp{color:var(--gold-bright)}
+        .det-card-unique{font-size:.55rem;color:var(--text3);padding:0 .55rem .4rem;text-transform:uppercase;letter-spacing:.05em}
+        .detachment-empty-note{font-size:.7rem;color:var(--text3);font-style:italic;margin-top:.5rem}
         .army-instance{background:var(--bg3);border:1px solid var(--border);border-radius:6px;margin-bottom:.5rem;overflow:visible}
         .army-instance-header{display:flex;align-items:center;gap:.6rem;padding:.6rem .75rem;cursor:pointer;touch-action:manipulation;background:linear-gradient(90deg,rgba(212,168,75,.05),transparent);border-radius:6px 6px 0 0}
         .army-instance-header:hover{background:linear-gradient(90deg,rgba(212,168,75,.1),transparent)}
@@ -545,7 +560,7 @@
         </nav>
         <div class="header-actions">
             <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark theme">&#9788;</button>
-            <div class="det-btn tappable" id="detachment-banner" title="Detachment Rule"><span class="det-btn-icon">⚔</span></div>
+            <div class="det-btn tappable" id="detachment-banner" title="Detachment Rules" onclick="showDetachmentRules()"><span class="det-btn-icon">⚔</span><span class="det-btn-name" id="det-btn-dp">3/3 DP</span></div>
             <div class="buff-dropdown" id="buff-dropdown">
                 <div class="buff-dropdown-btn" onclick="toggleBuffDropdown(event)">
                     <span class="btn-icon">&#9776;</span>
@@ -576,7 +591,7 @@
             </div>
         </div>
     </header>
-    <div class="version-line" id="version-line">11th Edition - Version 0.0.1</div>
+    <div class="version-line" id="version-line">11th Edition - Version 0.1.0</div>
     <main class="container">
         <div id="units-tab" class="tab-content active" role="tabpanel" aria-label="Army view">
             <div id="units-container"><div class="loading">Loading units...</div></div>
@@ -883,49 +898,160 @@ let stratagems = {};
 const DETACHMENTS = {
     'hearthband': {
         name: 'Hearthband',
+        dp: 3,
+        category: 'Priority Assets',
+        unique: 'hearthband',
         ruleId: 'prioritised-efficiency',
         ruleType: 'Detachment Rule — Hearthband',
         ruleDescription: 'Each time a <strong>LEAGUES OF VOTANN</strong> model from your army makes an attack with a weapon that targets the <strong>closest eligible target</strong> or a target that is within <strong>Engagement Range</strong> of that model\'s unit:<br><br>• <strong>Re-roll a Wound roll of 1</strong><br><br>• If your unit is a <strong>KÂHL</strong>, <strong>EINHYR HEARTHGUARD</strong> or <strong>ÛTHAR THE DESTINED</strong> unit, <strong>improve the AP</strong> of that attack by 1.'
     },
     'needgaard-oathband': {
         name: 'Needgaârd Oathband',
+        dp: 2,
+        category: 'Purge the Foe',
+        unique: null,
         ruleId: 'needgaard-oathband-rule',
         ruleType: 'Detachment Rule — Needgaârd Oathband',
         ruleDescription: 'Each time an enemy unit is destroyed, you gain <strong>1YP</strong>.'
     },
     'delve-assault-shift': {
         name: 'Dêlve Assault Shift',
+        dp: 2,
+        category: 'Purge the Foe',
+        unique: null,
         ruleId: 'delve-assault-shift-rule',
         ruleType: 'Detachment Rule — Dêlve Assault Shift',
         ruleDescription: '<strong>CTHONIAN BESERKS</strong> units from your army have the <strong>Deep Strike</strong> ability.<br><br><em>Keywords:</em> <strong>CTHONIAN BESERKS</strong> units from your army gain the <strong>BATTLELINE</strong> keyword.'
     },
     'brandfast-oathband': {
         name: 'Brandfast Oathband',
+        dp: 2,
+        category: 'Take and Hold',
+        unique: null,
         ruleId: 'firebase-control',
         ruleType: 'Detachment Rule — Brandfast Oathband',
         ruleDescription: '<strong>LEAGUES OF VOTANN TRANSPORT</strong> units from your army have the following ability:<br><br><strong>Firebase Control (Aura):</strong> While a friendly <strong>LEAGUES OF VOTANN INFANTRY</strong> unit is wholly within 6" of this <strong>TRANSPORT</strong>, ranged weapons equipped by models in that <strong>INFANTRY</strong> unit have the <strong>[SUSTAINED HITS 1]</strong> ability.'
     },
     'hearthfyre-arsenal': {
         name: 'Hearthfyre Arsenal',
+        dp: 2,
+        category: 'Priority Assets',
+        unique: null,
         ruleId: 'hearthfyre-arsenal-rule',
         ruleType: 'Detachment Rule — Hearthfyre Arsenal',
         ruleDescription: '<strong>Forge Masters:</strong> At the end of your Command phase, you gain <strong>1YP</strong> for each objective marker you control that is not within your deployment zone and has one or more <strong>IRON-MASTER</strong> and/or <strong>MEMNYR STRATEGIST</strong> models from your army within range of it (to a maximum of <strong>2YP</strong> gained from this Detachment rule per turn).<br><br><strong>Optimal Application:</strong> In your Shooting phase, each time a <strong>BRÔKHYR</strong>, <strong>IRONKIN STEELJACKS</strong> or <strong>ARKANYST EVALUATOR</strong> unit from your army is selected to shoot, you can spend <strong>1YP</strong>. If you do, until the end of the phase, each time a model in that unit makes an attack, <strong>re-roll a Hit roll of 1</strong>.'
+    },
+    'armoured-trailblazers': {
+        name: 'Armoured Trailblazers',
+        dp: 1,
+        category: 'Disruption',
+        unique: null,
+        ruleId: 'armoured-trailblazers-rule',
+        ruleType: 'Detachment Rule — Armoured Trailblazers',
+        ruleDescription: '<em>Detachment rule to be added.</em>'
+    },
+    'farseekers': {
+        name: 'Farseekers',
+        dp: 1,
+        category: 'Reconnaissance',
+        unique: null,
+        ruleId: 'farseekers-rule',
+        ruleType: 'Detachment Rule — Farseekers',
+        ruleDescription: '<em>Detachment rule to be added.</em>'
+    },
+    'hearthguard-covenant': {
+        name: 'Hearthguard Covenant',
+        dp: 1,
+        category: 'Priority Assets',
+        unique: 'hearthband',
+        ruleId: 'hearthguard-covenant-rule',
+        ruleType: 'Detachment Rule — Hearthguard Covenant',
+        ruleDescription: '<em>Detachment rule to be added.</em>'
+    },
+    'mercenary-oathband': {
+        name: 'Mercenary Oathband',
+        dp: 2,
+        category: 'Take and Hold',
+        unique: null,
+        ruleId: 'mercenary-oathband-rule',
+        ruleType: 'Detachment Rule — Mercenary Oathband',
+        ruleDescription: '<em>Detachment rule to be added.</em>'
+    },
+    'persecution-prospect': {
+        name: 'Persecution Prospect',
+        dp: 2,
+        category: 'Disruption',
+        unique: null,
+        ruleId: 'persecution-prospect-rule',
+        ruleType: 'Detachment Rule — Persecution Prospect',
+        ruleDescription: '<em>Detachment rule to be added.</em>'
     }
 };
-let selectedDetachment = 'hearthband';
+// Detachment Points: every army has a fixed pool to spend on detachments.
+const DETACHMENT_POINTS = 3;
+// Category → accent colour for the card banner.
+const DETACHMENT_CATEGORIES = {
+    'Disruption': '#36506f',
+    'Take and Hold': '#3a7d44',
+    'Purge the Foe': '#9e2f2f',
+    'Reconnaissance': '#2f8f8f',
+    'Priority Assets': '#c2922b'
+};
+// One or more detachments may be active at once, limited by the DP budget.
+let selectedDetachments = ['hearthband'];
+
+function isDetachmentActive(id) { return selectedDetachments.includes(id); }
+function dpSpent() { return selectedDetachments.reduce((s, id) => s + (DETACHMENTS[id]?.dp || 0), 0); }
+function dpRemaining() { return DETACHMENT_POINTS - dpSpent(); }
+function uniqueGroupTaken(group, exceptId) {
+    if (!group) return false;
+    return selectedDetachments.some(id => id !== exceptId && DETACHMENTS[id]?.unique === group);
+}
+function canAddDetachment(id) {
+    const d = DETACHMENTS[id];
+    if (!d || isDetachmentActive(id)) return false;
+    if (d.dp > dpRemaining()) return false;
+    if (uniqueGroupTaken(d.unique)) return false;
+    return true;
+}
 
 function loadDetachment() {
-    selectedDetachment = localStorage.getItem('votann-detachment') || 'hearthband';
+    try {
+        const raw = localStorage.getItem('votann-detachments');
+        if (raw) {
+            const arr = JSON.parse(raw);
+            if (Array.isArray(arr)) { selectedDetachments = arr.filter(id => DETACHMENTS[id]); return; }
+        }
+    } catch (e) {}
+    // Migrate from the old single-detachment storage key
+    const old = localStorage.getItem('votann-detachment');
+    selectedDetachments = (old && DETACHMENTS[old]) ? [old] : ['hearthband'];
 }
 function saveDetachment() {
-    localStorage.setItem('votann-detachment', selectedDetachment);
+    localStorage.setItem('votann-detachments', JSON.stringify(selectedDetachments));
 }
 function updateDetachmentBanner() {
-    const det = DETACHMENTS[selectedDetachment];
-    document.getElementById('detachment-banner').setAttribute('data-ab', det.ruleId);
+    const el = document.getElementById('det-btn-dp');
+    if (el) el.textContent = `${dpSpent()}/${DETACHMENT_POINTS} DP`;
+}
+// Show the rules of all active detachments in the shared modal.
+function showDetachmentRules() {
+    const active = selectedDetachments.map(id => DETACHMENTS[id]).filter(Boolean);
+    mtitle.textContent = 'Detachment Rules';
+    mtype.textContent = `${dpSpent()} / ${DETACHMENT_POINTS} DP used`;
+    if (!active.length) {
+        mdesc.innerHTML = '<p>No detachments selected. Pick detachments in the Builder tab — you have 3 Detachment Points to spend.</p>';
+    } else {
+        mdesc.innerHTML = active.map(d =>
+            `<div style="margin-bottom:1rem"><strong>${escHtml(d.name)}</strong> <span style="color:var(--text3);font-size:.85em">(${d.dp} DP · ${escHtml(d.category)})</span><br>${d.ruleDescription}</div>`
+        ).join('');
+    }
+    modal.classList.add('show');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
 }
 function updateStratagemVisibility() {
-    const isHearthband = selectedDetachment === 'hearthband';
+    const isHearthband = isDetachmentActive('hearthband');
     document.querySelectorAll('.buff-dropdown-item[data-hearthband]').forEach(el => {
         el.style.display = isHearthband ? '' : 'none';
         if (!isHearthband) el.classList.remove('active');
@@ -934,7 +1060,7 @@ function updateStratagemVisibility() {
     fab.style.display = isHearthband ? '' : 'none';
     if (!isHearthband) fab.classList.remove('active');
 
-    const isBrandfast = selectedDetachment === 'brandfast-oathband';
+    const isBrandfast = isDetachmentActive('brandfast-oathband');
     document.querySelectorAll('.buff-dropdown-item[data-brandfast]').forEach(el => {
         el.style.display = isBrandfast ? '' : 'none';
         if (!isBrandfast) el.classList.remove('active');
@@ -943,7 +1069,7 @@ function updateStratagemVisibility() {
     firebaseFab.style.display = isBrandfast ? '' : 'none';
     if (!isBrandfast) firebaseFab.classList.remove('active');
 
-    const isHearthfyre = selectedDetachment === 'hearthfyre-arsenal';
+    const isHearthfyre = isDetachmentActive('hearthfyre-arsenal');
     document.querySelectorAll('.buff-dropdown-item[data-hearthfyre]').forEach(el => {
         el.style.display = isHearthfyre ? '' : 'none';
         if (!isHearthfyre) el.classList.remove('active');
@@ -952,34 +1078,42 @@ function updateStratagemVisibility() {
     optimalAppFab.style.display = isHearthfyre ? '' : 'none';
     if (!isHearthfyre) optimalAppFab.classList.remove('active');
 }
-function selectDetachment(id) {
-    if (selectedDetachment === id) return;
-    selectedDetachment = id;
-    saveDetachment();
-    // Reset Hearthband-only stratagems when leaving
-    if (id !== 'hearthband') {
-        stratagemState.closest = false;
-        stratagemState.fury = false;
-        furyYP = false;
-    }
-    // Reset Brandfast Oathband-only stratagems when leaving
-    if (id !== 'brandfast-oathband') {
-        stratagemState.firebase = false;
-    }
-    // Reset Hearthfyre Arsenal-only stratagems when leaving
-    if (id !== 'hearthfyre-arsenal') {
-        stratagemState.optimalApp = false;
-    }
-    saveGameState();
-    // Clear enhancements that don't belong to the new detachment
+// Reset any quick-buff state tied to a detachment that is no longer active.
+function resetDetachmentBuffs(id) {
+    if (id === 'hearthband') { stratagemState.closest = false; stratagemState.fury = false; furyYP = false; }
+    if (id === 'brandfast-oathband') { stratagemState.firebase = false; }
+    if (id === 'hearthfyre-arsenal') { stratagemState.optimalApp = false; }
+}
+// Drop enhancements whose detachment is no longer selected.
+function clearOrphanedEnhancements() {
     armyList.forEach(inst => {
         if (inst.enhancementId) {
             const enh = enhancements[inst.enhancementId];
-            if (enh?.detachment && enh.detachment !== id) {
-                inst.enhancementId = null;
-            }
+            if (enh?.detachment && !isDetachmentActive(enh.detachment)) inst.enhancementId = null;
         }
     });
+}
+// Add or remove a detachment, respecting the DP budget and unique groups.
+function toggleDetachment(id) {
+    const d = DETACHMENTS[id];
+    if (!d) return;
+    if (isDetachmentActive(id)) {
+        selectedDetachments = selectedDetachments.filter(x => x !== id);
+        resetDetachmentBuffs(id);
+        clearOrphanedEnhancements();
+    } else {
+        if (d.dp > dpRemaining()) {
+            showToast(`Not enough Detachment Points — ${d.name} costs ${d.dp} DP, ${dpRemaining()} left.`, 'warn');
+            return;
+        }
+        if (uniqueGroupTaken(d.unique)) {
+            showToast(`${d.name} can't be combined with another selected detachment.`, 'warn');
+            return;
+        }
+        selectedDetachments.push(id);
+    }
+    saveDetachment();
+    saveGameState();
     saveArmyList();
     updateDetachmentBanner();
     updateStratagemVisibility();
@@ -1068,7 +1202,7 @@ function saveCurrentList() {
     }
     savedLists[currentListSlot].armyList = armyList;
     savedLists[currentListSlot].nextInstanceId = nextInstanceId;
-    savedLists[currentListSlot].detachment = selectedDetachment;
+    savedLists[currentListSlot].detachments = [...selectedDetachments];
     savedLists[currentListSlot].pointsLimit = pointsLimit;
     try {
         localStorage.setItem('votann-saved-lists', JSON.stringify({ lists: savedLists, slot: currentListSlot }));
@@ -1102,7 +1236,7 @@ function loadSavedLists() {
             const old = localStorage.getItem('votann-army-list');
             if (old) { const p = JSON.parse(old); al = p.armyList || []; ni = p.nextInstanceId || 1; }
         } catch (e) {}
-        savedLists = [{ name: 'My Army', armyList: al, nextInstanceId: ni, detachment: selectedDetachment, pointsLimit: 0 }];
+        savedLists = [{ name: 'My Army', armyList: al, nextInstanceId: ni, detachments: [...selectedDetachments], pointsLimit: 0 }];
         currentListSlot = 0;
     }
     loadListState(savedLists[currentListSlot]);
@@ -1113,7 +1247,8 @@ function loadListState(list) {
     armyList = (list.armyList || []).map(normalizeInstance);
     nextInstanceId = list.nextInstanceId || 1;
     pointsLimit = list.pointsLimit || 0;
-    if (list.detachment && DETACHMENTS[list.detachment]) selectedDetachment = list.detachment;
+    if (Array.isArray(list.detachments)) selectedDetachments = list.detachments.filter(id => DETACHMENTS[id]);
+    else selectedDetachments = (list.detachment && DETACHMENTS[list.detachment]) ? [list.detachment] : ['hearthband'];
 }
 
 // Normalize an army instance to fix legacy data shapes
@@ -1156,7 +1291,7 @@ function switchToList(slot) {
     currentListSlot = slot;
     const list = savedLists[slot];
     loadListState(list);
-    if (list.detachment && DETACHMENTS[list.detachment]) saveDetachment();
+    saveDetachment();
     stratagemState.closest = false;
     stratagemState.fury = false;
     furyYP = false;
@@ -1167,7 +1302,7 @@ function switchToList(slot) {
 }
 
 function addNewList() {
-    savedLists.push({ name: `List ${savedLists.length + 1}`, armyList: [], nextInstanceId: 1, detachment: selectedDetachment, pointsLimit: 0 });
+    savedLists.push({ name: `List ${savedLists.length + 1}`, armyList: [], nextInstanceId: 1, detachments: [...selectedDetachments], pointsLimit: 0 });
     switchToList(savedLists.length - 1);
 }
 
@@ -1177,7 +1312,7 @@ function deleteCurrentList() {
     currentListSlot = Math.min(currentListSlot, savedLists.length - 1);
     const list = savedLists[currentListSlot];
     loadListState(list);
-    if (list.detachment && DETACHMENTS[list.detachment]) saveDetachment();
+    saveDetachment();
     saveCurrentList();
     refreshUI();
 }
@@ -1227,7 +1362,7 @@ async function inflateFromBase64(b64) {
 // Pack armyList into a compact form — only non-default values, short keys
 function packArmy() {
     return {
-        d: selectedDetachment,
+        d: selectedDetachments,
         p: pointsLimit || undefined,
         l: armyList.map(inst => {
             const unit = units[inst.unitId];
@@ -1298,7 +1433,7 @@ async function shareArmyUrl() {
 
 function exportArmyText() {
     const lines = [];
-    const detName = DETACHMENTS[selectedDetachment]?.name || selectedDetachment;
+    const detName = selectedDetachments.map(id => DETACHMENTS[id]?.name).filter(Boolean).join(', ') || 'None';
     const listName = savedLists[currentListSlot]?.name || 'My Army';
     const totalPts = armyList.reduce((sum, inst) => sum + calculateInstancePoints(inst), 0);
 
@@ -1377,8 +1512,11 @@ async function loadArmyFromUrl() {
             // New format: version prefix + deflate-compressed compact army
             const packed = JSON.parse(await inflateFromBase64(hash.slice(1)));
             armyList = unpackArmy(packed);
-            if (packed.d && DETACHMENTS[packed.d]) {
-                selectedDetachment = packed.d;
+            if (Array.isArray(packed.d)) {
+                selectedDetachments = packed.d.filter(id => DETACHMENTS[id]);
+                saveDetachment();
+            } else if (packed.d && DETACHMENTS[packed.d]) {
+                selectedDetachments = [packed.d];
                 saveDetachment();
             }
             saveArmyList();
@@ -1390,8 +1528,11 @@ async function loadArmyFromUrl() {
         if (parsed.armyList) {
             armyList = parsed.armyList;
             nextInstanceId = parsed.nextInstanceId || 1;
-            if (parsed.detachment && DETACHMENTS[parsed.detachment]) {
-                selectedDetachment = parsed.detachment;
+            if (Array.isArray(parsed.detachments)) {
+                selectedDetachments = parsed.detachments.filter(id => DETACHMENTS[id]);
+                saveDetachment();
+            } else if (parsed.detachment && DETACHMENTS[parsed.detachment]) {
+                selectedDetachments = [parsed.detachment];
                 saveDetachment();
             }
             saveArmyList();
@@ -2276,19 +2417,44 @@ function renderBodyguardAbilities(bodyguard, leader) {
     return html;
 }
 
-// Render detachment selector card
+// Render the detachment customizer: spend Detachment Points across detachments
 function renderDetachmentSelector() {
-    const det = DETACHMENTS[selectedDetachment];
+    const spent = dpSpent();
+    const overBudget = spent > DETACHMENT_POINTS;
+
+    // Sorted by name so the layout matches the published detachment list
+    const entries = Object.entries(DETACHMENTS).sort((a, b) => a[1].name.localeCompare(b[1].name));
+
+    const cards = entries.map(([id, d]) => {
+        const active = isDetachmentActive(id);
+        const blocked = !active && !canAddDetachment(id);
+        const color = DETACHMENT_CATEGORIES[d.category] || 'var(--border)';
+        return `
+            <button class="det-card ${active ? 'active' : ''} ${blocked ? 'blocked' : ''}"
+                    onclick="toggleDetachment('${id}')" ${blocked ? 'aria-disabled="true"' : ''}>
+                <div class="det-card-bar" style="background:${color}">${escHtml(d.category)}</div>
+                <div class="det-card-body">
+                    <span class="det-card-name">${escHtml(d.name)}</span>
+                    <span class="det-card-dp">${active ? '✓ ' : ''}${d.dp} DP</span>
+                </div>
+                ${d.unique ? `<div class="det-card-unique">Unique: ${escHtml(d.unique)}</div>` : ''}
+            </button>`;
+    }).join('');
+
+    const previews = selectedDetachments.map(id => {
+        const d = DETACHMENTS[id];
+        if (!d) return '';
+        return `<div class="detachment-rule-preview tappable" data-ab="${d.ruleId}"><strong>${escHtml(d.name)}</strong> — ${d.ruleDescription}</div>`;
+    }).join('');
+
     return `
         <div class="detachment-selector">
-            <div class="detachment-selector-label">Detachment</div>
-            <div class="detachment-options">
-                ${Object.entries(DETACHMENTS).map(([id, d]) => `
-                    <button class="detachment-option ${selectedDetachment === id ? 'active' : ''}"
-                            onclick="selectDetachment('${id}')">${d.name}</button>
-                `).join('')}
+            <div class="detachment-customizer-head">
+                <span class="detachment-selector-label">Detachments</span>
+                <span class="dp-counter ${overBudget ? 'over' : ''}">${spent} / ${DETACHMENT_POINTS} DP</span>
             </div>
-            <div class="detachment-rule-preview tappable" data-ab="${det.ruleId}">${det.name}: ${det.ruleDescription}</div>
+            <div class="det-card-grid">${cards}</div>
+            ${previews || '<div class="detachment-empty-note">Select detachments above — you have 3 Detachment Points to spend.</div>'}
         </div>
     `;
 }
@@ -2575,7 +2741,7 @@ function renderInstanceEnhancementSelector(instance, characterId) {
     // Filter available enhancements (same rules as before)
     const available = Object.entries(enhancements).filter(([enhId, enh]) => {
         if (usedEnhancements.includes(enhId) && enhId !== currentEnh) return false;
-        if (enh.detachment && enh.detachment !== selectedDetachment) return false;
+        if (enh.detachment && !isDetachmentActive(enh.detachment)) return false;
         if (enh.restrictedTo && !enh.restrictedTo.includes(characterId)) return false;
         if (enh.restrictedToWeapon) {
             const allWeapons = [...(character.weapons?.ranged || []), ...(character.weapons?.melee || [])];
@@ -3416,10 +3582,10 @@ function renderStratagemsTab() {
 
     Object.entries(stratagems).forEach(([id, strat]) => {
         if (!strat.phases || !strat.phases.includes(phase)) return;
-        // Filter detachment-specific stratagems to only show for the active detachment
-        if (strat.detachment && strat.detachment !== selectedDetachment) return;
+        // Only show detachment stratagems whose detachment is currently active
+        if (strat.detachment && !isDetachmentActive(strat.detachment)) return;
         if (strat.detachment) {
-            detCards.push(renderStratCard(id, strat));
+            detCards.push({ det: strat.detachment, html: renderStratCard(id, strat) });
         } else {
             coreCards.push(renderStratCard(id, strat));
         }
@@ -3430,11 +3596,14 @@ function renderStratagemsTab() {
         html = '<div class="strat-empty">No stratagems available in this phase.</div>';
     } else {
         html += coreCards.join('');
-        if (detCards.length > 0) {
-            const det = DETACHMENTS[selectedDetachment];
-            html += `<div class="strat-det-label">${escHtml(det?.name || selectedDetachment)}</div>`;
-            html += detCards.join('');
-        }
+        // Group detachment stratagems under each active detachment's name
+        selectedDetachments.forEach(detId => {
+            const cards = detCards.filter(c => c.det === detId);
+            if (cards.length) {
+                html += `<div class="strat-det-label">${escHtml(DETACHMENTS[detId]?.name || detId)}</div>`;
+                html += cards.map(c => c.html).join('');
+            }
+        });
     }
     grid.innerHTML = html;
 }

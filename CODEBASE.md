@@ -34,8 +34,8 @@ data/
 |---|---|---|---|
 | `armyList` | `Array<Instance>` | `[]` | Active army list — all added unit instances |
 | `nextInstanceId` | `Number` | `1` | Auto-increment ID for new instances |
-| `selectedDetachment` | `String` | `'<first-detachment-id>'` | Currently active detachment ID |
-| `savedLists` | `Array<SavedList>` | `[]` | All saved list slots: `{ name, armyList, nextInstanceId, detachment, pointsLimit }` |
+| `selectedDetachments` | `Array<String>` | `['hearthband']` | Active detachment IDs (limited by `DETACHMENT_POINTS`) |
+| `savedLists` | `Array<SavedList>` | `[]` | All saved list slots: `{ name, armyList, nextInstanceId, detachments, pointsLimit }` |
 | `currentListSlot` | `Number` | `0` | Index into `savedLists` for the active slot |
 | `pointsLimit` | `Number` | `0` | Points cap for the active list (0 = no limit) |
 
@@ -228,12 +228,25 @@ const UNIT_GROUPS = {
 const DETACHMENTS = {
   'detachment-id': {
     name: 'Detachment Name',
+    dp: 2,                                // Detachment Point cost (1–3)
+    category: 'Priority Assets',          // one of DETACHMENT_CATEGORIES (drives banner colour)
+    unique: 'hearthband' | null,          // unique group — only one detachment per group may be active
     ruleId: 'detachment-rule-id',         // ID used for ability modal lookup
     ruleType: 'Detachment Rule — Name',   // modal type label
     ruleDescription: '<strong>HTML...</strong>'  // embedded HTML (does NOT use abilities.json)
   }
 }
 ```
+
+### Detachment Points (DP) customizer
+
+- Every army has a fixed budget of `DETACHMENT_POINTS` (3 DP).
+- `selectedDetachments` is an **array** of active detachment IDs (was a single `selectedDetachment` string before v0.1.0).
+- `toggleDetachment(id)` adds/removes a detachment, enforced by `canAddDetachment(id)`: the DP cost must fit in `dpRemaining()` and its `unique` group must be free (`uniqueGroupTaken`).
+- Helpers: `isDetachmentActive(id)`, `dpSpent()`, `dpRemaining()`.
+- Enhancements and stratagems are available when their `detachment` is in `selectedDetachments` (`isDetachmentActive`). Removing a detachment drops orphaned enhancements (`clearOrphanedEnhancements`) and resets its quick-buffs (`resetDetachmentBuffs`).
+- Persistence: saved lists store a `detachments` array; the URL pack stores `d` as an array. Both migrate the old single-string form on load.
+- The header banner shows `dpSpent()/DETACHMENT_POINTS DP` and opens `showDetachmentRules()` (lists every active detachment's rule).
 
 ---
 
