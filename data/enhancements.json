@@ -166,5 +166,26 @@
     "detachment": "hearthfyre-arsenal",
     "points": 5,
     "description": "In your Shooting phase, after the bearer has shot, and in the Fight phase, after the bearer has fought, select one enemy <strong>MONSTER</strong> or <strong>VEHICLE</strong> unit hit by one or more of those attacks. Until the start of your next turn, that enemy unit is <strong>suppressed</strong>. While a unit is suppressed, each time a model in that unit makes an attack, <strong>subtract 1 from the Hit roll</strong>."
+  },
+  "optimised-attack-lines": {
+    "name": "Optimised Attack Lines",
+    "type": "Upgrade (15 pts)",
+    "upgrade": true,
+    "restriction": "SAGITAUR unit only",
+    "restrictedToKeyword": "SAGITAUR",
+    "detachment": "armoured-trailblazers",
+    "points": 15,
+    "grantsAbilities": ["mobile"],
+    "description": "<strong>SAGITAUR</strong> unit only. This unit has <strong>MOBILE</strong> (it can move horizontally through Dense Terrain features)."
+  },
+  "saturation-rounds": {
+    "name": "Saturation Rounds",
+    "type": "Upgrade (10 pts)",
+    "upgrade": true,
+    "restriction": "SAGITAUR unit only",
+    "restrictedToKeyword": "SAGITAUR",
+    "detachment": "armoured-trailblazers",
+    "points": 10,
+    "description": "<strong>SAGITAUR</strong> unit only. This unit's ranged attacks have <strong>[IGNORES COVER]</strong>."
   }
 }

@@ -596,7 +596,7 @@
             </div>
         </div>
     </header>
-    <div class="version-line" id="version-line">11th Edition - Version 0.2.0</div>
+    <div class="version-line" id="version-line">11th Edition - Version 0.2.1</div>
     <main class="container">
         <div id="units-tab" class="tab-content active" role="tabpanel" aria-label="Army view">
             <div id="units-container"><div class="loading">Loading units...</div></div>
@@ -1806,6 +1806,12 @@ function renderSoloUnitCard(entry) {
         }
     }
 
+    // Surface unit-level abilities granted by an assigned enhancement/upgrade (e.g. MOBILE)
+    const enhGrantedAbilities = (enhancementId && enhancements[enhancementId]?.grantsAbilities) || [];
+    if (enhGrantedAbilities.length) {
+        displayUnit = { ...displayUnit, abilities: [...(displayUnit.abilities || []), ...enhGrantedAbilities] };
+    }
+
     // Apply selected wargear effects (supports multiple selections)
     const selectedWargear = instance?.selectedWargear || [];
     let wargearInheritedAbilities = [];
@@ -2798,6 +2804,8 @@ function renderInstanceEnhancementSelector(instance) {
         if (enh.detachment && !isDetachmentActive(enh.detachment)) return false;
         if (enh.upgrade) {
             if (!upgradesAllowed) return false;
+            // Keyword restriction (e.g. "SAGITAUR unit only")
+            if (enh.restrictedToKeyword && !(unit.keywords || []).includes(enh.restrictedToKeyword)) return false;
             // Up to three of the same Upgrade across the army
             if ((usage[enhId] || 0) >= 3 && enhId !== currentEnh) return false;
             return true;
