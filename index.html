@@ -405,6 +405,7 @@
         .enh-option.none-opt{color:var(--text3);font-family:'Rajdhani',sans-serif;font-size:.75rem;font-style:italic}
         .enh-option-header{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem}
         .enh-option-name{font-family:'Rajdhani',sans-serif;font-size:.8rem;color:var(--gold);font-weight:600}
+        .enh-option-tag{display:inline-block;margin-left:.4rem;font-size:.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--blue);background:rgba(74,142,212,.15);border:1px solid rgba(74,142,212,.35);border-radius:2px;padding:.05rem .25rem;vertical-align:middle}
         .enh-option.active .enh-option-name{color:var(--gold-bright)}
         .enh-option-pts{font-size:.65rem;color:var(--text3);font-family:'Share Tech Mono',monospace;white-space:nowrap;flex-shrink:0}
         .enh-option-desc{font-size:.7rem;color:var(--text2);line-height:1.5;margin-top:.2rem}
@@ -595,7 +596,7 @@
             </div>
         </div>
     </header>
-    <div class="version-line" id="version-line">11th Edition - Version 0.1.7</div>
+    <div class="version-line" id="version-line">11th Edition - Version 0.2.0</div>
     <main class="container">
         <div id="units-tab" class="tab-content active" role="tabpanel" aria-label="Army view">
             <div id="units-container"><div class="loading">Loading units...</div></div>
@@ -1788,8 +1789,9 @@ function renderSoloUnitCard(entry) {
     // Check if Ironskein enhancement is active (for solo leaders)
     const enhancementId = instance?.enhancementId;
     const ironskeinActive = enhancementId === 'ironskein';
-    const soloInlineEnh = enhancementId === 'bastion-shield'
-        ? { id: 'bastion-shield', name: enhancements['bastion-shield']?.name || 'Bastion Shield' }
+    // Show any assigned enhancement/upgrade as a badge on the card (bastion-shield modifies the invuln row)
+    const soloInlineEnh = (enhancementId && enhancements[enhancementId])
+        ? { id: enhancementId, name: enhancements[enhancementId].name }
         : null;
 
     // Apply Ironskein +2 wounds if active
@@ -2547,21 +2549,17 @@ function renderArmyInstance(instance) {
     // Leader assignment dropdown (for non-leader units that can be led)
     if (!isLeader && canBeLeadBy.length > 0) {
         bodyContent += renderInstanceLeaderSelector(instance, canBeLeadBy);
-        // Enhancement selector for attached leader (if leader is selected and not Epic Hero)
-        if (instance.leaderId) {
-            const attachedLeader = units[instance.leaderId];
-            if (attachedLeader && !attachedLeader.isEpicHero) {
-                bodyContent += renderInstanceEnhancementSelector(instance, instance.leaderId);
-                if (attachedLeader.wargearExclusiveChoices?.length) {
-                    bodyContent += renderInstanceLeaderWargearSelector(instance, attachedLeader);
-                }
-            }
-        }
     }
 
-    // Enhancement selector (for standalone leader units, if not Epic Hero)
-    if (isLeader && !unit.isEpicHero) {
-        bodyContent += renderInstanceEnhancementSelector(instance, instance.unitId);
+    // Enhancement / Upgrade selector (characters get enhancements; any non-Epic unit can take Upgrades)
+    bodyContent += renderInstanceEnhancementSelector(instance);
+
+    // Attached leader's exclusive wargear (if a non-Epic leader is attached)
+    if (!isLeader && instance.leaderId) {
+        const attachedLeader = units[instance.leaderId];
+        if (attachedLeader && !attachedLeader.isEpicHero && attachedLeader.wargearExclusiveChoices?.length) {
+            bodyContent += renderInstanceLeaderWargearSelector(instance, attachedLeader);
+        }
     }
 
     // Exclusive wargear selector (pick one, e.g. Weavefield Crest vs Teleport Crest)
@@ -2745,50 +2743,94 @@ function renderInstanceLeaderSelector(instance, canBeLeadBy) {
 }
 
 // Get all used enhancement IDs (excluding the current instance)
-function getUsedEnhancements(excludeInstanceId) {
-    const used = [];
+// Count how many times each enhancement is used across the army (excluding one instance)
+function getEnhancementUsage(excludeInstanceId) {
+    const counts = {};
     armyList.forEach(inst => {
         if (inst.instanceId !== excludeInstanceId && inst.enhancementId) {
-            used.push(inst.enhancementId);
+            counts[inst.enhancementId] = (counts[inst.enhancementId] || 0) + 1;
         }
     });
-    return used;
+    return counts;
 }
 
-// Render enhancement selector for an instance
-function renderInstanceEnhancementSelector(instance, characterId) {
+// Enhancements counting toward the army limit: each normal enhancement counts; each distinct
+// Upgrade counts once (2nd/3rd copies of the same Upgrade are free of the limit).
+// Pass extraEnhId to test what the count would be if that enhancement were also added.
+function countArmyEnhancements(excludeInstanceId, extraEnhId) {
+    const seenUpgrades = new Set();
+    let count = 0;
+    const tally = (enhId) => {
+        const enh = enhId && enhancements[enhId];
+        if (!enh) return;
+        if (enh.upgrade) {
+            if (!seenUpgrades.has(enhId)) { seenUpgrades.add(enhId); count++; }
+        } else {
+            count++;
+        }
+    };
+    armyList.forEach(inst => { if (inst.instanceId !== excludeInstanceId) tally(inst.enhancementId); });
+    tally(extraEnhId);
+    return count;
+}
+
+// Render the enhancement / upgrade selector for an instance.
+// Normal enhancements require an eligible (non-Epic) CHARACTER; Upgrades may go on any
+// non-Epic-Hero unit. Returns '' when the unit can't take anything and has none selected.
+function renderInstanceEnhancementSelector(instance) {
+    const unit = units[instance.unitId];
+    if (!unit) return '';
+    // Epic Hero units cannot have enhancements or upgrades
+    if (unit.isLeader && unit.isEpicHero) return '';
+
+    // Eligible character for normal (non-Upgrade) enhancements: the unit itself if it's a
+    // non-Epic leader, otherwise a non-Epic attached leader.
+    let normalCharId = null;
+    if (unit.isLeader && !unit.isEpicHero) normalCharId = instance.unitId;
+    else if (instance.leaderId && units[instance.leaderId] && !units[instance.leaderId].isEpicHero) normalCharId = instance.leaderId;
+    const normalChar = normalCharId ? units[normalCharId] : null;
+
+    const upgradesAllowed = !unit.isEpicHero;
     const currentEnh = instance.enhancementId || '';
-    const character = units[characterId];
-    if (!character) return '';
+    const usage = getEnhancementUsage(instance.instanceId);
 
-    const usedEnhancements = getUsedEnhancements(instance.instanceId);
-    const totalUsed = usedEnhancements.length + (currentEnh ? 1 : 0);
-    const maxReached = totalUsed >= MAX_ENHANCEMENTS && !currentEnh;
-    const countLabel = maxReached ? ` (Max ${MAX_ENHANCEMENTS} reached)` : ` (${totalUsed}/${MAX_ENHANCEMENTS} used)`;
-
-    // Filter available enhancements (same rules as before)
     const available = Object.entries(enhancements).filter(([enhId, enh]) => {
-        if (usedEnhancements.includes(enhId) && enhId !== currentEnh) return false;
         if (enh.detachment && !isDetachmentActive(enh.detachment)) return false;
-        if (enh.restrictedTo && !enh.restrictedTo.includes(characterId)) return false;
+        if (enh.upgrade) {
+            if (!upgradesAllowed) return false;
+            // Up to three of the same Upgrade across the army
+            if ((usage[enhId] || 0) >= 3 && enhId !== currentEnh) return false;
+            return true;
+        }
+        // Normal enhancement — needs an eligible character, max one in the army
+        if (!normalChar) return false;
+        if ((usage[enhId] || 0) >= 1 && enhId !== currentEnh) return false;
+        if (enh.restrictedTo && !enh.restrictedTo.includes(normalCharId)) return false;
         if (enh.restrictedToWeapon) {
-            const allWeapons = [...(character.weapons?.ranged || []), ...(character.weapons?.melee || [])];
+            const allWeapons = [...(normalChar.weapons?.ranged || []), ...(normalChar.weapons?.melee || [])];
             if (!allWeapons.some(w => w.name.toLowerCase().includes(enh.restrictedToWeapon.toLowerCase()))) return false;
         }
         return true;
     });
 
+    // Keep non-eligible units uncluttered: no options and nothing selected → no selector
+    if (!available.length && !currentEnh) return '';
+
+    const countLabel = ` (${countArmyEnhancements(null)}/${MAX_ENHANCEMENTS} used)`;
     const noneActive = !currentEnh;
     let cards = `<div class="enh-option none-opt ${noneActive ? 'active' : ''}" onclick="setInstanceEnhancement('${instance.instanceId}', '')">No Enhancement</div>`;
 
     available.forEach(([enhId, enh]) => {
         const isActive = currentEnh === enhId;
-        const isDisabled = maxReached && !isActive;
+        // Selecting this would exceed the limit? (duplicate Upgrades don't add to the count)
+        const isDisabled = !isActive && countArmyEnhancements(instance.instanceId, enhId) > MAX_ENHANCEMENTS;
+        const tag = enh.upgrade ? '<span class="enh-option-tag">Upgrade</span>' : '';
+        const click = isDisabled ? '' : `setInstanceEnhancement('${escHtml(instance.instanceId)}', '${escHtml(enhId)}')`;
         cards += `
             <div class="enh-option ${isActive ? 'active' : ''} ${isDisabled ? 'disabled' : ''}"
-                 onclick="setInstanceEnhancement('${escHtml(instance.instanceId)}', '${escHtml(enhId)}')">
+                 onclick="${click}">
                 <div class="enh-option-header">
-                    <span class="enh-option-name">${enh.name}</span>
+                    <span class="enh-option-name">${enh.name}${tag}</span>
                     <span class="enh-option-pts">+${enh.points} pts</span>
                 </div>
                 <div class="enh-option-desc">${enh.description}</div>

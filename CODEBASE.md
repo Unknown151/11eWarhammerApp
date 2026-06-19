@@ -373,19 +373,25 @@ const DETACHMENTS = { 'detachment-a': {...}, 'detachment-b': {...}, ... }
 
 ## Enhancement System
 
-### Filter Logic (`renderInstanceEnhancementSelector`)
-An enhancement is shown if ALL conditions pass:
-1. Not already used by another instance (max 3 total, tracked by `getUsedEnhancements()`)
-2. `enh.detachment` matches `selectedDetachment`
-3. `enh.restrictedTo` is absent OR includes `characterId`
-4. `enh.restrictedToWeapon` is absent OR the character has a weapon with that name (case-insensitive)
+### Enhancements vs Upgrades
+- **Normal enhancements** — only on a non-Epic **CHARACTER** unit; max **one** of each in the army; each counts toward the army limit (`MAX_ENHANCEMENTS = 3`).
+- **Upgrades** (`"upgrade": true` on the enhancement) — may go on **any non-Epic-Hero unit** (including non-characters); up to **three** of the same Upgrade in the army; only the **first** copy of each distinct Upgrade counts toward the limit (extra copies are free of the limit but still cost points each).
+- **Epic Hero** units can take neither.
 
-`characterId` = `instance.unitId` (standalone leader) or `instance.leaderId` (attached leader)
+### Filter Logic (`renderInstanceEnhancementSelector(instance)`)
+The selector figures out internally:
+- `normalCharId` — the non-Epic character eligible for normal enhancements (the unit itself if a non-Epic leader, else a non-Epic attached leader; otherwise none).
+- `upgradesAllowed` — true for any non-Epic-Hero unit.
+
+An option is shown if `enh.detachment` is active and: for Upgrades, fewer than 3 copies are used elsewhere; for normal enhancements, a `normalChar` exists, it isn't already used, and `restrictedTo`/`restrictedToWeapon` pass. Returns `''` when nothing is available and none is selected (keeps non-eligible units uncluttered).
+
+Helpers: `getEnhancementUsage(excludeId)` → `{enhId: countElsewhere}`; `countArmyEnhancements(excludeId, extraEnhId)` → army limit count (distinct Upgrades count once). Per-option disable = selecting it would push `countArmyEnhancements` over `MAX_ENHANCEMENTS`.
 
 ### Enhancement Card UI
 Cards rendered as `.enh-option` divs in `.enh-option-list`:
 - `.enh-option.active` — currently selected
-- `.enh-option.disabled` — max 3 reached and not this card
+- `.enh-option.disabled` — selecting it would exceed the limit
+- `.enh-option-tag` — the "Upgrade" badge on upgrade options
 
 ---
 
