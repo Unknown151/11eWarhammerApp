@@ -466,17 +466,17 @@
         .detachment-customizer-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem}
         .dp-counter{font-family:'Share Tech Mono',monospace;font-size:.75rem;color:var(--gold);background:rgba(212,168,75,.12);padding:.15rem .55rem;border-radius:4px}
         .dp-counter.over{color:var(--red);background:rgba(204,0,68,.12)}
-        .det-card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.5rem}
-        .det-card{position:relative;text-align:left;padding:0;border:1px solid var(--border);border-radius:6px;background:var(--bg3);cursor:pointer;overflow:hidden;transition:all .15s;color:var(--text)}
-        .det-card:hover{border-color:var(--gold-dark)}
-        .det-card.active{border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold)}
-        .det-card.blocked{opacity:.4;cursor:not-allowed}
-        .det-card-bar{font-family:'Orbitron',sans-serif;font-size:.5rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff;padding:.22rem .5rem;text-shadow:0 1px 1px rgba(0,0,0,.4)}
-        .det-card-body{display:flex;justify-content:space-between;align-items:center;gap:.4rem;padding:.4rem .55rem}
-        .det-card-name{font-size:.72rem;font-weight:600;line-height:1.15}
-        .det-card-dp{font-family:'Share Tech Mono',monospace;font-size:.65rem;color:var(--gold);white-space:nowrap}
-        .det-card.active .det-card-dp{color:var(--gold-bright)}
-        .det-card-unique{font-size:.55rem;color:var(--text3);padding:0 .55rem .4rem;text-transform:uppercase;letter-spacing:.05em}
+        .dp-card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.5rem}
+        .dp-card{position:relative;text-align:left;padding:0;border:1px solid var(--border);border-radius:6px;background:var(--bg3);cursor:pointer;overflow:hidden;transition:all .15s;color:var(--text)}
+        .dp-card:hover{border-color:var(--gold-dark)}
+        .dp-card.active{border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold)}
+        .dp-card.blocked{opacity:.4;cursor:not-allowed}
+        .dp-card-bar{font-family:'Orbitron',sans-serif;font-size:.5rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff;padding:.22rem .5rem;text-shadow:0 1px 1px rgba(0,0,0,.4)}
+        .dp-card-body{display:flex;justify-content:space-between;align-items:center;gap:.4rem;padding:.4rem .55rem}
+        .dp-card-name{font-size:.72rem;font-weight:600;line-height:1.15}
+        .dp-card-dp{font-family:'Share Tech Mono',monospace;font-size:.65rem;color:var(--gold);white-space:nowrap}
+        .dp-card.active .dp-card-dp{color:var(--gold-bright)}
+        .dp-card-unique{font-size:.55rem;color:var(--text3);padding:0 .55rem .4rem;text-transform:uppercase;letter-spacing:.05em}
         .detachment-empty-note{font-size:.7rem;color:var(--text3);font-style:italic;margin-top:.5rem}
         .army-instance{background:var(--bg3);border:1px solid var(--border);border-radius:6px;margin-bottom:.5rem;overflow:visible}
         .army-instance-header{display:flex;align-items:center;gap:.6rem;padding:.6rem .75rem;cursor:pointer;touch-action:manipulation;background:linear-gradient(90deg,rgba(212,168,75,.05),transparent);border-radius:6px 6px 0 0}
@@ -591,7 +591,7 @@
             </div>
         </div>
     </header>
-    <div class="version-line" id="version-line">11th Edition - Version 0.1.4</div>
+    <div class="version-line" id="version-line">11th Edition - Version 0.1.5</div>
     <main class="container">
         <div id="units-tab" class="tab-content active" role="tabpanel" aria-label="Army view">
             <div id="units-container"><div class="loading">Loading units...</div></div>
@@ -2430,14 +2430,14 @@ function renderDetachmentSelector() {
         const blocked = !active && !canAddDetachment(id);
         const color = DETACHMENT_CATEGORIES[d.category] || 'var(--border)';
         return `
-            <button class="det-card ${active ? 'active' : ''} ${blocked ? 'blocked' : ''}"
+            <button class="dp-card ${active ? 'active' : ''} ${blocked ? 'blocked' : ''}"
                     onclick="toggleDetachment('${id}')" ${blocked ? 'aria-disabled="true"' : ''}>
-                <div class="det-card-bar" style="background:${color}">${escHtml(d.category)}</div>
-                <div class="det-card-body">
-                    <span class="det-card-name">${escHtml(d.name)}</span>
-                    <span class="det-card-dp">${active ? '✓ ' : ''}${d.dp} DP</span>
+                <div class="dp-card-bar" style="background:${color}">${escHtml(d.category)}</div>
+                <div class="dp-card-body">
+                    <span class="dp-card-name">${escHtml(d.name)}</span>
+                    <span class="dp-card-dp">${active ? '✓ ' : ''}${d.dp} DP</span>
                 </div>
-                ${d.unique ? `<div class="det-card-unique">Unique: ${escHtml(d.unique)}</div>` : ''}
+                ${d.unique ? `<div class="dp-card-unique">Unique: ${escHtml(d.unique)}</div>` : ''}
             </button>`;
     }).join('');
 
@@ -2453,7 +2453,7 @@ function renderDetachmentSelector() {
                 <span class="detachment-selector-label">Detachments</span>
                 <span class="dp-counter ${overBudget ? 'over' : ''}">${spent} / ${DETACHMENT_POINTS} DP</span>
             </div>
-            <div class="det-card-grid">${cards}</div>
+            <div class="dp-card-grid">${cards}</div>
             ${previews || '<div class="detachment-empty-note">Select detachments above — you have 3 Detachment Points to spend.</div>'}
         </div>
     `;
