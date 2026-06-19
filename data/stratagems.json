@@ -246,6 +246,52 @@
     "effect": "Select one visible enemy unit within 12\" of your unit. Until the end of the phase, each time a friendly LEAGUES OF VOTANN unit makes an attack that targets that enemy unit, that attack has the [IGNORES COVER] ability.",
     "detachment": "farseekers"
   },
+  "fury-of-the-hearth-hc": {
+    "name": "Fury of the Hearth",
+    "type": "Hearthguard Covenant Stratagem",
+    "turn": "your",
+    "phases": [
+      "shooting"
+    ],
+    "cpCost": 1,
+    "ypCost": 0,
+    "summary": "EINHYR HEARTHGUARD ranged attacks gain +1 S (and [SUSTAINED HITS 1] for 1YP).",
+    "when": "Your Shooting phase, when a friendly EINHYR HEARTHGUARD unit is selected to shoot.",
+    "target": "That EINHYR HEARTHGUARD unit.",
+    "effect": "Until the end of the phase, your unit's ranged attacks have +1 to their Strength characteristic. In addition, you can spend 1YP; if you do, those ranged attacks also have the [SUSTAINED HITS 1] ability.",
+    "detachment": "hearthguard-covenant"
+  },
+  "materialisation-matrices-hc": {
+    "name": "Materialisation Matrices",
+    "type": "Hearthguard Covenant Stratagem",
+    "turn": "your",
+    "phases": [
+      "movement"
+    ],
+    "cpCost": 1,
+    "ypCost": 0,
+    "summary": "Deep Strike an EINHYR HEARTHGUARD unit anywhere >6\" from enemies (no charge that turn).",
+    "when": "Your Movement phase, when a friendly EINHYR HEARTHGUARD unit with Deep Strike is selected to make an Ingress move.",
+    "target": "That EINHYR HEARTHGUARD unit.",
+    "effect": "Your unit can be set up anywhere on the battlefield that is more than 6\" horizontally from all enemy units, even if that is within your opponent's deployment zone. Your unit is not eligible to declare a charge until the end of the turn.",
+    "detachment": "hearthguard-covenant"
+  },
+  "brekkeknots-hc": {
+    "name": "Brëkkeknots",
+    "type": "Hearthguard Covenant Stratagem",
+    "turn": "either",
+    "phases": [
+      "shooting",
+      "fight"
+    ],
+    "cpCost": 1,
+    "ypCost": 0,
+    "summary": "An EINHYR HEARTHGUARD unit being attacked gains a 4+ invulnerable save.",
+    "when": "Your opponent's Shooting phase or the Fight phase, when an enemy unit targets a friendly EINHYR HEARTHGUARD unit.",
+    "target": "That EINHYR HEARTHGUARD unit.",
+    "effect": "Until the end of the phase, models in your unit have a 4+ invulnerable save.",
+    "detachment": "hearthguard-covenant"
+  },
   "fury-of-the-hearth": {
     "name": "Fury of the Hearth",
     "type": "Hearthband – Battle Tactic Stratagem",
