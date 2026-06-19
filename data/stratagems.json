@@ -201,6 +201,51 @@
     "effect": "Your units each make an Ingress move.",
     "detachment": "armoured-trailblazers"
   },
+  "no-shot-wasted": {
+    "name": "No Shot Wasted",
+    "type": "Farseekers Stratagem",
+    "turn": "your",
+    "phases": [
+      "shooting"
+    ],
+    "cpCost": 1,
+    "ypCost": 0,
+    "summary": "A HERNKYN unit's ranged attacks gain [LETHAL HITS].",
+    "when": "Your Shooting phase, when a friendly HERNKYN unit is selected to shoot.",
+    "target": "That HERNKYN unit.",
+    "effect": "Until the end of the phase, your unit's ranged attacks have the [LETHAL HITS] ability.",
+    "detachment": "farseekers"
+  },
+  "economy-of-motion": {
+    "name": "Economy of Motion",
+    "type": "Farseekers Stratagem",
+    "turn": "opponent",
+    "phases": [
+      "movement"
+    ],
+    "cpCost": 1,
+    "ypCost": 0,
+    "summary": "A PIONEERS unit makes a D3+3\" normal move when an enemy ends a move nearby.",
+    "when": "Your opponent's Movement phase, when an enemy unit ends a move within 8\" of a friendly unengaged PIONEERS unit.",
+    "target": "That PIONEERS unit.",
+    "effect": "Your unit can make a Normal move of up to D3+3\".",
+    "detachment": "farseekers"
+  },
+  "scornful-analysis": {
+    "name": "Scornful Analysis",
+    "type": "Farseekers Stratagem",
+    "turn": "your",
+    "phases": [
+      "shooting"
+    ],
+    "cpCost": 1,
+    "ypCost": 0,
+    "summary": "LEAGUES OF VOTANN attacks against one enemy unit gain [IGNORES COVER].",
+    "when": "Start of your Shooting phase.",
+    "target": "One friendly HERNKYN unit.",
+    "effect": "Select one visible enemy unit within 12\" of your unit. Until the end of the phase, each time a friendly LEAGUES OF VOTANN unit makes an attack that targets that enemy unit, that attack has the [IGNORES COVER] ability.",
+    "detachment": "farseekers"
+  },
   "fury-of-the-hearth": {
     "name": "Fury of the Hearth",
     "type": "Hearthband – Battle Tactic Stratagem",
