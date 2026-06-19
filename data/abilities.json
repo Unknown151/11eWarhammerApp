@@ -280,6 +280,12 @@
     "phases": ["pre-game"],
     "description": "At the start of the first battle round, before the first turn begins, this unit can make a <strong>Normal move of up to 9\"</strong>."
   },
+  "scouts-6": {
+    "name": "Scouts 6\"",
+    "type": "Core Ability",
+    "phases": ["pre-game"],
+    "description": "At the start of the first battle round, before the first turn begins, this unit can make a <strong>Normal move of up to 6\"</strong>.<br><br><em>Granted to SAGITAUR units by the Armoured Trailblazers detachment (Sagitaur Spearhead).</em>"
+  },
   "firing-deck-5": {
     "name": "Firing Deck 5",
     "type": "Core Ability",

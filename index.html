@@ -118,6 +118,10 @@
         .fnp-val{font-family:'Share Tech Mono',monospace;font-size:1rem;color:var(--text);font-weight:700;cursor:pointer}
         .invuln-core-ab{font-size:.58rem;font-weight:700;padding:.2rem .45rem;background:rgba(74,142,212,.25);border:1px solid rgba(74,142,212,.5);color:var(--text);border-radius:2px;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;margin-left:.15rem}
         .invuln-enh{font-size:.58rem;font-weight:700;padding:.2rem .45rem;background:rgba(212,168,75,.25);border:1px solid var(--gold-dark);color:var(--gold-bright);border-radius:2px;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;margin-left:.15rem}
+        .detach-row{display:flex;align-items:center;gap:.5rem;margin-bottom:.875rem;padding:.4rem .6rem;background:rgba(74,142,212,.22);border:1px solid rgba(74,142,212,.45);border-radius:3px;width:fit-content;cursor:pointer}
+        body.light-theme .detach-row{background:rgba(74,142,212,.12);border-color:rgba(74,142,212,.4)}
+        .detach-label{font-size:.6rem;color:var(--text);text-transform:uppercase;letter-spacing:.05em}
+        .detach-val{font-family:'Share Tech Mono',monospace;font-size:1rem;color:var(--text);font-weight:700}
         .weapons{margin-bottom:.875rem}
         .weapon-category{background:var(--bg2);border-radius:4px;margin-bottom:.5rem;overflow:hidden}
         .weapon-category:last-child{margin-bottom:0}
@@ -591,7 +595,7 @@
             </div>
         </div>
     </header>
-    <div class="version-line" id="version-line">11th Edition - Version 0.1.5</div>
+    <div class="version-line" id="version-line">11th Edition - Version 0.1.6</div>
     <main class="container">
         <div id="units-tab" class="tab-content active" role="tabpanel" aria-label="Army view">
             <div id="units-container"><div class="loading">Loading units...</div></div>
@@ -1858,6 +1862,7 @@ function renderSoloUnitCard(entry) {
                     ${renderUnitHeader(unit, modelCount)}
                     ${renderUnitStats(displayUnit)}
                     ${renderDefensiveRow(displayUnit, false, null, soloInlineEnh)}
+                    ${renderDetachmentGrantedRow(displayUnit)}
                     ${renderWeapons(filteredWeapons, wargearInheritedAbilities, wargearAppliesTo, furyActive, closestActive, closestBonuses, firebaseActive, optimalAppActive)}
                     ${renderSoloAbilities(displayUnit, extraWargear)}
                 </div>
@@ -1865,6 +1870,29 @@ function renderSoloUnitCard(entry) {
             </div>
         </div>
     `;
+}
+
+// Abilities granted to a unit by the currently active detachments (keyword-gated)
+function getDetachmentGrantedAbilities(unit) {
+    const granted = [];
+    const kw = unit.keywords || [];
+    // Armoured Trailblazers — Sagitaur Spearhead: SAGITAUR units gain Scouts 6"
+    if (isDetachmentActive('armoured-trailblazers') && kw.includes('SAGITAUR')) {
+        granted.push({ id: 'scouts-6', name: 'Scouts 6"' });
+    }
+    return granted;
+}
+
+// Render a row (shown just below the stat line) for detachment-granted abilities
+function renderDetachmentGrantedRow(unit) {
+    const granted = getDetachmentGrantedAbilities(unit);
+    if (!granted.length) return '';
+    return granted.map(ab =>
+        `<div class="detach-row tappable" data-ab="${escHtml(ab.id)}">
+            <span class="detach-label">Detachment:</span>
+            <span class="detach-val">${escHtml(ab.name)}</span>
+        </div>`
+    ).join('');
 }
 
 // Render abilities for a solo unit
