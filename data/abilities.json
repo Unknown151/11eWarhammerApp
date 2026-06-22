@@ -384,7 +384,7 @@
   "predictive-guidance": {
     "name": "Predictive Guidance",
     "type": "Ability — Memnyr Strategist",
-    "description": "Once per battle round, this model can use this ability. If it does, you can target this unit with the <strong>Fire Overwatch</strong> or <strong>Heroic Intervention</strong> Stratagem for <strong>0CP</strong>."
+    "description": "Once per battle round, when you target this unit with the <strong>Fire Overwatch</strong> or <strong>Heroic Intervention</strong> Stratagem, you can use this ability. If you do, that use of that Stratagem is <strong>-1CP</strong>."
   },
   "cyberstimms": {
     "name": "Cyberstimms",

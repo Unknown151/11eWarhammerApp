@@ -2,7 +2,7 @@
   "id": "hekaton-land-fortress",
   "name": "Hekaton Land Fortress",
   "type": ["Vehicle"],
-  "keywords": ["VEHICLE", "TRANSPORT", "HEKATON LAND FORTRESS"],
+  "keywords": ["VEHICLE", "TRANSPORT", "FRAME", "HEKATON LAND FORTRESS"],
   "isLeader": false,
   "points": 250,
   "models": 1,

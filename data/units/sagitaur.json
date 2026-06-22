@@ -2,7 +2,7 @@
   "id": "sagitaur",
   "name": "Sagitaur",
   "type": ["Dedicated Transport", "Vehicle"],
-  "keywords": ["VEHICLE", "TRANSPORT", "DEDICATED TRANSPORT", "SAGITAUR"],
+  "keywords": ["VEHICLE", "TRANSPORT", "FRAME", "DEDICATED TRANSPORT", "SAGITAUR"],
   "isLeader": false,
   "points": 85,
   "models": 1,

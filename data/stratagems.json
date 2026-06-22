@@ -412,9 +412,9 @@
     "cpCost": 1,
     "ypCost": 0,
     "summary": "Disembark one unit from a TRANSPORT at the end of any of your phases. Cannot charge this turn.",
-    "when": "End of any of your phases.",
+    "when": "End of any of your phases, if units from your army have Hostile Acquisition.",
     "target": "One LEAGUES OF VOTANN TRANSPORT unit from your army.",
-    "effect": "One LEAGUES OF VOTANN unit embarked within your TRANSPORT can disembark. When doing so, models in that unit can be set up anywhere on the battlefield wholly within 6\" of your TRANSPORT. That unit cannot declare a charge in the same turn, but can otherwise act normally in the remainder of the turn.",
+    "effect": "One LEAGUES OF VOTANN unit embarked within that TRANSPORT can disembark. When doing so, models in that unit can be set up anywhere on the battlefield wholly within 6\" of your TRANSPORT. That unit cannot declare a charge in the same turn, but can otherwise act normally in the remainder of the turn.",
     "detachment": "brandfast-oathband"
   },
   "bastion-running": {
