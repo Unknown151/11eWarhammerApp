@@ -207,5 +207,39 @@
     "detachment": "farseekers",
     "points": 15,
     "description": "<strong>YAEGIRS</strong> unit only. This unit has <strong>-3\" detection range</strong>."
+  },
+  "asset-manipulator": {
+    "name": "Asset Manipulator",
+    "type": "Enhancement (25 pts)",
+    "restriction": "Leagues of Votann model only",
+    "detachment": "mercenary-oathband",
+    "points": 25,
+    "description": "At the start of the Command phase, you can spend <strong>3YP</strong>. If you do, until the end of the turn, while an enemy unit is within <strong>3\"</strong> of the bearer, <strong>subtract 1 from the Objective Control</strong> characteristic of models in that enemy unit."
+  },
+  "etacarn-sb9-targeting-implant": {
+    "name": "Etacarn SB9 Targeting Implant",
+    "type": "Enhancement (15 pts)",
+    "restriction": "Leagues of Votann model only",
+    "detachment": "mercenary-oathband",
+    "points": 15,
+    "description": "Each time a model in the bearer's unit makes an attack, <strong>re-roll a Hit roll of 1</strong>. Each time the bearer's unit is selected to shoot or fight, you can spend <strong>3YP</strong>. If you do, until the end of the phase, each time a model in the bearer's unit makes an attack, that attack has the <strong>[SUSTAINED HITS 1]</strong> ability."
+  },
+  "mercenary-prospector": {
+    "name": "Mercenary Prospector",
+    "type": "Enhancement (20 pts)",
+    "restriction": "Kâhl only",
+    "restrictedTo": ["kahl"],
+    "detachment": "mercenary-oathband",
+    "points": 20,
+    "description": "<strong>KÂHL</strong> model only. Each time an enemy unit is destroyed by the bearer's unit, <strong>gain 2YP</strong>."
+  },
+  "metaphysical-brokerage": {
+    "name": "Metaphysical Brokerage",
+    "type": "Enhancement (20 pts)",
+    "restriction": "MEMNYR STRATEGIST model only",
+    "restrictedTo": ["memnyr-strategist"],
+    "detachment": "mercenary-oathband",
+    "points": 20,
+    "description": "<strong>MEMNYR STRATEGIST</strong> model only. At the end of your turn, if the bearer is on the battlefield and you gained fewer than <strong>3YP</strong> this turn, you gain an amount of YP equal to the difference."
   }
 }
