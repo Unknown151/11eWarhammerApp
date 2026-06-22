@@ -596,7 +596,7 @@
             </div>
         </div>
     </header>
-    <div class="version-line" id="version-line">11th Edition - Version 0.2.4</div>
+    <div class="version-line" id="version-line">11th Edition - Version 0.2.5</div>
     <main class="container">
         <div id="units-tab" class="tab-content active" role="tabpanel" aria-label="Army view">
             <div id="units-container"><div class="loading">Loading units...</div></div>
@@ -1094,7 +1094,7 @@ function clearOrphanedEnhancements() {
     armyList.forEach(inst => {
         if (inst.enhancementId) {
             const enh = enhancements[inst.enhancementId];
-            if (enh?.detachment && !isDetachmentActive(enh.detachment)) inst.enhancementId = null;
+            if (enh && !isEnhancementDetachmentActive(enh)) inst.enhancementId = null;
         }
     });
 }
@@ -2749,6 +2749,14 @@ function renderInstanceLeaderSelector(instance, canBeLeadBy) {
 }
 
 // Get all used enhancement IDs (excluding the current instance)
+// True if an enhancement's detachment requirement is met (no detachment, or any of its
+// detachment(s) is currently active). `detachment` may be a string or an array of ids.
+function isEnhancementDetachmentActive(enh) {
+    if (!enh || !enh.detachment) return true;
+    const dets = Array.isArray(enh.detachment) ? enh.detachment : [enh.detachment];
+    return dets.some(isDetachmentActive);
+}
+
 // Count how many times each enhancement is used across the army (excluding one instance)
 function getEnhancementUsage(excludeInstanceId) {
     const counts = {};
@@ -2801,7 +2809,7 @@ function renderInstanceEnhancementSelector(instance) {
     const usage = getEnhancementUsage(instance.instanceId);
 
     const available = Object.entries(enhancements).filter(([enhId, enh]) => {
-        if (enh.detachment && !isDetachmentActive(enh.detachment)) return false;
+        if (!isEnhancementDetachmentActive(enh)) return false;
         if (enh.upgrade) {
             if (!upgradesAllowed) return false;
             // Keyword restriction (e.g. "SAGITAUR unit only")

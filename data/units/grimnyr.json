@@ -5,8 +5,8 @@
   "keywords": ["INFANTRY", "CHARACTER", "PSYKER", "GRIMNYR"],
   "isLeader": true,
   "points": 65,
-  "models": 2,
-  "modelBreakdown": "1 Grimnyr + 1 CORV",
+  "models": 3,
+  "modelBreakdown": "1 Grimnyr + 2 E-COG",
   "stats": {
     "m": "5\"",
     "t": 5,

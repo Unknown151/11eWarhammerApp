@@ -20,7 +20,7 @@
     "name": "Ironskein",
     "type": "Enhancement (10 pts)",
     "restriction": "Leagues of Votann only",
-    "detachment": "hearthband",
+    "detachment": ["hearthband", "hearthguard-covenant"],
     "points": 10,
     "description": "Add <strong>+2</strong> to the bearer's Wounds characteristic."
   },
@@ -29,7 +29,7 @@
     "type": "Enhancement (30 pts)",
     "restriction": "Kâhl only",
     "restrictedTo": ["kahl"],
-    "detachment": "hearthband",
+    "detachment": ["hearthband", "hearthguard-covenant"],
     "points": 30,
     "description": "Each time a model in the bearer's unit is destroyed by a melee attack, if it has not fought this phase, roll one D6: on a 4+, do not remove it from play. The destroyed model can fight after the attacking unit has finished making its attacks, and is then removed from play."
   },
