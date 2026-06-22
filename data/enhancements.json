@@ -187,5 +187,25 @@
     "detachment": "armoured-trailblazers",
     "points": 10,
     "description": "<strong>SAGITAUR</strong> unit only. This unit's ranged attacks have <strong>[IGNORES COVER]</strong>."
+  },
+  "pan-spectral-lockons": {
+    "name": "Pan-spectral Lockons",
+    "type": "Upgrade (10 pts)",
+    "upgrade": true,
+    "restriction": "PIONEERS unit only",
+    "restrictedToKeyword": "PIONEERS",
+    "detachment": "farseekers",
+    "points": 10,
+    "description": "<strong>PIONEERS</strong> unit only. In your Shooting phase, you can select one <strong>visible</strong> enemy unit within <strong>12\"</strong> of this unit. That enemy unit is <strong>spotted</strong>. While a unit is spotted, that unit has <strong>+3\" detection range</strong>."
+  },
+  "shroudwerke-talismans": {
+    "name": "Shroudwërke Talismans",
+    "type": "Upgrade (15 pts)",
+    "upgrade": true,
+    "restriction": "YAEGIRS unit only",
+    "restrictedToKeyword": "YAEGIRS",
+    "detachment": "farseekers",
+    "points": 15,
+    "description": "<strong>YAEGIRS</strong> unit only. This unit has <strong>-3\" detection range</strong>."
   }
 }
