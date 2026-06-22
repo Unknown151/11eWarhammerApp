@@ -292,6 +292,97 @@
     "effect": "Until the end of the phase, models in your unit have a 4+ invulnerable save.",
     "detachment": "hearthguard-covenant"
   },
+  "auxiliary-contract": {
+    "name": "Auxiliary Contract",
+    "type": "Mercenary Oathband – Strategic Ploy Stratagem",
+    "turn": "either",
+    "phases": [
+      "shooting",
+      "fight"
+    ],
+    "cpCost": 1,
+    "ypCost": 0,
+    "summary": "A VOTANN INFANTRY/MOUNTED unit's weapons gain [PRECISION] this phase.",
+    "when": "Your Shooting phase or the Fight phase.",
+    "target": "One LEAGUES OF VOTANN INFANTRY or LEAGUES OF VOTANN MOUNTED unit from your army that has not been selected to shoot or fight this phase.",
+    "effect": "Until the end of the phase, weapons equipped by models in your unit have the [PRECISION] ability.",
+    "detachment": "mercenary-oathband"
+  },
+  "optimal-expenditure": {
+    "name": "Optimal Expenditure",
+    "type": "Mercenary Oathband – Wargear Stratagem",
+    "turn": "either",
+    "phases": [
+      "fight"
+    ],
+    "cpCost": 1,
+    "ypCost": 0,
+    "summary": "A VOTANN INFANTRY unit re-rolls Hit/Wound 1s in the Fight phase (better for 3YP).",
+    "when": "The Fight phase.",
+    "target": "One LEAGUES OF VOTANN INFANTRY unit from your army that has not been selected to fight this phase.",
+    "effect": "Each time you use this Stratagem, you can spend 3YP. Until the end of the phase, each time a model in your unit makes an attack, re-roll a Hit roll of 1 and re-roll a Wound roll of 1. If you spent YP during this usage, you can re-roll a Hit roll of 1 and re-roll the Wound roll instead.",
+    "detachment": "mercenary-oathband"
+  },
+  "grand-artifice": {
+    "name": "Grand Artifice",
+    "type": "Mercenary Oathband – Strategic Ploy Stratagem",
+    "turn": "your",
+    "phases": [
+      "movement"
+    ],
+    "cpCost": 1,
+    "ypCost": 0,
+    "summary": "A VOTANN unit can shoot and charge in a turn it Fell Back.",
+    "when": "Your Movement phase, just after a LEAGUES OF VOTANN unit from your army Falls Back.",
+    "target": "That LEAGUES OF VOTANN unit.",
+    "effect": "Until the end of the turn, your unit is eligible to shoot and declare a charge in a turn in which it Fell Back.",
+    "detachment": "mercenary-oathband"
+  },
+  "privateer-arsenal": {
+    "name": "Privateer Arsenal",
+    "type": "Mercenary Oathband – Wargear Stratagem",
+    "turn": "your",
+    "phases": [
+      "shooting"
+    ],
+    "cpCost": 1,
+    "ypCost": 0,
+    "summary": "A VOTANN INFANTRY unit re-rolls Hit/Wound 1s in the Shooting phase (better for 3YP).",
+    "when": "Your Shooting phase.",
+    "target": "One LEAGUES OF VOTANN INFANTRY unit from your army that has not been selected to shoot this phase.",
+    "effect": "Each time you use this Stratagem, you can spend 3YP. Until the end of the phase, each time a model in your unit makes an attack, re-roll a Hit roll of 1 and re-roll a Wound roll of 1. If you spent YP during this usage, you can re-roll the Hit roll and re-roll a Wound roll of 1 instead.",
+    "detachment": "mercenary-oathband"
+  },
+  "new-horizons": {
+    "name": "New Horizons",
+    "type": "Mercenary Oathband – Strategic Ploy Stratagem",
+    "turn": "opponent",
+    "phases": [
+      "fight"
+    ],
+    "cpCost": 1,
+    "ypCost": 0,
+    "summary": "A VOTANN INFANTRY unit embarks into a nearby TRANSPORT.",
+    "when": "End of your opponent's Fight phase.",
+    "target": "One LEAGUES OF VOTANN INFANTRY unit from your army that is not within Engagement Range of one or more enemy units, and one friendly TRANSPORT it is able to embark within.",
+    "effect": "If your LEAGUES OF VOTANN unit is wholly within 6\" of that TRANSPORT, it can embark within it.",
+    "detachment": "mercenary-oathband"
+  },
+  "mobile-exploitation": {
+    "name": "Mobile Exploitation",
+    "type": "Mercenary Oathband – Strategic Ploy Stratagem",
+    "turn": "opponent",
+    "phases": [
+      "fight"
+    ],
+    "cpCost": 1,
+    "ypCost": 0,
+    "summary": "Pull a HERNKYN unit (or two for 2YP) back into Strategic Reserves.",
+    "when": "End of your opponent's Fight phase.",
+    "target": "One HERNKYN unit from your army that is not within Engagement Range of one or more enemy units. Alternatively, you can spend 2YP and target up to two HERNKYN units from your army that are not within Engagement Range of one or more enemy units instead.",
+    "effect": "Remove your unit(s) from the battlefield and place them into Strategic Reserves.",
+    "detachment": "mercenary-oathband"
+  },
   "fury-of-the-hearth": {
     "name": "Fury of the Hearth",
     "type": "Hearthband – Battle Tactic Stratagem",
