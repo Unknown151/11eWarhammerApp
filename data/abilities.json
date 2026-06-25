@@ -267,7 +267,7 @@
   "stealth": {
     "name": "Stealth",
     "type": "Core Ability",
-    "description": "If every model in this unit has this ability, then each time a ranged attack is made against it, subtract <strong>1 from the Hit roll</strong>."
+    "description": "Gives <strong>Benefit of Cover</strong> (-1 to BS)."
   },
   "infiltrators": {
     "name": "Infiltrators",
