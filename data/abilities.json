@@ -92,7 +92,7 @@
   "heavy": {
     "name": "Heavy",
     "type": "Weapon Ability",
-    "description": "In your Shooting phase, each time an attack is made with this weapon, <strong>add 1 to the Hit roll</strong> if all of the following apply to the attacking unit: it is <strong>unengaged</strong>; it was not set up on the battlefield this turn; and no model in it has moved more than <strong>3\"</strong> this turn."
+    "description": "In your Shooting phase, each time an attack is made with this weapon, <strong>add 1 to the Hit roll</strong> if all of the following apply to the attacking unit:<br><br>• It is <strong>unengaged</strong>.<br>• It was not set up on the battlefield this turn.<br>• No model in it has moved more than <strong>3\"</strong> this turn."
   },
   "hazardous": {
     "name": "Hazardous",
