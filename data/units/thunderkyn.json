@@ -27,6 +27,18 @@
   "weapons": {
     "ranged": [
       {
+        "name": "Bolt cannon",
+        "count": 6,
+        "range": "36\"",
+        "a": "3",
+        "bs": "4+",
+        "s": "6",
+        "ap": "-1",
+        "d": "2",
+        "abilities": [{"id": "sustained-hits", "display": "Sustained Hits 2"}],
+        "inheritedAbilities": []
+      },
+      {
         "name": "Graviton blast cannon",
         "count": 6,
         "range": "24\"",
