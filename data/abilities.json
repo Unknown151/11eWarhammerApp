@@ -92,7 +92,7 @@
   "heavy": {
     "name": "Heavy",
     "type": "Weapon Ability",
-    "description": "<strong>+1 to hit</strong> if the bearer <strong>remained stationary</strong>."
+    "description": "In your Shooting phase, each time an attack is made with this weapon, <strong>add 1 to the Hit roll</strong> if all of the following apply to the attacking unit: it is <strong>unengaged</strong>; it was not set up on the battlefield this turn; and no model in it has moved more than <strong>3\"</strong> this turn."
   },
   "hazardous": {
     "name": "Hazardous",
