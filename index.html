@@ -488,6 +488,7 @@
         .army-instance-header:hover{background:linear-gradient(90deg,rgba(212,168,75,.1),transparent)}
         .army-instance-info{flex:1;min-width:0}
         .army-instance-name{font-family:'Orbitron',sans-serif;font-size:.8rem;font-weight:700;color:var(--gold);letter-spacing:.02em}
+        .enh-star{color:var(--gold-bright);margin-left:.3rem;font-size:.8rem}
         .army-instance-details{font-size:.6rem;color:var(--text3);margin-top:.15rem}
         .army-instance-points{font-family:'Share Tech Mono',monospace;font-size:.7rem;color:var(--gold);background:rgba(212,168,75,.15);padding:.2rem .5rem;border-radius:3px}
         .army-instance-delete{width:28px;height:28px;background:transparent;border:1px solid var(--text3);border-radius:4px;color:var(--text3);font-size:.8rem;cursor:pointer;touch-action:manipulation;display:flex;align-items:center;justify-content:center;transition:all .15s ease}
@@ -596,7 +597,7 @@
             </div>
         </div>
     </header>
-    <div class="version-line" id="version-line">11th Edition - Version 0.2.8</div>
+    <div class="version-line" id="version-line">11th Edition - Version 0.2.9</div>
     <main class="container">
         <div id="units-tab" class="tab-content active" role="tabpanel" aria-label="Army view">
             <div id="units-container"><div class="loading">Loading units...</div></div>
@@ -2613,7 +2614,7 @@ function renderArmyInstance(instance) {
         <div class="army-instance ${isExpanded ? 'expanded' : ''}" data-instance="${instance.instanceId}">
             <div class="army-instance-header" onclick="toggleInstanceCard('${instance.instanceId}')">
                 <div class="army-instance-info">
-                    <div class="army-instance-name">${escHtml(unit.name)}</div>
+                    <div class="army-instance-name">${escHtml(unit.name)}${instance.enhancementId && enhancements[instance.enhancementId] ? ` <span class="enh-star" title="${escHtml(enhancements[instance.enhancementId].name)}">★</span>` : ''}</div>
                     <div class="army-instance-details">${instance.modelCount}x ${escHtml(unit.name)} • ${escHtml(weaponDetails)}</div>
                 </div>
                 <div class="army-instance-points"${isInstanceEscalated(instance) ? ' title="Escalated cost — this is a higher-tier copy of this datasheet in your army"' : ''}>${instancePoints} pts${isInstanceEscalated(instance) ? ' ↑' : ''}</div>
