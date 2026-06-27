@@ -374,7 +374,7 @@ const DETACHMENTS = { 'detachment-a': {...}, 'detachment-b': {...}, ... }
 ## Enhancement System
 
 ### Enhancements vs Upgrades
-- **Normal enhancements** — only on a non-Epic **CHARACTER** unit; max **one** of each in the army; each counts toward the army limit (`MAX_ENHANCEMENTS = 3`).
+- **Normal enhancements** — only on a non-Epic **CHARACTER** unit; max **one** of each in the army; each counts toward the army limit (`MAX_ENHANCEMENTS = 4`).
 - **Upgrades** (`"upgrade": true` on the enhancement) — may go on **any non-Epic-Hero unit** (including non-characters); up to **three** of the same Upgrade in the army; only the **first** copy of each distinct Upgrade counts toward the limit (extra copies are free of the limit but still cost points each).
 - **Epic Hero** units can take neither.
 
@@ -530,7 +530,7 @@ Use a consistent faction-specific prefix for all keys. Example pattern:
 |---|---|
 | `.enh-option` | Enhancement card |
 | `.enh-option.active` | Selected enhancement |
-| `.enh-option.disabled` | Greyed out (max 3 reached) |
+| `.enh-option.disabled` | Greyed out (max reached) |
 | `.leader-select` | Leader assignment dropdown |
 | `.config-label` | Section label in instance card |
 | `.wargear-exclusive-option` | Radio-style wargear choice |
