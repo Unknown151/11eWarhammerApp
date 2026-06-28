@@ -483,6 +483,22 @@
         .dp-card.active .dp-card-dp{color:var(--gold-bright)}
         .dp-card-unique{font-size:.55rem;color:var(--text3);padding:0 .55rem .4rem;text-transform:uppercase;letter-spacing:.05em}
         .detachment-empty-note{font-size:.7rem;color:var(--text3);font-style:italic;margin-top:.5rem}
+        .detachment-customizer-head{cursor:pointer;user-select:none;-webkit-user-select:none}
+        .det-head-right{display:flex;align-items:center;gap:.5rem}
+        .det-collapse-chevron{color:var(--gold);font-size:.7rem;transition:transform .2s}
+        .det-collapse-chevron.collapsed{transform:rotate(-90deg)}
+        .detachment-collapsed-summary{font-size:.72rem;color:var(--text2);margin-top:.4rem;line-height:1.4}
+        .enh-overview{background:var(--bg2);border:1px solid var(--gold-dark);border-radius:8px;padding:.7rem .85rem;margin-bottom:.75rem}
+        .enh-overview-head{font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:.5rem}
+        .enh-overview-detlabel{font-family:'Orbitron',sans-serif;font-size:.62rem;font-weight:700;color:var(--gold-bright);text-transform:uppercase;letter-spacing:.05em;margin:.5rem 0 .35rem}
+        .enh-overview-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.4rem}
+        .enh-overview-card{background:var(--bg3);border:1px solid var(--border);border-radius:5px;padding:.4rem .5rem;cursor:pointer;transition:border-color .15s,background .15s}
+        .enh-overview-card:hover{border-color:var(--gold-dark);background:rgba(212,168,75,.06)}
+        .enh-overview-card-top{display:flex;justify-content:space-between;align-items:baseline;gap:.35rem}
+        .enh-overview-card-name{font-family:'Rajdhani',sans-serif;font-size:.74rem;font-weight:700;color:var(--gold);line-height:1.1}
+        .enh-overview-card-pts{font-family:'Share Tech Mono',monospace;font-size:.62rem;color:var(--text3);white-space:nowrap;flex-shrink:0}
+        .enh-overview-tag{display:inline-block;margin:.2rem 0;font-size:.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--blue);background:rgba(74,142,212,.15);border:1px solid rgba(74,142,212,.35);border-radius:2px;padding:.04rem .25rem}
+        .enh-overview-card-short{font-size:.64rem;color:var(--text2);line-height:1.3;margin-top:.2rem}
         .army-instance{background:var(--bg3);border:1px solid var(--border);border-radius:6px;margin-bottom:.5rem;overflow:visible}
         .army-instance-header{display:flex;align-items:center;gap:.6rem;padding:.6rem .75rem;cursor:pointer;touch-action:manipulation;background:linear-gradient(90deg,rgba(212,168,75,.05),transparent);border-radius:6px 6px 0 0}
         .army-instance-header:hover{background:linear-gradient(90deg,rgba(212,168,75,.1),transparent)}
@@ -597,7 +613,7 @@
             </div>
         </div>
     </header>
-    <div class="version-line" id="version-line">11th Edition - Version 0.2.13</div>
+    <div class="version-line" id="version-line">11th Edition - Version 0.3.0</div>
     <main class="container">
         <div id="units-tab" class="tab-content active" role="tabpanel" aria-label="Army view">
             <div id="units-container"><div class="loading">Loading units...</div></div>
@@ -2455,9 +2471,15 @@ function renderBodyguardAbilities(bodyguard, leader) {
 }
 
 // Render the detachment customizer: spend Detachment Points across detachments
+let detachmentPanelCollapsed = false;
+function toggleDetachmentPanel() {
+    detachmentPanelCollapsed = !detachmentPanelCollapsed;
+    renderConfigurationTab();
+}
 function renderDetachmentSelector() {
     const spent = dpSpent();
     const overBudget = spent > DETACHMENT_POINTS;
+    const collapsed = detachmentPanelCollapsed;
 
     // Sorted by name so the layout matches the published detachment list
     const entries = Object.entries(DETACHMENTS).sort((a, b) => a[1].name.localeCompare(b[1].name));
@@ -2484,16 +2506,53 @@ function renderDetachmentSelector() {
         return `<div class="detachment-rule-preview tappable" data-ab="${d.ruleId}"><strong>${escHtml(d.name)}</strong> — ${d.ruleDescription}</div>`;
     }).join('');
 
+    const selectedNames = selectedDetachments.map(id => DETACHMENTS[id]?.name).filter(Boolean).join(', ') || 'None selected';
+
     return `
         <div class="detachment-selector">
-            <div class="detachment-customizer-head">
+            <div class="detachment-customizer-head" onclick="toggleDetachmentPanel()">
                 <span class="detachment-selector-label">Detachments</span>
-                <span class="dp-counter ${overBudget ? 'over' : ''}">${spent} / ${DETACHMENT_POINTS} DP</span>
+                <span class="det-head-right">
+                    <span class="dp-counter ${overBudget ? 'over' : ''}">${spent} / ${DETACHMENT_POINTS} DP</span>
+                    <span class="det-collapse-chevron ${collapsed ? 'collapsed' : ''}">▾</span>
+                </span>
             </div>
-            <div class="dp-card-grid">${cards}</div>
-            ${previews || '<div class="detachment-empty-note">Select detachments above — you have 3 Detachment Points to spend.</div>'}
+            ${collapsed
+                ? `<div class="detachment-collapsed-summary">${escHtml(selectedNames)}</div>`
+                : `<div class="dp-card-grid">${cards}</div>
+                   ${previews || '<div class="detachment-empty-note">Select detachments above — you have 3 Detachment Points to spend.</div>'}`}
         </div>
     `;
+}
+
+// Compact, tappable overview of every enhancement/upgrade available from the selected detachments
+function renderEnhancementsOverview() {
+    const groups = [];
+    selectedDetachments.forEach(detId => {
+        const items = Object.entries(enhancements).filter(([id, enh]) => {
+            const dets = Array.isArray(enh.detachment) ? enh.detachment : [enh.detachment];
+            return dets.includes(detId);
+        });
+        if (items.length) groups.push([detId, items]);
+    });
+    if (!groups.length) return '';
+
+    let html = '<div class="enh-overview"><div class="enh-overview-head">Available Enhancements</div>';
+    groups.forEach(([detId, items]) => {
+        html += `<div class="enh-overview-detlabel">${escHtml(DETACHMENTS[detId]?.name || detId)}</div>`;
+        html += '<div class="enh-overview-grid">';
+        items.forEach(([id, enh]) => {
+            const tag = enh.upgrade ? '<span class="enh-overview-tag">Upgrade</span>' : '';
+            html += `<div class="enh-overview-card tappable" data-ab="${escHtml(id)}">
+                <div class="enh-overview-card-top"><span class="enh-overview-card-name">${escHtml(enh.name)}</span><span class="enh-overview-card-pts">${enh.points}</span></div>
+                ${tag}
+                <div class="enh-overview-card-short">${escHtml(enh.short || '')}</div>
+            </div>`;
+        });
+        html += '</div>';
+    });
+    html += '</div>';
+    return html;
 }
 
 // Render configuration tab (army list)
@@ -2512,7 +2571,7 @@ function renderListSwitcher() {
 function renderConfigurationTab() {
     const container = document.getElementById('army-list-container');
 
-    let html = renderListSwitcher() + renderDetachmentSelector();
+    let html = renderListSwitcher() + renderDetachmentSelector() + renderEnhancementsOverview();
     if (armyList.length === 0) {
         html += '<div class="army-list-empty">No units added. Tap + to add units.</div>';
     } else {
