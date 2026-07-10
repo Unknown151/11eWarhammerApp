@@ -59,7 +59,6 @@ Some stratagems have a two-step activation (e.g. spend a resource before the buf
 | Variable | Type | Purpose |
 |---|---|---|
 | `characterState` | `Object` | `{ leaderId: bool }` — tracks slain leaders |
-| `bodyguardState` | `Object` | `{ leaderId: bool }` — tracks wiped bodyguards |
 | `expandedCards` | `Object` | `{ cardId: bool }` — accordion state for units tab |
 | `configExpandedCards` | `Object` | `{ instanceId: bool }` — accordion state for builder tab |
 
@@ -284,7 +283,7 @@ renderUnits()
 - `leader` = `units[ledUnit.leader]`, `bodyguard` = `units[ledUnit.bodyguard]`
 - Builds `leaderInheritedAbilities` and `bodyguardInheritedAbilities` from `leaderBonus.grantsAbilities`
 - Renders two `<div class="card-section">` blocks (Leader / Bodyguard)
-- Handles death/wipe states (`.leader-dead`, `.bodyguard-wiped`)
+- Handles death states (`.leader-dead`)
 
 ### Configuration Tab (Army Builder)
 ```
@@ -416,7 +415,6 @@ When a leader has `wargearExclusiveChoices`, the bodyguard instance stores the c
 | Action | State Key | CSS Class | Effect |
 |---|---|---|---|
 | Toggle leader dead | `characterState[leaderId]` | `.leader-dead` | "SLAIN" overlay; inherited bonuses hidden |
-| Toggle bodyguard wipe | `bodyguardState[leaderId]` | `.bodyguard-wiped` | "WIPED" overlay; leader loses "while leading" bonuses |
 
 **Wiring a new led unit:**
 - Add `"canBeLeadBy": ["leader-id"]` to the bodyguard unit JSON

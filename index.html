@@ -95,7 +95,6 @@
         .card-section.leader{background:linear-gradient(180deg,rgba(212,168,75,.03),transparent)}
         .sec-label{font-size:.6rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.625rem;display:flex;align-items:center;gap:.4rem}
         .sec-label::before{content:'';width:10px;height:1px;background:var(--text3)}
-        .sec-label .bodyguard-wipe-toggle{margin-left:auto}
         .stats-row{display:flex;gap:.35rem;margin-bottom:.875rem;flex-wrap:wrap}
         .stat{background:var(--bg2);padding:.35rem .5rem;border-radius:3px;text-align:center;min-width:42px;flex:1;max-width:60px;position:relative}
         .stat:not(:last-child)::after{content:'';position:absolute;right:-2px;top:15%;height:70%;width:1px;background:var(--gold-dark)}
@@ -213,13 +212,6 @@
         .leader-death-toggle{width:28px;height:28px;border-radius:50%;border:2px solid var(--text3);background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;touch-action:manipulation;transition:all .2s ease;font-size:.7rem;color:var(--text3)}
         .leader-death-toggle:hover{border-color:var(--red);color:var(--red)}
         .unit-card.leader-dead .leader-death-toggle{border-color:var(--red);background:var(--red);color:#fff}
-        .bodyguard-wipe-toggle{display:inline-flex;align-items:center;gap:.3rem;font-size:.55rem;padding:.2rem .5rem;background:transparent;border:1px solid var(--text3);color:var(--text3);border-radius:3px;cursor:pointer;touch-action:manipulation;transition:all .2s ease;text-transform:uppercase;letter-spacing:.05em}
-        .bodyguard-wipe-toggle:hover{border-color:var(--red);color:var(--red)}
-        .unit-card.bodyguard-wiped .bodyguard-wipe-toggle{border-color:var(--red);background:rgba(201,68,68,.2);color:var(--red)}
-        .unit-card.bodyguard-wiped .leader-bonus{display:none}
-        .unit-card.bodyguard-wiped .card-section.leader .inherited{display:none}
-        .unit-card.bodyguard-wiped .card-section:not(.leader){opacity:.4;position:relative}
-        .unit-card.bodyguard-wiped .card-section:not(.leader)::after{content:'WIPED';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Orbitron',sans-serif;font-size:1.5rem;color:var(--red);opacity:.5;letter-spacing:.2em;pointer-events:none}
         .card-collapse-points{font-family:'Share Tech Mono',monospace;font-size:.75rem;color:var(--gold-bright)}
         .card-collapse-toggle{width:24px;height:24px;display:flex;align-items:center;justify-content:center;color:var(--text3);transition:transform .2s ease}
         .card-collapse-toggle::after{content:'';border:solid var(--text2);border-width:0 2px 2px 0;padding:4px;transform:rotate(45deg);transition:transform .2s ease}
@@ -622,7 +614,7 @@
             </div>
         </div>
     </header>
-    <div class="version-line" id="version-line">11th Edition - Version 0.5.4</div>
+    <div class="version-line" id="version-line">11th Edition - Version 0.5.5</div>
     <main class="container">
         <div id="units-tab" class="tab-content active" role="tabpanel" aria-label="Army view">
             <div id="units-container"><div class="loading">Loading units...</div></div>
@@ -783,14 +775,13 @@ let enhancements = {};
 let army = {};
 let units = {};
 const characterState = {};
-const bodyguardState = {}; // Tracks if bodyguard unit is wiped (leader now solo)
 const stratagemState = { fury: false, closest: false, firebase: false, optimalApp: false };
 let furyYP = false;
 
-// Persist in-game state (slain leaders, wiped bodyguards, stratagem toggles) across refreshes
+// Persist in-game state (slain leaders, stratagem toggles) across refreshes
 function saveGameState() {
     localStorage.setItem('votann-game-state', JSON.stringify({
-        characterState, bodyguardState, stratagemState, furyYP
+        characterState, stratagemState, furyYP
     }));
 }
 
@@ -800,7 +791,6 @@ function loadGameState() {
         if (!raw) return;
         const s = JSON.parse(raw);
         Object.assign(characterState, s.characterState || {});
-        Object.assign(bodyguardState, s.bodyguardState || {});
         Object.assign(stratagemState, s.stratagemState || {});
         furyYP = !!s.furyYP;
     } catch (e) {}
@@ -1801,14 +1791,6 @@ function renderUnits() {
         }
     });
 
-    // Restore bodyguard wiped states
-    Object.keys(bodyguardState).forEach(leaderId => {
-        if (bodyguardState[leaderId]) {
-            const card = container.querySelector(`.unit-card[data-leader="${leaderId}"]`);
-            if (card) card.classList.add('bodyguard-wiped');
-        }
-    });
-
     // Restore scroll position
     window.scrollTo(0, scrollY);
 }
@@ -2145,7 +2127,7 @@ function renderLedUnitCard(ledUnit) {
                     ${renderAbilities(displayLeader, enhancement)}
                 </div>
                 <div class="card-section">
-                    <div class="sec-label"><span>Bodyguard</span><button class="bodyguard-wipe-toggle" onclick="toggleBodyguardWipe('${ledUnit.leader}', event)">☠ Wiped</button></div>
+                    <div class="sec-label"><span>Bodyguard</span></div>
                     ${renderUnitHeader(displayBodyguard, bodyguardModelCount)}
                     ${renderUnitStats(displayBodyguard)}
                     ${renderBodyguardInvuln(displayBodyguard, displayLeader)}
@@ -3876,24 +3858,6 @@ function toggleLeaderDeath(leaderId, e) {
 
     // Update unit card
     updateUnitCard(leaderId, isDead);
-}
-
-// Toggle bodyguard wipe (leader now solo, loses "while leading" abilities)
-function toggleBodyguardWipe(leaderId, e) {
-    e.stopPropagation();
-    bodyguardState[leaderId] = !bodyguardState[leaderId];
-    const isWiped = bodyguardState[leaderId];
-    saveGameState();
-
-    // Update unit card
-    const unitCard = document.querySelector(`.unit-card[data-leader="${leaderId}"]`);
-    if (unitCard) {
-        if (isWiped) {
-            unitCard.classList.add('bodyguard-wiped');
-        } else {
-            unitCard.classList.remove('bodyguard-wiped');
-        }
-    }
 }
 
 // Buff dropdown
