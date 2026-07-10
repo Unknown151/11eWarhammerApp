@@ -617,7 +617,7 @@
             </div>
         </div>
     </header>
-    <div class="version-line" id="version-line">11th Edition - Version 0.4.0</div>
+    <div class="version-line" id="version-line">11th Edition - Version 0.4.1</div>
     <main class="container">
         <div id="units-tab" class="tab-content active" role="tabpanel" aria-label="Army view">
             <div id="units-container"><div class="loading">Loading units...</div></div>
@@ -1398,6 +1398,7 @@ function packArmy() {
             if (inst.leaderId) p.l = inst.leaderId;
             if (inst.enhancementId) p.e = inst.enhancementId;
             if (inst.split) p.sp = 1;
+            if (inst.split && inst.splitWeapons) p.sw = inst.splitWeapons;
             if (inst.selectedWargear?.length) p.g = inst.selectedWargear;
             if (inst.leaderWargear?.length) p.lw = inst.leaderWargear;
             // Only store weapon states that differ from the unit default
@@ -1443,7 +1444,8 @@ function unpackArmy(packed) {
             enhancementId: p.e || null,
             leaderWargear: p.lw || null,
             selectedWargear: p.g || [],
-            split: !!p.sp
+            split: !!p.sp,
+            splitWeapons: p.sw || null
         };
     });
 }
@@ -1515,11 +1517,17 @@ function exportArmyText() {
             const attachedNote = ` - Attached to the ${bodyguardCount}x ${bodyguardUnit?.name} below`;
 
             lines.push(unitBlock(leaderInst, leaderPts, attachedNote));
-            const splitNote = isSplitActive(instance) ? ' - Split into 2x5 (Sagitaur Transport)' : '';
-            lines.push(unitBlock({ ...instance, enhancementId: null }, bodyguardPts, splitNote));
+            if (isSplitActive(instance)) {
+                lines.push(unitBlock({ ...makeSplitHalf(instance, 'a'), enhancementId: null }, bodyguardPts, ' - Split A (Sagitaur Transport)'));
+                lines.push(unitBlock(makeSplitHalf(instance, 'b'), 0, ' - Split B (points included above)'));
+            } else {
+                lines.push(unitBlock({ ...instance, enhancementId: null }, bodyguardPts));
+            }
+        } else if (isSplitActive(instance)) {
+            lines.push(unitBlock({ ...makeSplitHalf(instance, 'a'), enhancementId: null }, calculateInstancePoints(instance), ' - Split A (Sagitaur Transport)'));
+            lines.push(unitBlock(makeSplitHalf(instance, 'b'), 0, ' - Split B (points included above)'));
         } else {
-            const splitNote = isSplitActive(instance) ? ' - Split into 2x5 (Sagitaur Transport)' : '';
-            lines.push(unitBlock(instance, calculateInstancePoints(instance), splitNote));
+            lines.push(unitBlock(instance, calculateInstancePoints(instance)));
         }
         lines.push('');
     });
@@ -1668,7 +1676,8 @@ function duplicateUnit(instanceId) {
         leaderId: source.leaderId,
         enhancementId: null, // enhancements are unique per army — don't copy
         selectedWargear: [...source.selectedWargear],
-        split: source.split || false
+        split: source.split || false,
+        splitWeapons: source.splitWeapons ? JSON.parse(JSON.stringify(source.splitWeapons)) : null
     };
     // Insert clone right after the source
     const idx = armyList.indexOf(source);
@@ -2674,8 +2683,14 @@ function renderArmyInstance(instance) {
         bodyContent += renderInstanceWargearChoiceSelector(instance, unit.wargearChoices);
     }
 
-    // Weapons section
-    bodyContent += renderInstanceWeaponSelector(instance);
+    // Weapons section — split units configure each half separately
+    if (isSplitActive(instance)) {
+        ensureSplitWeapons(instance);
+        bodyContent += renderInstanceWeaponSelector(instance, 'a');
+        bodyContent += renderInstanceWeaponSelector(instance, 'b');
+    } else {
+        bodyContent += renderInstanceWeaponSelector(instance);
+    }
 
     // Abilities section (unit abilities only)
     const unitAbilities = unit.abilities || [];
@@ -3011,16 +3026,26 @@ function renderInstanceWargearExclusiveChoiceSelector(instance, wargearExclusive
 }
 
 // Render weapon selector for an instance
-function renderInstanceWeaponSelector(instance) {
+function renderInstanceWeaponSelector(instance, half = null) {
     const unit = units[instance.unitId];
     if (!unit?.weapons) return '';
 
     let html = '';
     const locked = !!unit.fixedWeapons;   // weapons can't be toggled/counted (e.g. single fixed loadout)
+    // Split halves edit their own config (instance.splitWeapons[half]) via the split handlers
+    const halfLabel = half ? `Split ${half.toUpperCase()} — ` : '';
 
     const renderWeaponRow = (w, weaponType) => {
         const key = generateWeaponKey(w);
-        const config = instance.weapons[key] || { equipped: true, count: w.count || 1 };
+        const config = half
+            ? (instance.splitWeapons?.[half]?.[key] || { equipped: false, count: 0 })
+            : (instance.weapons[key] || { equipped: true, count: w.count || 1 });
+        const eqHandler = half
+            ? `setInstanceSplitWeaponEquipped('${instance.instanceId}','${half}','${key}',this.checked)`
+            : `setInstanceWeaponEquipped('${instance.instanceId}', '${key}', this.checked)`;
+        const cntHandler = d => half
+            ? `adjustSplitWeaponCount('${instance.instanceId}','${half}','${key}',${d})`
+            : `adjustWeaponCount('${instance.instanceId}','${key}',${d})`;
 
         // Stats grid
         const statsGrid = weaponType === 'ranged'
@@ -3062,11 +3087,11 @@ function renderInstanceWeaponSelector(instance) {
                     ${statsToggle}
                </div>`
             : `<label class="weapon-checkbox">
-                    <input type="checkbox" ${config.equipped ? 'checked' : ''} onchange="setInstanceWeaponEquipped('${instance.instanceId}', '${key}', this.checked)">
+                    <input type="checkbox" ${config.equipped ? 'checked' : ''} onchange="${eqHandler}">
                     <span class="weapon-checkbox-name">${escHtml(w.name)}</span>
-                    <button class="weapon-count-btn" onclick="event.preventDefault();event.stopPropagation();adjustWeaponCount('${instance.instanceId}','${key}',-1)">−</button>
+                    <button class="weapon-count-btn" onclick="event.preventDefault();event.stopPropagation();${cntHandler(-1)}">−</button>
                     <span class="weapon-count-display">${config.count}</span>
-                    <button class="weapon-count-btn" onclick="event.preventDefault();event.stopPropagation();adjustWeaponCount('${instance.instanceId}','${key}',1)">+</button>
+                    <button class="weapon-count-btn" onclick="event.preventDefault();event.stopPropagation();${cntHandler(1)}">+</button>
                     ${statsToggle}
                </label>`;
 
@@ -3083,13 +3108,13 @@ function renderInstanceWeaponSelector(instance) {
 
     // Ranged weapons
     if (unit.weapons.ranged?.length > 0) {
-        html += '<div class="config-label">Ranged Weapons</div>';
+        html += `<div class="config-label">${halfLabel}Ranged Weapons</div>`;
         unit.weapons.ranged.forEach(w => { html += renderWeaponRow(w, 'ranged'); });
     }
 
     // Melee weapons
     if (unit.weapons.melee?.length > 0) {
-        html += '<div class="config-label">Melee Weapons</div>';
+        html += `<div class="config-label">${halfLabel}Melee Weapons</div>`;
         unit.weapons.melee.forEach(w => { html += renderWeaponRow(w, 'melee'); });
     }
 
@@ -3178,6 +3203,41 @@ function adjustWeaponCount(instanceId, weaponKey, delta) {
         renderConfigurationTab();
         renderUnits();
     }
+}
+
+// --- Per-half weapon config for split units ---
+// Initialise splitWeapons from a ceil/floor division of the unit's current loadout
+function ensureSplitWeapons(instance) {
+    if (instance.splitWeapons) return;
+    const a = {}, b = {};
+    Object.entries(instance.weapons || {}).forEach(([k, v]) => {
+        const ca = Math.ceil((v.count || 0) / 2), cb = Math.floor((v.count || 0) / 2);
+        a[k] = { equipped: v.equipped && ca > 0, count: ca };
+        b[k] = { equipped: v.equipped && cb > 0, count: cb };
+    });
+    instance.splitWeapons = { a, b };
+}
+function getSplitWeaponConfig(instance, half, weaponKey, fallback) {
+    ensureSplitWeapons(instance);
+    if (!instance.splitWeapons[half][weaponKey]) instance.splitWeapons[half][weaponKey] = { ...fallback };
+    return instance.splitWeapons[half][weaponKey];
+}
+function setInstanceSplitWeaponEquipped(instanceId, half, weaponKey, equipped) {
+    const instance = armyList.find(i => i.instanceId === instanceId);
+    if (!instance) return;
+    getSplitWeaponConfig(instance, half, weaponKey, { equipped: true, count: 1 }).equipped = equipped;
+    saveArmyList();
+    renderConfigurationTab();
+    renderUnits();
+}
+function adjustSplitWeaponCount(instanceId, half, weaponKey, delta) {
+    const instance = armyList.find(i => i.instanceId === instanceId);
+    if (!instance) return;
+    const cfg = getSplitWeaponConfig(instance, half, weaponKey, { equipped: true, count: 1 });
+    cfg.count = Math.max(0, cfg.count + delta);
+    saveArmyList();
+    renderConfigurationTab();
+    renderUnits();
 }
 
 // Set instance leader
@@ -3349,20 +3409,27 @@ function setInstanceSplit(instanceId, on) {
     const instance = armyList.find(i => i.instanceId === instanceId);
     if (!instance) return;
     instance.split = on;
+    if (on) ensureSplitWeapons(instance);
     saveArmyList();
     renderConfigurationTab();
     renderUnits();
 }
-// Build one half of a split unit: half the models, weapon counts split ceil/floor,
-// leader & enhancement stay with half A only.
+// Build one half of a split unit: half the models; weapons come from the user's per-half
+// config (instance.splitWeapons) when set, else a ceil/floor division of the base loadout.
+// Leader & enhancement stay with half A only.
 function makeSplitHalf(instance, half) {
     const total = instance.modelCount || 10;
     const count = half === 'a' ? Math.ceil(total / 2) : Math.floor(total / 2);
-    const weapons = {};
-    Object.entries(instance.weapons || {}).forEach(([k, v]) => {
-        const c = half === 'a' ? Math.ceil((v.count || 0) / 2) : Math.floor((v.count || 0) / 2);
-        weapons[k] = { equipped: v.equipped && c > 0, count: c };
-    });
+    let weapons;
+    if (instance.splitWeapons?.[half]) {
+        weapons = JSON.parse(JSON.stringify(instance.splitWeapons[half]));
+    } else {
+        weapons = {};
+        Object.entries(instance.weapons || {}).forEach(([k, v]) => {
+            const c = half === 'a' ? Math.ceil((v.count || 0) / 2) : Math.floor((v.count || 0) / 2);
+            weapons[k] = { equipped: v.equipped && c > 0, count: c };
+        });
+    }
     const keepLeader = half === 'a';
     return {
         ...instance,
