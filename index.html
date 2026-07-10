@@ -622,7 +622,7 @@
             </div>
         </div>
     </header>
-    <div class="version-line" id="version-line">11th Edition - Version 0.5.0</div>
+    <div class="version-line" id="version-line">11th Edition - Version 0.5.1</div>
     <main class="container">
         <div id="units-tab" class="tab-content active" role="tabpanel" aria-label="Army view">
             <div id="units-container"><div class="loading">Loading units...</div></div>
@@ -1855,6 +1855,16 @@ function renderSoloUnitCard(entry) {
         displayUnit = { ...displayUnit, abilities: [...(displayUnit.abilities || []), ...enhGrantedAbilities] };
     }
 
+    // Split half without the Theyn loses his weavefield crest (the unit's 5+ invuln)
+    if (instance?.hasTheyn === false) {
+        displayUnit = {
+            ...displayUnit,
+            invulnerableSave: null,
+            invulnerableSource: null,
+            wargear: (displayUnit.wargear || []).filter(w => w !== 'weavefield-crest-theyn')
+        };
+    }
+
     // Apply selected wargear effects (supports multiple selections)
     const selectedWargear = instance?.selectedWargear || [];
     let wargearInheritedAbilities = [];
@@ -2083,6 +2093,16 @@ function renderLedUnitCard(ledUnit) {
         } else if (activeLeaderChoice === 'teleport-crest') {
             displayBodyguard = { ...displayBodyguard, coreAbilities: [...(displayBodyguard.coreAbilities || []), 'deep-strike'] };
         }
+    }
+
+    // Split half without the Theyn loses his weavefield crest (the unit's 5+ invuln)
+    if (instance?.hasTheyn === false) {
+        displayBodyguard = {
+            ...displayBodyguard,
+            invulnerableSave: null,
+            invulnerableSource: null,
+            wargear: (displayBodyguard.wargear || []).filter(w => w !== 'weavefield-crest-theyn')
+        };
     }
 
     return `
@@ -3442,12 +3462,17 @@ function makeSplitHalf(instance, half) {
         });
     }
     const keepLeader = half === 'a';
+    // The Theyn (and his weavefield crest 5+ invuln) is only in one half
+    const hasTheyn = instance.unitId === 'hearthkyn-warriors'
+        ? (instance.hkWargear?.theynIn || 'a') === half
+        : undefined;
     return {
         ...instance,
         modelCount: count,
         weapons,
         leaderId: keepLeader ? instance.leaderId : null,
-        enhancementId: keepLeader ? instance.enhancementId : null
+        enhancementId: keepLeader ? instance.enhancementId : null,
+        hasTheyn
     };
 }
 
@@ -3662,7 +3687,7 @@ function buildActiveArmy() {
         if (isSplitActive(instance)) {
             ['a', 'b'].forEach(half => {
                 const inst = makeSplitHalf(instance, half);
-                const label = half === 'a' ? 'Split A (Sagitaur)' : 'Split B (Sagitaur)';
+                const label = `Split ${half.toUpperCase()}${inst.hasTheyn ? ' • Theyn' : ''} (Sagitaur)`;
                 if (inst.leaderId && units[inst.leaderId]) {
                     const leader = units[inst.leaderId];
                     activeUnits.push({
