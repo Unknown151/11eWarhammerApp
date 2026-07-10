@@ -381,6 +381,11 @@
         .weapon-count-display{width:32px;text-align:center;font-family:'Share Tech Mono',monospace;font-size:.75rem;color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:3px;padding:.2rem 0}
         .weapon-checkbox-row{margin-bottom:.25rem}
         .weapon-checkbox.weapon-locked{cursor:default}
+        .hk-row{display:flex;align-items:center;gap:.5rem;margin-bottom:.4rem}
+        .hk-row-label{font-size:.7rem;color:var(--text2);flex:0 0 40%;min-width:0}
+        .hk-row .leader-select{flex:1;width:auto}
+        .hk-max-hint{font-size:.6rem;color:var(--text3);font-family:'Share Tech Mono',monospace;margin-left:.3rem}
+        .hk-derived{font-size:.65rem;color:var(--text3);line-height:1.5;background:var(--bg);border:1px dashed var(--border);border-radius:4px;padding:.4rem .55rem;margin:.4rem 0 .6rem}
         .weapon-stats-toggle{width:26px;height:26px;flex-shrink:0;background:var(--bg);border:1px solid var(--border);border-radius:3px;color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;touch-action:manipulation;padding:0;transition:all .2s ease}
         .weapon-stats-toggle::after{content:'';border:solid currentColor;border-width:0 2px 2px 0;padding:3px;display:inline-block;transform:rotate(45deg);margin-top:-3px;transition:transform .2s ease}
         .weapon-stats-toggle:hover{border-color:var(--gold-dark);color:var(--gold-dark)}
@@ -617,7 +622,7 @@
             </div>
         </div>
     </header>
-    <div class="version-line" id="version-line">11th Edition - Version 0.4.1</div>
+    <div class="version-line" id="version-line">11th Edition - Version 0.5.0</div>
     <main class="container">
         <div id="units-tab" class="tab-content active" role="tabpanel" aria-label="Army view">
             <div id="units-container"><div class="loading">Loading units...</div></div>
@@ -1399,13 +1404,14 @@ function packArmy() {
             if (inst.enhancementId) p.e = inst.enhancementId;
             if (inst.split) p.sp = 1;
             if (inst.split && inst.splitWeapons) p.sw = inst.splitWeapons;
+            if (inst.hkWargear) p.hk = inst.hkWargear;
             if (inst.selectedWargear?.length) p.g = inst.selectedWargear;
             if (inst.leaderWargear?.length) p.lw = inst.leaderWargear;
             // Only store weapon states that differ from the unit default
             const defWeapons = {};
             if (unit?.weapons) {
                 [...(unit.weapons.ranged || []), ...(unit.weapons.melee || [])].forEach(w => {
-                    defWeapons[generateWeaponKey(w)] = { equipped: true, count: w.count || 1 };
+                    defWeapons[generateWeaponKey(w)] = { equipped: true, count: w.count ?? 1 };
                 });
             }
             const diffs = {};
@@ -1431,7 +1437,7 @@ function unpackArmy(packed) {
         const weapons = {};
         if (unit?.weapons) {
             [...(unit.weapons.ranged || []), ...(unit.weapons.melee || [])].forEach(w => {
-                weapons[generateWeaponKey(w)] = { equipped: true, count: w.count || 1 };
+                weapons[generateWeaponKey(w)] = { equipped: true, count: w.count ?? 1 };
             });
         }
         if (p.W) Object.assign(weapons, p.W);
@@ -1445,7 +1451,8 @@ function unpackArmy(packed) {
             leaderWargear: p.lw || null,
             selectedWargear: p.g || [],
             split: !!p.sp,
-            splitWeapons: p.sw || null
+            splitWeapons: p.sw || null,
+            hkWargear: p.hk || null
         };
     });
 }
@@ -1487,7 +1494,7 @@ function exportArmyText() {
             const config = instance.weapons?.[key];
             const equipped = config ? config.equipped : true;
             if (!equipped) return;
-            const count = config ? config.count : (w.count || 1);
+            const count = config ? config.count : (w.count ?? 1);
             if (count < 1) return;
             block.push(`  * ${count}x ${w.name}`);
         });
@@ -1625,7 +1632,7 @@ function createUnitInstance(unitId) {
     if (unit.weapons) {
         [...(unit.weapons.ranged || []), ...(unit.weapons.melee || [])].forEach(w => {
             const key = generateWeaponKey(w);
-            weapons[key] = { equipped: true, count: w.count || 1 };
+            weapons[key] = { equipped: true, count: w.count ?? 1 };
         });
     }
 
@@ -1677,7 +1684,8 @@ function duplicateUnit(instanceId) {
         enhancementId: null, // enhancements are unique per army — don't copy
         selectedWargear: [...source.selectedWargear],
         split: source.split || false,
-        splitWeapons: source.splitWeapons ? JSON.parse(JSON.stringify(source.splitWeapons)) : null
+        splitWeapons: source.splitWeapons ? JSON.parse(JSON.stringify(source.splitWeapons)) : null,
+        hkWargear: source.hkWargear ? JSON.parse(JSON.stringify(source.hkWargear)) : null
     };
     // Insert clone right after the source
     const idx = armyList.indexOf(source);
@@ -2617,6 +2625,7 @@ function renderConfigurationTab() {
 function renderArmyInstance(instance) {
     const unit = units[instance.unitId];
     if (!unit) return '';
+    ensureHkWargear(instance);   // keep derived Hearthkyn loadout current for the summary line
 
     const isExpanded = configExpandedCards[instance.instanceId];
     const isLeader = unit.isLeader;
@@ -2683,8 +2692,10 @@ function renderArmyInstance(instance) {
         bodyContent += renderInstanceWargearChoiceSelector(instance, unit.wargearChoices);
     }
 
-    // Weapons section — split units configure each half separately
-    if (isSplitActive(instance)) {
+    // Weapons section — Hearthkyn use the guided wargear panel; split units configure each half
+    if (instance.unitId === 'hearthkyn-warriors') {
+        bodyContent += renderHearthkynWargearPanel(instance);
+    } else if (isSplitActive(instance)) {
         ensureSplitWeapons(instance);
         bodyContent += renderInstanceWeaponSelector(instance, 'a');
         bodyContent += renderInstanceWeaponSelector(instance, 'b');
@@ -3039,7 +3050,7 @@ function renderInstanceWeaponSelector(instance, half = null) {
         const key = generateWeaponKey(w);
         const config = half
             ? (instance.splitWeapons?.[half]?.[key] || { equipped: false, count: 0 })
-            : (instance.weapons[key] || { equipped: true, count: w.count || 1 });
+            : (instance.weapons[key] || { equipped: true, count: w.count ?? 1 });
         const eqHandler = half
             ? `setInstanceSplitWeaponEquipped('${instance.instanceId}','${half}','${key}',this.checked)`
             : `setInstanceWeaponEquipped('${instance.instanceId}', '${key}', this.checked)`;
@@ -3440,12 +3451,212 @@ function makeSplitHalf(instance, half) {
     };
 }
 
+// --- Hearthkyn Warriors guided wargear (Option B) ---
+// The datasheet's wargear choices are modelled as slots; the actual weapon counts on the
+// instance (and its split halves) are DERIVED from these, so the loadout is always legal.
+const HK_SPECIAL_OPTIONS = {
+    'auto-rifle':    { label: 'HYLas auto rifle',    weapons: ['hylas-auto-rifle'] },
+    'rotary-cannon': { label: 'HYLas rotary cannon', weapons: ['hylas-rotary-cannon'] },
+    'l7':            { label: 'L7 missile launcher', weapons: ['l7-missile-launcher-blast', 'l7-missile-launcher-focused'] },
+    'etacarn':       { label: 'EtaCarn plasma beamer', weapons: ['etacarn-plasma-beamer'] },
+    'magna-rail':    { label: 'Magna-rail rifle',    weapons: ['magna-rail-rifle'] }
+};
+function defaultHkWargear() {
+    return {
+        ion: 0, special1: 'l7', special2: 'magna-rail', knives: 0,
+        theynRanged: 'bolter', theynMelee: false,
+        // split assignment
+        theynIn: 'a', ionA: 0, knivesA: 0, special1In: 'a', special2In: 'b'
+    };
+}
+function ensureHkWargear(instance) {
+    if (instance.unitId !== 'hearthkyn-warriors') return;
+    if (!instance.hkWargear) {
+        const wg = defaultHkWargear();
+        // Migrate a pre-guided loadout: infer the slots from the equipped weapons
+        const w = instance.weapons || {};
+        const eq = k => w[k]?.equipped && (w[k].count || 0) > 0;
+        if (Object.keys(w).length) {
+            const specials = [];
+            if (eq('l7-missile-launcher-blast') || eq('l7-missile-launcher-focused')) specials.push('l7');
+            if (eq('magna-rail-rifle')) specials.push('magna-rail');
+            if (eq('hylas-auto-rifle')) specials.push('auto-rifle');
+            if (eq('hylas-rotary-cannon')) specials.push('rotary-cannon');
+            if (eq('etacarn-plasma-beamer')) specials.push('etacarn');
+            wg.special1 = specials[0] || null;
+            wg.special2 = specials[1] || null;
+            wg.knives = Math.min(2, eq('plasma-knife') ? (w['plasma-knife'].count || 0) : 0);
+            wg.ion = Math.min(9, eq('ion-blaster') ? (w['ion-blaster'].count || 0) : 0);
+            if (eq('theyn-s-pistol')) wg.theynRanged = 'pistol';
+            wg.theynMelee = eq('theyn-s-melee-weapon');
+        }
+        instance.hkWargear = wg;
+    }
+    deriveHearthkynWeapons(instance);
+}
+// Recompute instance.weapons and instance.splitWeapons from the wargear slots
+function deriveHearthkynWeapons(instance) {
+    const unit = units['hearthkyn-warriors'];
+    if (!unit) return;
+    const wg = instance.hkWargear;
+    const specials = [wg.special1, wg.special2].filter(Boolean);
+    // 9 warriors carry the options; clamp the numeric picks to what's legal
+    wg.knives = Math.max(0, Math.min(2, wg.knives || 0, 9 - specials.length));
+    wg.ion = Math.max(0, Math.min(wg.ion || 0, 9 - specials.length - wg.knives));
+
+    const allWeapons = [...(unit.weapons.ranged || []), ...(unit.weapons.melee || [])];
+    const loadout = (theynHere, warriors, ionN, knivesN, specialList, models) => {
+        const c = {};
+        c['autoch-pattern-bolt-pistol'] = models;
+        c['close-combat-weapon'] = models;
+        c['ion-blaster'] = ionN + (theynHere && wg.theynRanged === 'ion' ? 1 : 0);
+        c['theyn-s-pistol'] = theynHere && wg.theynRanged === 'pistol' ? 1 : 0;
+        c['autoch-pattern-bolter'] = Math.max(0, warriors - ionN - specialList.length - knivesN)
+            + (theynHere && wg.theynRanged === 'bolter' ? 1 : 0);
+        c['plasma-knife'] = knivesN;
+        c['theyn-s-melee-weapon'] = theynHere && wg.theynMelee ? 1 : 0;
+        specialList.forEach(s => HK_SPECIAL_OPTIONS[s].weapons.forEach(k => { c[k] = 1; }));
+        const out = {};
+        allWeapons.forEach(w => {
+            const key = generateWeaponKey(w);
+            const n = c[key] || 0;
+            out[key] = { equipped: n > 0, count: n };
+        });
+        return out;
+    };
+
+    instance.weapons = loadout(true, 9, wg.ion, wg.knives, specials, 10);
+
+    // Per-half assignment (5 models each; the Theyn occupies a warrior slot in his half)
+    const theynA = wg.theynIn !== 'b';
+    const warriorsA = 5 - (theynA ? 1 : 0);
+    const warriorsB = 9 - warriorsA;
+    const specialsA = specials.filter(s => (s === wg.special1 ? wg.special1In : wg.special2In) !== 'b');
+    const specialsB = specials.filter(s => !specialsA.includes(s));
+    // clamp knives, then ion, so both halves stay within their warrior counts
+    let kA = Math.max(0, Math.min(wg.knivesA || 0, wg.knives, warriorsA - specialsA.length));
+    kA = Math.max(0, Math.min(Math.max(kA, wg.knives - (warriorsB - specialsB.length)), wg.knives));
+    wg.knivesA = kA;
+    const kB = wg.knives - kA;
+    const capA = warriorsA - specialsA.length - kA;
+    const capB = warriorsB - specialsB.length - kB;
+    let iA = Math.max(0, Math.min(wg.ionA || 0, wg.ion, capA));
+    iA = Math.max(0, Math.min(Math.max(iA, wg.ion - capB), wg.ion));
+    wg.ionA = iA;
+    const iB = wg.ion - iA;
+
+    instance.splitWeapons = {
+        a: loadout(theynA, warriorsA, iA, kA, specialsA, 5),
+        b: loadout(!theynA, warriorsB, iB, kB, specialsB, 5)
+    };
+}
+function setHkWargear(instanceId, field, value) {
+    const instance = armyList.find(i => i.instanceId === instanceId);
+    if (!instance) return;
+    ensureHkWargear(instance);
+    const wg = instance.hkWargear;
+    wg[field] = value === '' ? null : value;
+    // The two special slots can't hold the same weapon (duplicates not allowed)
+    if (field === 'special1' && wg.special1 && wg.special1 === wg.special2) wg.special2 = null;
+    if (field === 'special2' && wg.special2 && wg.special2 === wg.special1) wg.special1 = null;
+    deriveHearthkynWeapons(instance);
+    saveArmyList();
+    renderConfigurationTab();
+    renderUnits();
+}
+function adjustHkWargear(instanceId, field, delta) {
+    const instance = armyList.find(i => i.instanceId === instanceId);
+    if (!instance) return;
+    ensureHkWargear(instance);
+    instance.hkWargear[field] = (instance.hkWargear[field] || 0) + delta;
+    deriveHearthkynWeapons(instance);   // clamps to legal range
+    saveArmyList();
+    renderConfigurationTab();
+    renderUnits();
+}
+function hkHalfSummary(instance, half) {
+    const unit = units[instance.unitId];
+    const parts = [];
+    [...(unit.weapons.ranged || []), ...(unit.weapons.melee || [])].forEach(w => {
+        const cfg = instance.splitWeapons?.[half]?.[generateWeaponKey(w)];
+        if (cfg?.equipped && cfg.count > 0) parts.push(`${cfg.count}× ${w.name}`);
+    });
+    return `${half.toUpperCase()}: ${parts.join(' · ')}`;
+}
+function renderHearthkynWargearPanel(instance) {
+    ensureHkWargear(instance);
+    const wg = instance.hkWargear;
+    const specials = [wg.special1, wg.special2].filter(Boolean);
+
+    const specialSelect = slot => {
+        const current = wg[slot] || '';
+        const other = slot === 'special1' ? wg.special2 : wg.special1;
+        let opts = `<option value="">— None —</option>`;
+        Object.entries(HK_SPECIAL_OPTIONS).forEach(([id, o]) => {
+            opts += `<option value="${id}" ${current === id ? 'selected' : ''} ${other === id && current !== id ? 'disabled' : ''}>${escHtml(o.label)}</option>`;
+        });
+        return `<select class="leader-select" onchange="setHkWargear('${instance.instanceId}','${slot}',this.value)">${opts}</select>`;
+    };
+    const stepper = (label, field, val, max) => `
+        <div class="model-count-row">
+            <span class="model-count-label">${label}</span>
+            <button class="weapon-count-btn" onclick="event.preventDefault();adjustHkWargear('${instance.instanceId}','${field}',-1)">−</button>
+            <span class="weapon-count-display">${val}</span>
+            <button class="weapon-count-btn" onclick="event.preventDefault();adjustHkWargear('${instance.instanceId}','${field}',1)">+</button>
+            <span class="hk-max-hint">max ${max}</span>
+        </div>`;
+
+    let html = `<div class="config-label">Wargear Options</div>`;
+    html += stepper('Ion blasters (warriors):', 'ion', wg.ion, 9 - specials.length - wg.knives);
+    html += `<div class="hk-row"><span class="hk-row-label">Special weapon 1</span>${specialSelect('special1')}</div>`;
+    html += `<div class="hk-row"><span class="hk-row-label">Special weapon 2</span>${specialSelect('special2')}</div>`;
+    html += stepper('Plasma knives (0–2):', 'knives', wg.knives, Math.min(2, 9 - specials.length - wg.ion));
+    html += `<div class="hk-row"><span class="hk-row-label">Theyn's ranged</span>
+        <select class="leader-select" onchange="setHkWargear('${instance.instanceId}','theynRanged',this.value)">
+            <option value="bolter" ${wg.theynRanged === 'bolter' ? 'selected' : ''}>Autoch-pattern bolter</option>
+            <option value="ion" ${wg.theynRanged === 'ion' ? 'selected' : ''}>Ion blaster</option>
+            <option value="pistol" ${wg.theynRanged === 'pistol' ? 'selected' : ''}>Theyn's pistol</option>
+        </select></div>`;
+    html += `<div class="wargear-checkboxes"><label class="wargear-checkbox ${wg.theynMelee ? 'checked' : ''}">
+        <input type="checkbox" ${wg.theynMelee ? 'checked' : ''} onchange="setHkWargear('${instance.instanceId}','theynMelee',this.checked)">
+        <span>Theyn's melee weapon</span></label></div>`;
+
+    // Derived loadout summary
+    const unit = units[instance.unitId];
+    const parts = [];
+    [...(unit.weapons.ranged || []), ...(unit.weapons.melee || [])].forEach(w => {
+        const cfg = instance.weapons[generateWeaponKey(w)];
+        if (cfg?.equipped && cfg.count > 0) parts.push(`${cfg.count}× ${w.name}`);
+    });
+    html += `<div class="hk-derived">${escHtml(parts.join(' · '))}</div>`;
+
+    // Split assignment: which half gets the Theyn and each chosen option
+    if (isSplitActive(instance)) {
+        const abSelect = (field, val) => `
+            <select class="leader-select hk-ab" onchange="setHkWargear('${instance.instanceId}','${field}',this.value)">
+                <option value="a" ${val !== 'b' ? 'selected' : ''}>Half A</option>
+                <option value="b" ${val === 'b' ? 'selected' : ''}>Half B</option>
+            </select>`;
+        html += `<div class="config-label">Split Assignment</div>`;
+        html += `<div class="hk-row"><span class="hk-row-label">Theyn</span>${abSelect('theynIn', wg.theynIn)}</div>`;
+        if (wg.special1) html += `<div class="hk-row"><span class="hk-row-label">${escHtml(HK_SPECIAL_OPTIONS[wg.special1].label)}</span>${abSelect('special1In', wg.special1In)}</div>`;
+        if (wg.special2) html += `<div class="hk-row"><span class="hk-row-label">${escHtml(HK_SPECIAL_OPTIONS[wg.special2].label)}</span>${abSelect('special2In', wg.special2In)}</div>`;
+        if (wg.ion > 0) html += stepper('Ion blasters in Half A:', 'ionA', wg.ionA, wg.ion);
+        if (wg.knives > 0) html += stepper('Plasma knives in Half A:', 'knivesA', wg.knivesA, wg.knives);
+        html += `<div class="hk-derived">${escHtml(hkHalfSummary(instance, 'a'))}<br>${escHtml(hkHalfSummary(instance, 'b'))}</div>`;
+    }
+    return html;
+}
+
 function buildActiveArmy() {
     const activeUnits = [];
 
     armyList.forEach(instance => {
         const unit = units[instance.unitId];
         if (!unit) return;
+
+        // Hearthkyn loadouts (incl. split halves) derive from their wargear slots
+        ensureHkWargear(instance);
 
         // Split Hearthkyn Warriors render as two half-cards (A carries any leader/enhancement)
         if (isSplitActive(instance)) {

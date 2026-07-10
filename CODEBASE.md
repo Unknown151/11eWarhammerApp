@@ -580,3 +580,14 @@ See the **Adding a stratagem effect to weapon rendering** section above.
 2. Add a `costing` block with the explicit per-size prices (see **Points Calculation**). The stepper snaps between the sizes listed in `tiers[0]`.
 3. For escalating costs (a copy beyond the Nth costs more), add `"escalationAfter": N` and a second tier.
 4. Weapon counts scale automatically if set to match `baseModels` in the JSON
+
+### Hearthkyn Warriors guided wargear
+Hearthkyn Warriors don't use the free-form weapon selector. Their builder card renders
+`renderHearthkynWargearPanel(instance)` — steppers/dropdowns modelling the datasheet's
+wargear options (ion blasters 0–9, two no-duplicate special-weapon slots, 0–2 plasma
+knives, Theyn ranged/melee choices). The slots live in `instance.hkWargear` (packed as
+`hk` in share URLs) and `deriveHearthkynWeapons()` recomputes `instance.weapons` AND
+`instance.splitWeapons` from them on every change/render (`ensureHkWargear` also
+migrates old free-form loadouts). When the Sagitaur split is active, extra "Split
+Assignment" controls choose which half gets the Theyn, each special, and how many ion
+blasters/knives go to half A — all clamped to each half's warrior count.
