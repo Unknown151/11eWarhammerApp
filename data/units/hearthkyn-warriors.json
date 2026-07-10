@@ -34,7 +34,19 @@
       },
       {
         "name": "Autoch-pattern bolter",
-        "count": 8,
+        "count": 7,
+        "range": "24\"",
+        "a": "2",
+        "bs": "4+",
+        "s": "4",
+        "ap": "0",
+        "d": "1",
+        "abilities": [],
+        "inheritedAbilities": [{ "id": "panspectral-scanning", "display": "Re-roll Hit 1" }]
+      },
+      {
+        "name": "Autoch-pattern bolter (Theyn)",
+        "count": 1,
         "range": "24\"",
         "a": "2",
         "bs": "4+",
@@ -82,6 +94,18 @@
       },
       {
         "name": "Ion blaster",
+        "count": 0,
+        "range": "18\"",
+        "a": "1",
+        "bs": "4+",
+        "s": "5",
+        "ap": "-2",
+        "d": "1",
+        "abilities": [],
+        "inheritedAbilities": [{ "id": "panspectral-scanning", "display": "Re-roll Hit 1" }]
+      },
+      {
+        "name": "Ion blaster (Theyn)",
         "count": 0,
         "range": "18\"",
         "a": "1",

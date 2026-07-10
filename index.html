@@ -622,7 +622,7 @@
             </div>
         </div>
     </header>
-    <div class="version-line" id="version-line">11th Edition - Version 0.5.2</div>
+    <div class="version-line" id="version-line">11th Edition - Version 0.5.3</div>
     <main class="container">
         <div id="units-tab" class="tab-content active" role="tabpanel" aria-label="Army view">
             <div id="units-container"><div class="loading">Loading units...</div></div>
@@ -3531,14 +3531,19 @@ function deriveHearthkynWeapons(instance) {
     wg.ion = Math.max(0, Math.min(wg.ion || 0, 9 - specials.length - wg.knives));
 
     const allWeapons = [...(unit.weapons.ranged || []), ...(unit.weapons.melee || [])];
+    // The Theyn's own bolter/ion blaster uses a dedicated "(Theyn)" weapon entry so his
+    // gear is identifiable in lists and on the cards.
+    const kBolterTheyn = generateWeaponKey({ name: 'Autoch-pattern bolter (Theyn)' });
+    const kIonTheyn = generateWeaponKey({ name: 'Ion blaster (Theyn)' });
     const loadout = (theynHere, warriors, ionN, knivesN, specialList, models) => {
         const c = {};
         c['autoch-pattern-bolt-pistol'] = models;
         c['close-combat-weapon'] = models;
-        c['ion-blaster'] = ionN + (theynHere && wg.theynRanged === 'ion' ? 1 : 0);
+        c['ion-blaster'] = ionN;
+        c[kIonTheyn] = theynHere && wg.theynRanged === 'ion' ? 1 : 0;
         c['theyn-s-pistol'] = theynHere && wg.theynRanged === 'pistol' ? 1 : 0;
-        c['autoch-pattern-bolter'] = Math.max(0, warriors - ionN - specialList.length - knivesN)
-            + (theynHere && wg.theynRanged === 'bolter' ? 1 : 0);
+        c['autoch-pattern-bolter'] = Math.max(0, warriors - ionN - specialList.length - knivesN);
+        c[kBolterTheyn] = theynHere && wg.theynRanged === 'bolter' ? 1 : 0;
         c['plasma-knife'] = knivesN;
         c['theyn-s-melee-weapon'] = theynHere && wg.theynMelee ? 1 : 0;
         specialList.forEach(s => HK_SPECIAL_OPTIONS[s].weapons.forEach(k => { c[k] = 1; }));
