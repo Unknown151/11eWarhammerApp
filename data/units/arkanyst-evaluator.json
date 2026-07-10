@@ -6,6 +6,7 @@
   "isLeader": false,
   "points": 70,
   "models": 1,
+  "fixedWeapons": true,
   "stats": {
     "m": "5\"",
     "t": 5,

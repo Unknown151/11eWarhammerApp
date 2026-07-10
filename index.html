@@ -380,6 +380,7 @@
         .weapon-count-btn:active{background:var(--gold);color:var(--bg)}
         .weapon-count-display{width:32px;text-align:center;font-family:'Share Tech Mono',monospace;font-size:.75rem;color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:3px;padding:.2rem 0}
         .weapon-checkbox-row{margin-bottom:.25rem}
+        .weapon-checkbox.weapon-locked{cursor:default}
         .weapon-stats-toggle{width:26px;height:26px;flex-shrink:0;background:var(--bg);border:1px solid var(--border);border-radius:3px;color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;touch-action:manipulation;padding:0;transition:all .2s ease}
         .weapon-stats-toggle::after{content:'';border:solid currentColor;border-width:0 2px 2px 0;padding:3px;display:inline-block;transform:rotate(45deg);margin-top:-3px;transition:transform .2s ease}
         .weapon-stats-toggle:hover{border-color:var(--gold-dark);color:var(--gold-dark)}
@@ -616,7 +617,7 @@
             </div>
         </div>
     </header>
-    <div class="version-line" id="version-line">11th Edition - Version 0.3.2</div>
+    <div class="version-line" id="version-line">11th Edition - Version 0.3.3</div>
     <main class="container">
         <div id="units-tab" class="tab-content active" role="tabpanel" aria-label="Army view">
             <div id="units-container"><div class="loading">Loading units...</div></div>
@@ -2996,6 +2997,7 @@ function renderInstanceWeaponSelector(instance) {
     if (!unit?.weapons) return '';
 
     let html = '';
+    const locked = !!unit.fixedWeapons;   // weapons can't be toggled/counted (e.g. single fixed loadout)
 
     const renderWeaponRow = (w, weaponType) => {
         const key = generateWeaponKey(w);
@@ -3032,16 +3034,26 @@ function renderInstanceWeaponSelector(instance) {
         })() : '';
         const abilitiesHtml = (abBadges || unitAbBadge) ? `<div class="wabs">${abBadges}${unitAbBadge}</div>` : '';
 
-        return `
-            <div class="weapon-checkbox-row">
-                <label class="weapon-checkbox">
+        const statsToggle = `<button class="weapon-stats-toggle" onclick="event.preventDefault();event.stopPropagation();toggleWeaponStats(this)" aria-label="Show weapon stats"></button>`;
+
+        // Fixed loadout: no equip checkbox, no count controls — just the name and stats
+        const rowInner = locked
+            ? `<div class="weapon-checkbox weapon-locked">
+                    <span class="weapon-checkbox-name">${escHtml(w.name)}</span>
+                    ${statsToggle}
+               </div>`
+            : `<label class="weapon-checkbox">
                     <input type="checkbox" ${config.equipped ? 'checked' : ''} onchange="setInstanceWeaponEquipped('${instance.instanceId}', '${key}', this.checked)">
                     <span class="weapon-checkbox-name">${escHtml(w.name)}</span>
                     <button class="weapon-count-btn" onclick="event.preventDefault();event.stopPropagation();adjustWeaponCount('${instance.instanceId}','${key}',-1)">−</button>
                     <span class="weapon-count-display">${config.count}</span>
                     <button class="weapon-count-btn" onclick="event.preventDefault();event.stopPropagation();adjustWeaponCount('${instance.instanceId}','${key}',1)">+</button>
-                    <button class="weapon-stats-toggle" onclick="event.preventDefault();event.stopPropagation();toggleWeaponStats(this)" aria-label="Show weapon stats"></button>
-                </label>
+                    ${statsToggle}
+               </label>`;
+
+        return `
+            <div class="weapon-checkbox-row">
+                ${rowInner}
                 <div class="weapon-stats-panel">
                     ${statsGrid}
                     ${abilitiesHtml}
