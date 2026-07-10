@@ -101,7 +101,7 @@
       }
     ]
   },
-  "abilities": ["blistering-advance"],
+  "abilities": ["blistering-advance", "sagitaur-transport"],
   "coreAbilities": ["deadly-demise-1"],
   "wargear": [],
   "wargearOptions": [

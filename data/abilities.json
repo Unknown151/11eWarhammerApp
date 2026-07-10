@@ -291,6 +291,11 @@
     "type": "Keyword",
     "description": "A unit with the <strong>MOBILE</strong> keyword can move horizontally through Dense Terrain features."
   },
+  "sagitaur-transport": {
+    "name": "Sagitaur Transport",
+    "type": "Ability — Sagitaur",
+    "description": "This model has a transport capacity of <strong>6 LEAGUES OF VOTANN INFANTRY</strong> models. It cannot transport <strong>ARTILLERY</strong>, <strong>EXO-ARMOUR</strong>, <strong>EXO-FRAME</strong> or <strong>IRONKIN STEELJACKS</strong> models.<br><br>At the start of the Declare Battle Formations step, you can select one <strong>HEARTHKYN WARRIORS</strong> unit from your army that has not been split. If you do, that unit is split into two units, each containing as equal a number of models as possible (when splitting a unit in this way, make a note of which models form each of the two new units). One of these units must start the battle embarked within this <strong>TRANSPORT</strong>; the other can start the battle embarked within another <strong>TRANSPORT</strong>, or it can be deployed as a separate unit."
+  },
   "firing-deck-5": {
     "name": "Firing Deck 5",
     "type": "Core Ability",

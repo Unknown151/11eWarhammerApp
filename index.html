@@ -617,7 +617,7 @@
             </div>
         </div>
     </header>
-    <div class="version-line" id="version-line">11th Edition - Version 0.3.3</div>
+    <div class="version-line" id="version-line">11th Edition - Version 0.4.0</div>
     <main class="container">
         <div id="units-tab" class="tab-content active" role="tabpanel" aria-label="Army view">
             <div id="units-container"><div class="loading">Loading units...</div></div>
@@ -1397,6 +1397,7 @@ function packArmy() {
             if (inst.modelCount !== defaultCount) p.m = inst.modelCount;
             if (inst.leaderId) p.l = inst.leaderId;
             if (inst.enhancementId) p.e = inst.enhancementId;
+            if (inst.split) p.sp = 1;
             if (inst.selectedWargear?.length) p.g = inst.selectedWargear;
             if (inst.leaderWargear?.length) p.lw = inst.leaderWargear;
             // Only store weapon states that differ from the unit default
@@ -1441,7 +1442,8 @@ function unpackArmy(packed) {
             leaderId: p.l || null,
             enhancementId: p.e || null,
             leaderWargear: p.lw || null,
-            selectedWargear: p.g || []
+            selectedWargear: p.g || [],
+            split: !!p.sp
         };
     });
 }
@@ -1513,9 +1515,11 @@ function exportArmyText() {
             const attachedNote = ` - Attached to the ${bodyguardCount}x ${bodyguardUnit?.name} below`;
 
             lines.push(unitBlock(leaderInst, leaderPts, attachedNote));
-            lines.push(unitBlock({ ...instance, enhancementId: null }, bodyguardPts));
+            const splitNote = isSplitActive(instance) ? ' - Split into 2x5 (Sagitaur Transport)' : '';
+            lines.push(unitBlock({ ...instance, enhancementId: null }, bodyguardPts, splitNote));
         } else {
-            lines.push(unitBlock(instance, calculateInstancePoints(instance)));
+            const splitNote = isSplitActive(instance) ? ' - Split into 2x5 (Sagitaur Transport)' : '';
+            lines.push(unitBlock(instance, calculateInstancePoints(instance), splitNote));
         }
         lines.push('');
     });
@@ -1663,7 +1667,8 @@ function duplicateUnit(instanceId) {
         weapons: JSON.parse(JSON.stringify(source.weapons)),
         leaderId: source.leaderId,
         enhancementId: null, // enhancements are unique per army — don't copy
-        selectedWargear: [...source.selectedWargear]
+        selectedWargear: [...source.selectedWargear],
+        split: source.split || false
     };
     // Insert clone right after the source
     const idx = armyList.indexOf(source);
@@ -2629,6 +2634,20 @@ function renderArmyInstance(instance) {
         `;
     }
 
+    // Sagitaur split toggle (Hearthkyn Warriors, only when a Sagitaur is in the list)
+    if (instance.unitId === 'hearthkyn-warriors' && armyHasSagitaur()) {
+        bodyContent += `
+            <div class="config-label">Sagitaur Transport</div>
+            <div class="wargear-checkboxes">
+                <label class="wargear-checkbox ${instance.split ? 'checked' : ''}">
+                    <input type="checkbox" ${instance.split ? 'checked' : ''}
+                        onchange="setInstanceSplit('${instance.instanceId}', this.checked)">
+                    <span>Split into 2×5 (one half starts embarked)</span>
+                </label>
+            </div>
+        `;
+    }
+
     // Leader assignment dropdown (for non-leader units that can be led)
     if (!isLeader && canBeLeadBy.length > 0) {
         bodyContent += renderInstanceLeaderSelector(instance, canBeLeadBy);
@@ -3318,12 +3337,81 @@ function closeUnitPicker() {
 }
 
 // Build active army from army list
+// --- Sagitaur split (Hearthkyn Warriors may split into two halves at Declare Battle Formations) ---
+function armyHasSagitaur() {
+    return armyList.some(i => i.unitId === 'sagitaur');
+}
+// The split only applies while a Sagitaur is actually in the list
+function isSplitActive(instance) {
+    return !!instance.split && instance.unitId === 'hearthkyn-warriors' && armyHasSagitaur();
+}
+function setInstanceSplit(instanceId, on) {
+    const instance = armyList.find(i => i.instanceId === instanceId);
+    if (!instance) return;
+    instance.split = on;
+    saveArmyList();
+    renderConfigurationTab();
+    renderUnits();
+}
+// Build one half of a split unit: half the models, weapon counts split ceil/floor,
+// leader & enhancement stay with half A only.
+function makeSplitHalf(instance, half) {
+    const total = instance.modelCount || 10;
+    const count = half === 'a' ? Math.ceil(total / 2) : Math.floor(total / 2);
+    const weapons = {};
+    Object.entries(instance.weapons || {}).forEach(([k, v]) => {
+        const c = half === 'a' ? Math.ceil((v.count || 0) / 2) : Math.floor((v.count || 0) / 2);
+        weapons[k] = { equipped: v.equipped && c > 0, count: c };
+    });
+    const keepLeader = half === 'a';
+    return {
+        ...instance,
+        modelCount: count,
+        weapons,
+        leaderId: keepLeader ? instance.leaderId : null,
+        enhancementId: keepLeader ? instance.enhancementId : null
+    };
+}
+
 function buildActiveArmy() {
     const activeUnits = [];
 
     armyList.forEach(instance => {
         const unit = units[instance.unitId];
         if (!unit) return;
+
+        // Split Hearthkyn Warriors render as two half-cards (A carries any leader/enhancement)
+        if (isSplitActive(instance)) {
+            ['a', 'b'].forEach(half => {
+                const inst = makeSplitHalf(instance, half);
+                const label = half === 'a' ? 'Split A (Sagitaur)' : 'Split B (Sagitaur)';
+                if (inst.leaderId && units[inst.leaderId]) {
+                    const leader = units[inst.leaderId];
+                    activeUnits.push({
+                        id: `${instance.instanceId}-${half}`,
+                        type: 'led',
+                        leader: inst.leaderId,
+                        bodyguard: inst.unitId,
+                        enhancement: inst.enhancementId,
+                        attachedBannerText: 'Attached',
+                        combinedKeywords: [...new Set([...(leader.keywords || []), ...(unit.keywords || [])])],
+                        instance: inst,
+                        diffLabel: label,
+                        noMerge: true
+                    });
+                } else {
+                    activeUnits.push({
+                        id: `${instance.instanceId}-${half}`,
+                        type: 'solo',
+                        unit: inst.unitId,
+                        instance: inst,
+                        diffLabel: label,
+                        noMerge: true
+                    });
+                }
+            });
+            return;
+        }
 
         // If it has an assigned leader, render as led unit
         if (instance.leaderId && units[instance.leaderId]) {
@@ -3368,7 +3456,9 @@ function buildActiveArmy() {
 
     const groups = new Map();
     activeUnits.forEach(entry => {
-        const key = entry.type === 'led' ? `led:${entry.leader}:${entry.bodyguard}` : `solo:${entry.unit}`;
+        const key = entry.noMerge
+            ? `nomerge:${entry.id}`
+            : entry.type === 'led' ? `led:${entry.leader}:${entry.bodyguard}` : `solo:${entry.unit}`;
         if (!groups.has(key)) groups.set(key, []);
         groups.get(key).push(entry);
     });
