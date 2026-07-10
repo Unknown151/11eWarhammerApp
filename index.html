@@ -622,7 +622,7 @@
             </div>
         </div>
     </header>
-    <div class="version-line" id="version-line">11th Edition - Version 0.5.3</div>
+    <div class="version-line" id="version-line">11th Edition - Version 0.5.4</div>
     <main class="container">
         <div id="units-tab" class="tab-content active" role="tabpanel" aria-label="Army view">
             <div id="units-container"><div class="loading">Loading units...</div></div>
@@ -1108,6 +1108,20 @@ function updateStratagemVisibility() {
     const optimalAppFab = document.getElementById('optimalapp-fab');
     optimalAppFab.style.display = isHearthfyre ? '' : 'none';
     if (!isHearthfyre) optimalAppFab.classList.remove('active');
+
+    updateHeaderControls();
+}
+// The DP button is builder context — hide it on the Army tab. The buff (burger) menu is
+// hidden whenever no active detachment provides quick-buff toggles.
+function updateHeaderControls() {
+    const activeTab = document.querySelector('.tab-compact.active')?.getAttribute('data-tab');
+    const detBtn = document.getElementById('detachment-banner');
+    if (detBtn) detBtn.style.display = activeTab === 'units' ? 'none' : '';
+    const dropdown = document.getElementById('buff-dropdown');
+    if (dropdown) {
+        const anyVisible = [...dropdown.querySelectorAll('.buff-dropdown-item')].some(el => el.style.display !== 'none');
+        dropdown.style.display = anyVisible ? '' : 'none';
+    }
 }
 // Reset any quick-buff state tied to a detachment that is no longer active.
 function resetDetachmentBuffs(id) {
@@ -4187,6 +4201,7 @@ document.querySelectorAll('.tab-compact').forEach(tab => {
         document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
         document.getElementById(tabId + '-tab').classList.add('active');
         if (tabId === 'stratagems') renderStratagemsTab();
+        updateHeaderControls();
     });
 });
 
