@@ -622,7 +622,7 @@
             </div>
         </div>
     </header>
-    <div class="version-line" id="version-line">11th Edition - Version 0.5.1</div>
+    <div class="version-line" id="version-line">11th Edition - Version 0.5.2</div>
     <main class="container">
         <div id="units-tab" class="tab-content active" role="tabpanel" aria-label="Army view">
             <div id="units-container"><div class="loading">Loading units...</div></div>
@@ -1487,16 +1487,9 @@ function exportArmyText() {
         const block = [];
         block.push(`${modelCount}x ${unit.name} (${pts} pts)${annotation}`);
 
-        // Weapons
-        const allWeapons = [...(unit.weapons?.ranged || []), ...(unit.weapons?.melee || [])];
-        allWeapons.forEach(w => {
-            const key = generateWeaponKey(w);
-            const config = instance.weapons?.[key];
-            const equipped = config ? config.equipped : true;
-            if (!equipped) return;
-            const count = config ? config.count : (w.count ?? 1);
-            if (count < 1) return;
-            block.push(`  * ${count}x ${w.name}`);
+        // Weapons (multi-profile weapons listed once, e.g. one L7 missile launcher)
+        summarizeWeaponEntries(unit, instance.weapons).forEach(e => {
+            block.push(`  * ${e.count}x ${e.name}`);
         });
 
         // Enhancement
@@ -2776,21 +2769,29 @@ function renderArmyInstance(instance) {
 }
 
 // Get weapon summary for instance details
-function getWeaponSummary(instance) {
-    const weapons = [];
-    Object.entries(instance.weapons).forEach(([key, config]) => {
-        if (config.equipped && config.count > 0) {
-            // Find weapon name from key
-            const unit = units[instance.unitId];
-            let weaponName = key;
-            if (unit?.weapons) {
-                const allWeapons = [...(unit.weapons.ranged || []), ...(unit.weapons.melee || [])];
-                const found = allWeapons.find(w => generateWeaponKey(w) === key);
-                if (found) weaponName = found.name;
-            }
-            weapons.push(`${config.count}x ${weaponName}`);
+// Equipped weapons as [{name, count}], with multi-profile weapons (same weaponGroup,
+// e.g. the L7 missile launcher's Blast/Focused profiles) merged into ONE logical weapon.
+function summarizeWeaponEntries(unit, cfgSource) {
+    if (!unit?.weapons) return [];
+    const seenGroups = new Set();
+    const out = [];
+    [...(unit.weapons.ranged || []), ...(unit.weapons.melee || [])].forEach(w => {
+        const cfg = (cfgSource || {})[generateWeaponKey(w)] ?? { equipped: true, count: w.count ?? 1 };
+        if (!cfg.equipped || !(cfg.count > 0)) return;
+        if (w.weaponGroup) {
+            if (seenGroups.has(w.weaponGroup)) return;   // one entry per weapon, not per profile
+            seenGroups.add(w.weaponGroup);
+            out.push({ name: w.name.split(' – ')[0], count: cfg.count });
+        } else {
+            out.push({ name: w.name, count: cfg.count });
         }
     });
+    return out;
+}
+
+function getWeaponSummary(instance) {
+    const unit = units[instance.unitId];
+    const weapons = summarizeWeaponEntries(unit, instance.weapons).map(e => `${e.count}x ${e.name}`);
     return weapons.slice(0, 2).join(', ') + (weapons.length > 2 ? '...' : '') || 'No weapons';
 }
 
@@ -3601,11 +3602,7 @@ function adjustHkWargear(instanceId, field, delta) {
 }
 function hkHalfSummary(instance, half) {
     const unit = units[instance.unitId];
-    const parts = [];
-    [...(unit.weapons.ranged || []), ...(unit.weapons.melee || [])].forEach(w => {
-        const cfg = instance.splitWeapons?.[half]?.[generateWeaponKey(w)];
-        if (cfg?.equipped && cfg.count > 0) parts.push(`${cfg.count}× ${w.name}`);
-    });
+    const parts = summarizeWeaponEntries(unit, instance.splitWeapons?.[half] || {}).map(e => `${e.count}× ${e.name}`);
     return `${half.toUpperCase()}: ${parts.join(' · ')}`;
 }
 function renderHearthkynWargearPanel(instance) {
@@ -3648,11 +3645,7 @@ function renderHearthkynWargearPanel(instance) {
 
     // Derived loadout summary
     const unit = units[instance.unitId];
-    const parts = [];
-    [...(unit.weapons.ranged || []), ...(unit.weapons.melee || [])].forEach(w => {
-        const cfg = instance.weapons[generateWeaponKey(w)];
-        if (cfg?.equipped && cfg.count > 0) parts.push(`${cfg.count}× ${w.name}`);
-    });
+    const parts = summarizeWeaponEntries(unit, instance.weapons).map(e => `${e.count}× ${e.name}`);
     html += `<div class="hk-derived">${escHtml(parts.join(' · '))}</div>`;
 
     // Split assignment: which half gets the Theyn and each chosen option
