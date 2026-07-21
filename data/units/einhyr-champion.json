@@ -43,7 +43,8 @@
     ]
   },
   "abilities": ["exemplar-of-the-einhyr", "mass-driver-accelerators"],
-  "wargear": ["teleport-crest"],
+  "wargear": [],
+  "wargearExclusiveChoices": ["weavefield-crest-champion", "teleport-crest"],
   "leaderBonus": {
     "text": "+1 Advance & Charge",
     "grantsAbilities": []

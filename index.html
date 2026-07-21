@@ -614,7 +614,7 @@
             </div>
         </div>
     </header>
-    <div class="version-line" id="version-line">11th Edition - Version 0.5.5</div>
+    <div class="version-line" id="version-line">11th Edition - Version 0.5.6</div>
     <main class="container">
         <div id="units-tab" class="tab-content active" role="tabpanel" aria-label="Army view">
             <div id="units-container"><div class="loading">Loading units...</div></div>
@@ -1884,14 +1884,15 @@ function renderSoloUnitCard(entry) {
     if (exclusiveChoices.length) {
         const activeChoice = exclusiveChoices.find(id => selectedWargear.includes(id)) || exclusiveChoices[0];
         extraWargear.push(activeChoice);
-        // Non-leader units carry the crest effects directly (e.g. Einhyr Hearthguard)
-        // Leader units only show the badge here; effects apply to their bodyguard in renderLedUnitCard
-        if (!unit.isLeader) {
-            if (activeChoice === 'weavefield-crest-hesyr') {
-                displayUnit = { ...displayUnit, invulnerableSave: '5+', invulnerableSource: 'weavefield-crest-hesyr' };
-            } else if (activeChoice === 'teleport-crest') {
-                displayUnit = { ...displayUnit, coreAbilities: [...(displayUnit.coreAbilities || []), 'deep-strike'] };
-            }
+        // Weavefield crest grants the BEARER an invuln — applies to solo leaders too (e.g. the
+        // Einhyr Champion's crest only affects himself, not the unit he leads).
+        if (activeChoice === 'weavefield-crest-hesyr') {
+            displayUnit = { ...displayUnit, invulnerableSave: '5+', invulnerableSource: 'weavefield-crest-hesyr' };
+        } else if (activeChoice === 'weavefield-crest-champion') {
+            displayUnit = { ...displayUnit, invulnerableSave: '4+', invulnerableSource: 'weavefield-crest-champion' };
+        } else if (activeChoice === 'teleport-crest' && !unit.isLeader) {
+            // Teleport crest gives the unit Deep Strike; leaders grant it to their led unit instead
+            displayUnit = { ...displayUnit, coreAbilities: [...(displayUnit.coreAbilities || []), 'deep-strike'] };
         }
     }
 
@@ -2079,6 +2080,9 @@ function renderLedUnitCard(ledUnit) {
                 ...displayLeader,
                 leaderBonus: { ...(leader.leaderBonus || {}), grantsAbilities: [...(leader.leaderBonus?.grantsAbilities || []), 'invuln-5'] }
             };
+        } else if (activeLeaderChoice === 'weavefield-crest-champion') {
+            // Weavefield crest gives only the leader (Champion) a 4+ invuln, not the led unit
+            displayLeader = { ...displayLeader, invulnerableSave: '4+', invulnerableSource: 'weavefield-crest-champion' };
         } else if (activeLeaderChoice === 'teleport-crest') {
             displayBodyguard = { ...displayBodyguard, coreAbilities: [...(displayBodyguard.coreAbilities || []), 'deep-strike'] };
         }
@@ -2122,7 +2126,7 @@ function renderLedUnitCard(ledUnit) {
                     <div class="sec-label">Leader</div>
                     ${renderUnitHeader(leader)}
                     ${renderUnitStats(leaderStats)}
-                    ${renderDefensiveRow(leader, false, null, ledInlineEnh)}
+                    ${renderDefensiveRow(displayLeader, false, null, ledInlineEnh)}
                     ${renderWeapons(leader.weapons, leaderInheritedAbilities, leaderAppliesTo, furyActive, closestActive, closestBonuses, firebaseActive, optimalAppActiveLeader)}
                     ${renderAbilities(displayLeader, enhancement)}
                 </div>

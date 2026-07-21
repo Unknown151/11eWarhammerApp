@@ -164,6 +164,11 @@
     "type": "Wargear",
     "description": "Models in the bearer's unit have a <strong>5+ invulnerable save</strong>."
   },
+  "weavefield-crest-champion": {
+    "name": "Weavefield Crest",
+    "type": "Wargear",
+    "description": "The bearer has a <strong>4+ invulnerable save</strong>."
+  },
   "weavefield-crest-theyn": {
     "name": "Weavefield Crest (Theyn)",
     "type": "Wargear",
