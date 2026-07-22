@@ -6,6 +6,13 @@
   "isLeader": false,
   "points": 85,
   "models": 1,
+  "costing": {
+    "escalationAfter": 3,
+    "tiers": [
+      [{ "models": 1, "points": 85 }],
+      [{ "models": 1, "points": 95 }]
+    ]
+  },
   "stats": {
     "m": "12\"",
     "t": 9,
