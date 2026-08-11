@@ -1,0 +1,81 @@
+{
+  "id": "cthonian-beserks",
+  "name": "Cthonian Beserks",
+  "type": ["Infantry"],
+  "keywords": ["INFANTRY", "CTHONIAN", "BESERKS"],
+  "isLeader": false,
+  "points": 100,
+  "models": 5,
+  "baseModels": 5,
+  "maxModels": 10,
+  "costing": {
+    "tiers": [
+      [{ "models": 5, "points": 100 }, { "models": 10, "points": 200 }]
+    ]
+  },
+  "stats": {
+    "m": "6\"",
+    "t": 6,
+    "sv": "5+",
+    "w": 1,
+    "ld": "7+",
+    "oc": 1
+  },
+  "invulnerableSave": null,
+  "weapons": {
+    "ranged": [
+      {
+        "name": "Mole grenade launcher",
+        "range": "18\"",
+        "a": "D6",
+        "bs": "5+",
+        "s": "5",
+        "ap": "-1",
+        "d": "1",
+        "abilities": ["blast", "indirect-fire"],
+        "inheritedAbilities": []
+      }
+    ],
+    "melee": [
+      {
+        "name": "Concussion maul",
+        "a": "3",
+        "ws": "4+",
+        "s": "5",
+        "ap": "-2",
+        "d": "3",
+        "abilities": ["anti-monster", "anti-vehicle"],
+        "inheritedAbilities": []
+      },
+      {
+        "name": "Heavy plasma axe",
+        "a": "3",
+        "ws": "4+",
+        "s": "7",
+        "ap": "-2",
+        "d": "3",
+        "abilities": [],
+        "inheritedAbilities": []
+      },
+      {
+        "name": "Twin concussion gauntlet",
+        "a": "4",
+        "ws": "4+",
+        "s": "9",
+        "ap": "-2",
+        "d": "2",
+        "abilities": ["twin-linked"],
+        "inheritedAbilities": []
+      }
+    ]
+  },
+  "abilities": ["cyberstimms", "subterranean-explosives"],
+  "coreAbilities": ["feel-no-pain-4"],
+  "canBeLeadBy": ["berehk-stornbrow"],
+  "wargear": [],
+  "wargearOptions": [
+    "All models in this unit can each have their heavy plasma axe replaced with 1 concussion maul.",
+    "For every 5 models in this unit, 1 model that is not equipped with a mole grenade launcher can have its heavy plasma axe or concussion maul replaced with 1 twin concussion gauntlet.",
+    "For every 5 models in this unit, 1 model that is not equipped with a twin concussion gauntlet or a mole grenade launcher can be equipped with 1 mole grenade launcher."
+  ]
+}

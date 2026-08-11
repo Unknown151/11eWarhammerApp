@@ -1,0 +1,12 @@
+{
+  "name": "warhammer-votann-app",
+  "version": "1.0.0",
+  "description": "Warhammer 40K Leagues of Votann army list builder and game day companion",
+  "private": true,
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve . --cors"
+  },
+  "keywords": ["warhammer", "40k", "votann", "army-list"],
+  "license": "MIT"
+}

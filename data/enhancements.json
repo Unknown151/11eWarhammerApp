@@ -1,0 +1,299 @@
+{
+  "bastion-shield": {
+    "name": "Bastion Shield",
+    "type": "Enhancement (25 pts)",
+    "restriction": "Leagues of Votann only",
+    "detachment": "hearthband",
+    "points": 25,
+    "short": "Worsen AP of ranged attacks within 12\" (18\" for 1YP).",
+    "description": "Each time a ranged attack targets the bearer's unit, if the attacking model is within 12\", <strong>worsen the AP</strong> of that attack by 1. If you spend <strong>1YP</strong>, until the end of the phase, if the attacking model is within 18\", worsen the AP by 1 instead."
+  },
+  "quake-multigenerator": {
+    "name": "Quake Multigenerator",
+    "type": "Enhancement (15 pts)",
+    "restriction": "Kâhl only",
+    "restrictedTo": [
+      "kahl"
+    ],
+    "detachment": "hearthband",
+    "points": 15,
+    "short": "Suppress an enemy unit you shot (−1 to its Hit rolls).",
+    "description": "In your Shooting phase, after the bearer has shot, select one enemy unit (excluding TITANIC) hit by one or more of those attacks. Until the start of your next turn, that enemy unit is <strong>suppressed</strong>. While suppressed, each time a model in that unit makes an attack, <strong>subtract 1 from the Hit roll</strong>."
+  },
+  "ironskein": {
+    "name": "Ironskein",
+    "type": "Enhancement (10 pts)",
+    "restriction": "Leagues of Votann only",
+    "detachment": [
+      "hearthband",
+      "hearthguard-covenant"
+    ],
+    "points": 10,
+    "short": "+2 Wounds to the bearer.",
+    "description": "Add <strong>+2</strong> to the bearer's Wounds characteristic."
+  },
+  "high-kahl": {
+    "name": "High Kâhl",
+    "type": "Enhancement (30 pts)",
+    "restriction": "Kâhl only",
+    "restrictedTo": [
+      "kahl"
+    ],
+    "detachment": [
+      "hearthband",
+      "hearthguard-covenant"
+    ],
+    "points": 30,
+    "short": "Slain models in the unit strike back on a 4+ (melee).",
+    "description": "Each time a model in the bearer's unit is destroyed by a melee attack, if it has not fought this phase, roll one D6: on a 4+, do not remove it from play. The destroyed model can fight after the attacking unit has finished making its attacks, and is then removed from play."
+  },
+  "oathbound-speculator": {
+    "name": "Oathbound Speculator",
+    "type": "Enhancement (30 pts)",
+    "restriction": "Leagues of Votann only",
+    "detachment": "needgaard-oathband",
+    "points": 30,
+    "short": "Re-roll Wound 1s; better when spending YP.",
+    "description": "Each time a model in the bearer's unit makes an attack, <strong>re-roll a Wound roll of 1</strong>.<br><br>Each time the bearer's unit is selected to shoot or fight, you can spend <strong>3YP</strong>. If you do, until the end of the phase, each time a model in the bearer's unit makes an attack, <strong>add 1 to the Wound roll</strong>."
+  },
+  "dead-reckoning": {
+    "name": "Dead Reckoning",
+    "type": "Enhancement (10 pts)",
+    "restriction": "Leagues of Votann only",
+    "detachment": "needgaard-oathband",
+    "points": 10,
+    "short": "Gain 1YP at end of turn if you spent none.",
+    "description": "At the end of the turn, if the bearer is on the battlefield and you spent <strong>no YP</strong> in that turn, you can gain <strong>1YP</strong>."
+  },
+  "iron-ambassador": {
+    "name": "Iron Ambassador",
+    "type": "Enhancement (5 pts)",
+    "restriction": "LEAGUES OF VOTANN model with Autoch-pattern combi-bolter only",
+    "restrictedToWeapon": "Autoch-pattern combi-bolter",
+    "detachment": "needgaard-oathband",
+    "points": 5,
+    "short": "Once per battle: spend YP to buff the unit's shooting.",
+    "description": "Once per battle, when the bearer's unit is selected to shoot, the bearer can use this Enhancement. If it does, spend up to <strong>3YP</strong> and, until the end of the phase, add the number of YP you just spent to the <strong>Damage</strong> characteristic of the bearer's ranged weapons."
+  },
+  "ancestral-crest": {
+    "name": "Ancestral Crest",
+    "type": "Enhancement (15 pts)",
+    "restriction": "Leagues of Votann only",
+    "detachment": "needgaard-oathband",
+    "points": 15,
+    "short": "Improves Command Re-roll use on the bearer.",
+    "description": "Once per turn, when you target the bearer's unit with the <strong>Command Re-roll</strong> Stratagem, the bearer can use this Enhancement. If it does, spend <strong>1YP</strong> and reduce the CP cost of that use of that Stratagem by <strong>1CP</strong>."
+  },
+  "delvwerke-navigator": {
+    "name": "Dêlvwerke Navigator",
+    "type": "Enhancement (25 pts)",
+    "restriction": "LEAGUES OF VOTANN model only",
+    "detachment": "delve-assault-shift",
+    "points": 25,
+    "short": "Redeploy a friendly Cthonian Beserks unit.",
+    "description": "In the Reinforcements step of your Movement phase, the bearer can use this Enhancement. If it does, select one friendly <strong>CTHONIAN BESERKS</strong> unit visible to the bearer and then spend any number of YP. Return one destroyed model to that unit and then, for every <strong>2YP</strong> you just spent, return up to one additional destroyed model to that unit."
+  },
+  "multiwave-system-jammer": {
+    "name": "Multiwave System Jammer",
+    "type": "Enhancement (10 pts)",
+    "restriction": "LEAGUES OF VOTANN model only",
+    "detachment": "delve-assault-shift",
+    "points": 10,
+    "short": "Once per battle: disrupt an enemy's movement.",
+    "description": "Once per battle, in your Movement phase, if the bearer is on the battlefield, it can use this Enhancement. If it does, select one friendly <strong>CTHONIAN</strong> unit that is in Reserves. Until the end of the phase, for the purposes of setting up that unit on the battlefield, treat the current battle round number as being <strong>one higher</strong> than it actually is."
+  },
+  "quake-supervisor": {
+    "name": "Quake Supervisor",
+    "type": "Enhancement (20 pts)",
+    "restriction": "LEAGUES OF VOTANN model only",
+    "detachment": "delve-assault-shift",
+    "points": 20,
+    "short": "Bearer near ARTILLERY gains a bonus ability.",
+    "description": "While the bearer is within <strong>3\"</strong> of one or more friendly <strong>LEAGUES OF VOTANN ARTILLERY</strong> units, the bearer has the <strong>Lone Operative</strong> ability, and each time one of those <strong>ARTILLERY</strong> units makes a ranged attack that targets an enemy unit visible to the bearer, <strong>add 1 to the Hit roll</strong>."
+  },
+  "piledriver": {
+    "name": "Piledriver",
+    "type": "Enhancement (15 pts)",
+    "restriction": "LEAGUES OF VOTANN model only",
+    "detachment": "delve-assault-shift",
+    "points": 15,
+    "short": "Spend YP to boost the bearer's melee.",
+    "description": "Each time the bearer's unit is selected to fight, the bearer can use this Enhancement. If it does, spend up to <strong>2YP</strong> and, until the end of the phase, add the number of YP you just spent to the <strong>Damage</strong> characteristic of the bearer's melee weapons."
+  },
+  "tactical-alchemy": {
+    "name": "Tactical Alchemy",
+    "type": "Enhancement (10 pts)",
+    "restriction": "Kâhl only",
+    "restrictedTo": [
+      "kahl"
+    ],
+    "detachment": "brandfast-oathband",
+    "points": 10,
+    "short": "Objective-control trick in your Command phase.",
+    "description": "In your Command phase, if the bearer's unit is within range of one or more objective markers you control that are not within your deployment zone, you can spend <strong>1YP</strong>. If you do, roll one D6: on a <strong>4+</strong>, you gain <strong>1CP</strong>."
+  },
+  "trivarg-cyber-implant": {
+    "name": "Trivärg Cyber Implant",
+    "type": "Enhancement (40 pts)",
+    "restriction": "LEAGUES OF VOTANN model only",
+    "detachment": "brandfast-oathband",
+    "points": 40,
+    "short": "Buffs shooting after disembarking.",
+    "description": "In your Shooting phase, each time the bearer's unit is selected to shoot, if it disembarked from a <strong>TRANSPORT</strong> this turn, or if you spend <strong>2YP</strong>, until the end of the phase, ranged weapons equipped by models in that unit have the <strong>[SUSTAINED HITS 2]</strong> ability."
+  },
+  "precursive-judgement": {
+    "name": "Precursive Judgement",
+    "type": "Enhancement (15 pts)",
+    "restriction": "Kâhl only",
+    "restrictedTo": [
+      "kahl"
+    ],
+    "detachment": "brandfast-oathband",
+    "points": 15,
+    "short": "Target the bearer near a TRANSPORT for a bonus.",
+    "description": "While the bearer's unit is wholly within 6\" of one or more friendly <strong>LEAGUES OF VOTANN TRANSPORT</strong> units, you can target the bearer's unit with the <strong>Fire Overwatch</strong> Stratagem for <strong>0CP</strong> and hits are scored on unmodified Hit rolls of <strong>5+</strong> while resolving that Stratagem."
+  },
+  "signature-restoration": {
+    "name": "Signature Restoration",
+    "type": "Enhancement (5 pts)",
+    "restriction": "Iron-Master only",
+    "restrictedTo": [
+      "iron-master"
+    ],
+    "detachment": "brandfast-oathband",
+    "points": 5,
+    "short": "Better repairs via Forgewrought Expertise.",
+    "description": "Each time a friendly <strong>LEAGUES OF VOTANN</strong> model is repaired using the bearer's <strong>Forgewrought Expertise</strong> ability, that model regains <strong>1 additional lost wound</strong>."
+  },
+  "farstrydr-node": {
+    "name": "Fârstrydr Node",
+    "type": "Enhancement (20 pts)",
+    "restriction": "IRON-MASTER or MEMNYR STRATEGIST model only",
+    "detachment": "hearthfyre-arsenal",
+    "points": 20,
+    "short": "Bearer's unit gains Deep Strike.",
+    "description": "Models in the bearer's unit have the <strong>Deep Strike</strong> ability."
+  },
+  "calculated-tenacity": {
+    "name": "Calculated Tenacity",
+    "type": "Enhancement (15 pts)",
+    "restriction": "IRON-MASTER or MEMNYR STRATEGIST model only",
+    "detachment": "hearthfyre-arsenal",
+    "points": 15,
+    "short": "+1 Objective Control to the led unit.",
+    "description": "While the bearer is leading a unit, add <strong>1</strong> to the Objective Control characteristic of models in that unit."
+  },
+  "mantle-of-elders": {
+    "name": "Mantle of Elders",
+    "type": "Enhancement (10 pts)",
+    "restriction": "MEMNYR STRATEGIST model only",
+    "restrictedTo": [
+      "memnyr-strategist"
+    ],
+    "detachment": "hearthfyre-arsenal",
+    "points": 10,
+    "short": "Refund chance when spending YP on Optimal Application.",
+    "description": "Each time the bearer's unit is selected to shoot, if you spend YP using the <strong>Optimal Application</strong> Detachment rule when doing so, you can roll one D6: on a <strong>2+</strong>, you gain <strong>1YP</strong>."
+  },
+  "graviton-vault": {
+    "name": "Graviton Vault",
+    "type": "Enhancement (5 pts)",
+    "restriction": "IRON-MASTER model only",
+    "restrictedTo": [
+      "iron-master"
+    ],
+    "detachment": "hearthfyre-arsenal",
+    "points": 5,
+    "short": "Suppress a MONSTER/VEHICLE the bearer hits.",
+    "description": "In your Shooting phase, after the bearer has shot, and in the Fight phase, after the bearer has fought, select one enemy <strong>MONSTER</strong> or <strong>VEHICLE</strong> unit hit by one or more of those attacks. Until the start of your next turn, that enemy unit is <strong>suppressed</strong>. While a unit is suppressed, each time a model in that unit makes an attack, <strong>subtract 1 from the Hit roll</strong>."
+  },
+  "optimised-attack-lines": {
+    "name": "Optimised Attack Lines",
+    "type": "Upgrade (15 pts)",
+    "upgrade": true,
+    "restriction": "SAGITAUR unit only",
+    "restrictedToKeyword": "SAGITAUR",
+    "detachment": "armoured-trailblazers",
+    "points": 15,
+    "short": "SAGITAUR only: unit gains MOBILE.",
+    "grantsAbilities": [
+      "mobile"
+    ],
+    "description": "<strong>SAGITAUR</strong> unit only. This unit has <strong>MOBILE</strong> (it can move horizontally through Dense Terrain features)."
+  },
+  "saturation-rounds": {
+    "name": "Saturation Rounds",
+    "type": "Upgrade (15 pts)",
+    "upgrade": true,
+    "restriction": "SAGITAUR unit only",
+    "restrictedToKeyword": "SAGITAUR",
+    "detachment": "armoured-trailblazers",
+    "points": 15,
+    "short": "SAGITAUR only: ranged attacks get [IGNORES COVER].",
+    "description": "<strong>SAGITAUR</strong> unit only. This unit's ranged attacks have <strong>[IGNORES COVER]</strong>."
+  },
+  "pan-spectral-lockons": {
+    "name": "Pan-spectral Lockons",
+    "type": "Upgrade (10 pts)",
+    "upgrade": true,
+    "restriction": "PIONEERS unit only",
+    "restrictedToKeyword": "PIONEERS",
+    "detachment": "farseekers",
+    "points": 10,
+    "short": "PIONEERS only: spot an enemy (+3\" detection range).",
+    "description": "<strong>PIONEERS</strong> unit only. In your Shooting phase, you can select one <strong>visible</strong> enemy unit within <strong>12\"</strong> of this unit. That enemy unit is <strong>spotted</strong>. While a unit is spotted, that unit has <strong>+3\" detection range</strong>."
+  },
+  "shroudwerke-talismans": {
+    "name": "Shroudwërke Talismans",
+    "type": "Upgrade (15 pts)",
+    "upgrade": true,
+    "restriction": "YAEGIRS unit only",
+    "restrictedToKeyword": "YAEGIRS",
+    "detachment": "farseekers",
+    "points": 15,
+    "short": "YAEGIRS only: −3\" detection range.",
+    "description": "<strong>YAEGIRS</strong> unit only. This unit has <strong>-3\" detection range</strong>."
+  },
+  "asset-manipulator": {
+    "name": "Asset Manipulator",
+    "type": "Enhancement (25 pts)",
+    "restriction": "Leagues of Votann model only",
+    "detachment": "mercenary-oathband",
+    "points": 25,
+    "short": "Spend 3YP to drop nearby enemy OC by 1.",
+    "description": "At the start of the Command phase, you can spend <strong>3YP</strong>. If you do, until the end of the turn, while an enemy unit is within <strong>3\"</strong> of the bearer, <strong>subtract 1 from the Objective Control</strong> characteristic of models in that enemy unit."
+  },
+  "etacarn-sb9-targeting-implant": {
+    "name": "Etacarn SB9 Targeting Implant",
+    "type": "Enhancement (15 pts)",
+    "restriction": "Leagues of Votann model only",
+    "detachment": "mercenary-oathband",
+    "points": 15,
+    "short": "Re-roll Hit 1s; [SUSTAINED HITS 1] for 3YP.",
+    "description": "Each time a model in the bearer's unit makes an attack, <strong>re-roll a Hit roll of 1</strong>. Each time the bearer's unit is selected to shoot or fight, you can spend <strong>3YP</strong>. If you do, until the end of the phase, each time a model in the bearer's unit makes an attack, that attack has the <strong>[SUSTAINED HITS 1]</strong> ability."
+  },
+  "mercenary-prospector": {
+    "name": "Mercenary Prospector",
+    "type": "Enhancement (20 pts)",
+    "restriction": "Kâhl only",
+    "restrictedTo": [
+      "kahl"
+    ],
+    "detachment": "mercenary-oathband",
+    "points": 20,
+    "short": "KÂHL only: gain 2YP per enemy unit destroyed.",
+    "description": "<strong>KÂHL</strong> model only. Each time an enemy unit is destroyed by the bearer's unit, <strong>gain 2YP</strong>."
+  },
+  "metaphysical-brokerage": {
+    "name": "Metaphysical Brokerage",
+    "type": "Enhancement (20 pts)",
+    "restriction": "MEMNYR STRATEGIST model only",
+    "restrictedTo": [
+      "memnyr-strategist"
+    ],
+    "detachment": "mercenary-oathband",
+    "points": 20,
+    "short": "MEMNYR only: top up to 3YP per turn.",
+    "description": "<strong>MEMNYR STRATEGIST</strong> model only. At the end of your turn, if the bearer is on the battlefield and you gained fewer than <strong>3YP</strong> this turn, you gain an amount of YP equal to the difference."
+  }
+}

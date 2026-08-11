@@ -1,0 +1,2316 @@
+{
+  "faction": "Leagues of Votann",
+  "edition": "10th",
+  "version": "1.1",
+  "generatedFrom": "Wahapedia HTML extract",
+  "units": [
+    {
+      "id": "arkanyst-evaluator",
+      "name": "Arkanyst Evaluator",
+      "baseSize": "⌀32mm",
+      "stats": {
+        "m": "5\"",
+        "t": 5,
+        "sv": "3+",
+        "w": 4,
+        "ld": "7+",
+        "oc": 1
+      },
+      "invulnerableSave": null,
+      "weapons": {
+        "ranged": [
+          {
+            "name": "Transmatter inverter – half charge",
+            "range": "12\"",
+            "a": "3",
+            "bs": "2+",
+            "s": "8",
+            "ap": "-1",
+            "d": "1",
+            "abilities": [
+              "rapid fire 1"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Transmatter inverter – full charge",
+            "range": "18\"",
+            "a": "3",
+            "bs": "2+",
+            "s": "8",
+            "ap": "-2",
+            "d": "2",
+            "abilities": [
+              "hazardous",
+              "rapid fire 2"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Transmatter inverter – overcharge",
+            "range": "24\"",
+            "a": "3",
+            "bs": "2+",
+            "s": "8",
+            "ap": "-3",
+            "d": "3",
+            "abilities": [
+              "hazardous",
+              "overcharge",
+              "rapid fire 3"
+            ],
+            "inheritedAbilities": []
+          }
+        ],
+        "melee": [
+          {
+            "name": "Close combat weapon",
+            "a": "1",
+            "ws": "4+",
+            "s": "3",
+            "ap": "0",
+            "d": "1",
+            "abilities": [],
+            "inheritedAbilities": []
+          }
+        ]
+      },
+      "points": 65,
+      "models": 1,
+      "type": [
+        "Character",
+        "Infantry"
+      ],
+      "keywords": [
+        "INFANTRY",
+        "CHARACTER",
+        "ARKANYST EVALUATOR"
+      ],
+      "factionKeywords": [
+        "LEAGUES OF VOTANN"
+      ],
+      "isLeader": false,
+      "deadlyDemise": "1",
+      "abilities": [
+        "science-guild-support",
+        "resource-transmutation",
+        "deadly-demise"
+      ],
+      "coreAbilities": [
+        "deadly-demise-1"
+      ],
+      "factionAbility": "Prioritised Efficiency",
+      "wargear": [],
+      "wargearOptions": []
+    },
+    {
+      "id": "brokhyr-iron-master",
+      "name": "Brôkhyr Iron-master",
+      "stats": {
+        "m": "5\"",
+        "t": 5,
+        "sv": "4+",
+        "w": 4,
+        "ld": "7+",
+        "oc": 1
+      },
+      "invulnerableSave": null,
+      "weapons": {
+        "ranged": [
+          {
+            "name": "Autoch-pattern bolt pistol",
+            "range": "12\"",
+            "a": "1",
+            "bs": "3+",
+            "s": "4",
+            "ap": "0",
+            "d": "1",
+            "abilities": [],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Graviton rifle",
+            "range": "18\"",
+            "a": "3",
+            "bs": "3+",
+            "s": "5",
+            "ap": "-1",
+            "d": "3",
+            "abilities": [
+              "anti-monster 3+",
+              "anti-vehicle 3+"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Las-beam cutter",
+            "range": "6\"",
+            "a": "1",
+            "bs": "4+",
+            "s": "6",
+            "ap": "-3",
+            "d": "1",
+            "abilities": [],
+            "inheritedAbilities": []
+          }
+        ],
+        "melee": [
+          {
+            "name": "Close combat weapon",
+            "a": "1",
+            "ws": "4+",
+            "s": "3",
+            "ap": "0",
+            "d": "1",
+            "abilities": [],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Graviton hammer",
+            "a": "3",
+            "ws": "4+",
+            "s": "9",
+            "ap": "-1",
+            "d": "3",
+            "abilities": [
+              "anti-monster 3+",
+              "anti-vehicle 3+"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Manipulator arms",
+            "a": "3",
+            "ws": "4+",
+            "s": "3",
+            "ap": "0",
+            "d": "1",
+            "abilities": [],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Plasma torch",
+            "a": "1",
+            "ws": "4+",
+            "s": "6",
+            "ap": "-3",
+            "d": "2",
+            "abilities": [],
+            "inheritedAbilities": []
+          }
+        ]
+      },
+      "points": 75,
+      "models": 3,
+      "type": [
+        "Character"
+      ],
+      "keywords": [
+        "KEYWORDS – ALL MODELS: INFANTRY",
+        "BRÔKHYRBRÔKHYR IRON-MASTER MODEL: CHARACTER",
+        "IRON-MASTER"
+      ],
+      "factionKeywords": [
+        "LEAGUES OF VOTANN"
+      ],
+      "isLeader": true,
+      "abilities": [
+        "brokhyr-guild-support",
+        "multispectral-visor",
+        "forgewrought-expertise"
+      ],
+      "coreAbilities": [
+        "leader"
+      ],
+      "factionAbility": "Prioritised Efficiency",
+      "wargear": [],
+      "wargearOptions": [],
+      "canLead": [
+        "brokhyr-thunderkyn",
+        "hearthkyn-warriors"
+      ]
+    },
+    {
+      "id": "buri-aegnirssen",
+      "name": "Buri Aegnirssen",
+      "baseSize": "⌀40mm",
+      "stats": {
+        "m": "5\"",
+        "t": 6,
+        "sv": "3+",
+        "w": 5,
+        "ld": "6+",
+        "oc": 1
+      },
+      "invulnerableSave": "4+",
+      "weapons": {
+        "ranged": [
+          {
+            "name": "Autoch-pattern bolt pistol",
+            "range": "12\"",
+            "a": "1",
+            "bs": "2+",
+            "s": "4",
+            "ap": "0",
+            "d": "1",
+            "abilities": [
+              "pistol"
+            ],
+            "inheritedAbilities": []
+          }
+        ],
+        "melee": [
+          {
+            "name": "Bane – strike",
+            "a": "5",
+            "ws": "2+",
+            "s": "12",
+            "ap": "-3",
+            "d": "3",
+            "abilities": [
+              "precision"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Bane – sweep",
+            "a": "10",
+            "ws": "2+",
+            "s": "6",
+            "ap": "-2",
+            "d": "1",
+            "abilities": [],
+            "inheritedAbilities": []
+          }
+        ]
+      },
+      "points": 95,
+      "models": 1,
+      "type": [
+        "Character",
+        "Infantry"
+      ],
+      "keywords": [
+        "INFANTRY",
+        "CHARACTER",
+        "EPIC HERO",
+        "BURI AEGNIRSSEN"
+      ],
+      "factionKeywords": [
+        "LEAGUES OF VOTANN"
+      ],
+      "isLeader": false,
+      "abilities": [
+        "grudge-fuelled-fortitude",
+        "unhinged-vengeance"
+      ],
+      "coreAbilities": [
+        "lone-operative",
+        "stealth"
+      ],
+      "factionAbility": "Prioritised Efficiency",
+      "wargear": [],
+      "wargearOptions": []
+    },
+    {
+      "id": "einhyr-champion",
+      "name": "Einhyr Champion",
+      "baseSize": "⌀40mm",
+      "stats": {
+        "m": "5\"",
+        "t": 5,
+        "sv": "2+",
+        "w": 5,
+        "ld": "7+",
+        "oc": 1
+      },
+      "invulnerableSave": null,
+      "weapons": {
+        "ranged": [
+          {
+            "name": "Autoch-pattern combi-bolter",
+            "range": "24\"",
+            "a": "4",
+            "bs": "2+",
+            "s": "4",
+            "ap": "0",
+            "d": "1",
+            "abilities": [],
+            "inheritedAbilities": []
+          }
+        ],
+        "melee": [
+          {
+            "name": "Darkstar axe",
+            "a": "6",
+            "ws": "2+",
+            "s": "6",
+            "ap": "-3",
+            "d": "2",
+            "abilities": [],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Mass hammer",
+            "a": "3",
+            "ws": "3+",
+            "s": "12",
+            "ap": "-3",
+            "d": "D6+1",
+            "abilities": [],
+            "inheritedAbilities": []
+          }
+        ]
+      },
+      "points": 70,
+      "models": 1,
+      "type": [
+        "Character",
+        "Infantry",
+        "Exo-armour"
+      ],
+      "keywords": [
+        "INFANTRY",
+        "CHARACTER",
+        "EXOARMOUR",
+        "EINHYR CHAMPION"
+      ],
+      "factionKeywords": [
+        "LEAGUES OF VOTANN"
+      ],
+      "isLeader": true,
+      "abilities": [
+        "exemplar-of-the-einhyr",
+        "mass-driver-accelerators"
+      ],
+      "coreAbilities": [
+        "leader"
+      ],
+      "factionAbility": "Prioritised Efficiency",
+      "wargear": [
+        "teleport-crest",
+        "weavefield-crest"
+      ],
+      "wargearOptions": [
+        "This model’s mass hammer can be replaced with 1 darkstar axe.",
+        "This model’s weavefield crest can be replaced with 1 teleport crest."
+      ],
+      "canLead": [
+        "einhyr-hearthguard"
+      ]
+    },
+    {
+      "id": "grimnyr",
+      "name": "Grimnyr",
+      "stats": {
+        "m": "5\"",
+        "t": 5,
+        "sv": "4+",
+        "w": 4,
+        "ld": "6+",
+        "oc": 1
+      },
+      "invulnerableSave": "4+",
+      "weapons": {
+        "ranged": [
+          {
+            "name": "Ancestral Wrath – witchfire",
+            "range": "24\"",
+            "a": "3",
+            "bs": "3+",
+            "s": "6",
+            "ap": "-2",
+            "d": "D3",
+            "abilities": [
+              "psychic"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Ancestral Wrath – focused witchfire",
+            "range": "24\"",
+            "a": "6",
+            "bs": "3+",
+            "s": "6",
+            "ap": "-2",
+            "d": "D3",
+            "abilities": [
+              "hazardous",
+              "psychic"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Autoch-pattern bolter",
+            "range": "24\"",
+            "a": "2",
+            "bs": "4+",
+            "s": "4",
+            "ap": "0",
+            "d": "1",
+            "abilities": [],
+            "inheritedAbilities": []
+          }
+        ],
+        "melee": [
+          {
+            "name": "Ancestral ward stave",
+            "a": "2",
+            "ws": "3+",
+            "s": "7",
+            "ap": "-1",
+            "d": "D3",
+            "abilities": [
+              "psychic"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Close combat weapon",
+            "a": "1",
+            "ws": "4+",
+            "s": "3",
+            "ap": "0",
+            "d": "1",
+            "abilities": [],
+            "inheritedAbilities": []
+          }
+        ]
+      },
+      "points": 65,
+      "models": 2,
+      "type": [
+        "Character"
+      ],
+      "keywords": [
+        "KEYWORDS – ALL MODELS: INFANTRYGRIMNYR MODEL: CHARACTER",
+        "PSYKER",
+        "GRIMNYR"
+      ],
+      "factionKeywords": [
+        "LEAGUES OF VOTANN"
+      ],
+      "isLeader": true,
+      "abilities": [
+        "fortify-psychic",
+        "grimnyrs-regard"
+      ],
+      "coreAbilities": [
+        "leader"
+      ],
+      "factionAbility": "Prioritised Efficiency",
+      "wargear": [],
+      "wargearOptions": [],
+      "canLead": [
+        "hearthkyn-warriors"
+      ]
+    },
+    {
+      "id": "kahl",
+      "name": "Kâhl",
+      "baseSize": "⌀40mm",
+      "stats": {
+        "m": "5\"",
+        "t": 5,
+        "sv": "3+",
+        "w": 4,
+        "ld": "7+",
+        "oc": 1
+      },
+      "invulnerableSave": "4+",
+      "weapons": {
+        "ranged": [
+          {
+            "name": "Autoch-pattern combi-bolter",
+            "range": "24\"",
+            "a": "4",
+            "bs": "2+",
+            "s": "4",
+            "ap": "0",
+            "d": "1",
+            "abilities": [],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Volkanite disintegrator",
+            "range": "24\"",
+            "a": "3",
+            "bs": "2+",
+            "s": "5",
+            "ap": "0",
+            "d": "1",
+            "abilities": [
+              "devastating wounds"
+            ],
+            "inheritedAbilities": []
+          }
+        ],
+        "melee": [
+          {
+            "name": "Forgewrought plasma axe",
+            "a": "4",
+            "ws": "2+",
+            "s": "5",
+            "ap": "-2",
+            "d": "2",
+            "abilities": [],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Mass gauntlet",
+            "a": "3",
+            "ws": "3+",
+            "s": "8",
+            "ap": "-3",
+            "d": "3",
+            "abilities": [],
+            "inheritedAbilities": []
+          }
+        ]
+      },
+      "points": 65,
+      "models": 1,
+      "type": [
+        "Character",
+        "Infantry"
+      ],
+      "keywords": [
+        "INFANTRY",
+        "CHARACTER",
+        "KÂHL"
+      ],
+      "factionKeywords": [
+        "LEAGUES OF VOTANN"
+      ],
+      "isLeader": true,
+      "abilities": [
+        "kindred-hero",
+        "seized-opportunity"
+      ],
+      "coreAbilities": [
+        "leader"
+      ],
+      "factionAbility": "Prioritised Efficiency",
+      "wargear": [
+        "rampart-crest",
+        "teleport-crest"
+      ],
+      "wargearOptions": [
+        "This model’s Autoch-pattem combi-bolter can be replaced with 1 volkanite disintegrator.",
+        "This model’s forgewrought plasma axe can be replaced with 1 mass gauntlet.",
+        "This model’s rampart crest can be replaced with 1 teleport crest."
+      ],
+      "canLead": [
+        "einhyr-hearthguard",
+        "hearthkyn-warriors"
+      ]
+    },
+    {
+      "id": "memnyr-strategist",
+      "name": "Memnyr Strategist",
+      "baseSize": "⌀32mm",
+      "stats": {
+        "m": "5\"",
+        "t": 5,
+        "sv": "4+",
+        "w": 4,
+        "ld": "7+",
+        "oc": 1
+      },
+      "invulnerableSave": "4+",
+      "weapons": {
+        "ranged": [
+          {
+            "name": "Autoch-pattern bolt pistol",
+            "range": "12\"",
+            "a": "1",
+            "bs": "4+",
+            "s": "4",
+            "ap": "0",
+            "d": "1",
+            "abilities": [
+              "pistol"
+            ],
+            "inheritedAbilities": []
+          }
+        ],
+        "melee": [
+          {
+            "name": "Close combat weapon",
+            "a": "1",
+            "ws": "4+",
+            "s": "3",
+            "ap": "0",
+            "d": "1",
+            "abilities": [],
+            "inheritedAbilities": []
+          }
+        ]
+      },
+      "points": 45,
+      "models": 1,
+      "type": [
+        "Character",
+        "Infantry"
+      ],
+      "keywords": [
+        "INFANTRY",
+        "CHARACTER",
+        "MEMNYR STRATEGIST"
+      ],
+      "factionKeywords": [
+        "LEAGUES OF VOTANN"
+      ],
+      "isLeader": true,
+      "abilities": [
+        "computational-mastermind",
+        "predictive-guidance"
+      ],
+      "coreAbilities": [
+        "leader"
+      ],
+      "factionAbility": "Prioritised Efficiency",
+      "wargear": [],
+      "wargearOptions": [],
+      "canLead": [
+        "ironkin-steeljacks-with-heavy-volkanite-disintegrators",
+        "ironkin-steeljacks-with-melee-weapons"
+      ]
+    },
+    {
+      "id": "uthar-the-destined",
+      "name": "Ûthar the Destined",
+      "baseSize": "⌀40mm",
+      "stats": {
+        "m": "5\"",
+        "t": 5,
+        "sv": "3+",
+        "w": 5,
+        "ld": "6+",
+        "oc": 1
+      },
+      "invulnerableSave": "4+",
+      "weapons": {
+        "ranged": [
+          {
+            "name": "Volkanite disintegrator",
+            "range": "24\"",
+            "a": "3",
+            "bs": "2+",
+            "s": "5",
+            "ap": "0",
+            "d": "1",
+            "abilities": [
+              "devastating wounds"
+            ],
+            "inheritedAbilities": []
+          }
+        ],
+        "melee": [
+          {
+            "name": "Blade of the Ancestors",
+            "a": "5",
+            "ws": "2+",
+            "s": "6",
+            "ap": "-3",
+            "d": "2",
+            "abilities": [
+              "devastating wounds"
+            ],
+            "inheritedAbilities": []
+          }
+        ]
+      },
+      "points": 95,
+      "models": 1,
+      "type": [
+        "Character",
+        "Infantry"
+      ],
+      "keywords": [
+        "INFANTRY",
+        "CHARACTER",
+        "EPIC HERO",
+        "KÂHL",
+        "ÛTHAR THE DESTINED"
+      ],
+      "factionKeywords": [
+        "LEAGUES OF VOTANN"
+      ],
+      "isLeader": true,
+      "abilities": [
+        "ancestral-fortune",
+        "grim-efficiency"
+      ],
+      "coreAbilities": [
+        "leader"
+      ],
+      "factionAbility": "Prioritised Efficiency",
+      "wargear": [
+        "rampart-crest"
+      ],
+      "wargearOptions": [],
+      "canLead": [
+        "einhyr-hearthguard",
+        "hearthkyn-warriors"
+      ]
+    },
+    {
+      "id": "hearthkyn-warriors",
+      "name": "Hearthkyn Warriors",
+      "baseSize": "⌀28.5mm",
+      "stats": {
+        "m": "5\"",
+        "t": 5,
+        "sv": "4+",
+        "w": 1,
+        "ld": "7+",
+        "oc": 2
+      },
+      "invulnerableSave": null,
+      "weapons": {
+        "ranged": [
+          {
+            "name": "Autoch-pattern bolt pistol",
+            "range": "12\"",
+            "a": "1",
+            "bs": "4+",
+            "s": "4",
+            "ap": "0",
+            "d": "1",
+            "abilities": [
+              "pistol"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Autoch-pattern bolter",
+            "range": "24\"",
+            "a": "2",
+            "bs": "4+",
+            "s": "4",
+            "ap": "0",
+            "d": "1",
+            "abilities": [],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "EtaCarn plasma beamer",
+            "range": "18\"",
+            "a": "1",
+            "bs": "4+",
+            "s": "8",
+            "ap": "-3",
+            "d": "2",
+            "abilities": [
+              "sustained hits d3"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "HYLas auto rifle",
+            "range": "24\"",
+            "a": "3",
+            "bs": "4+",
+            "s": "6",
+            "ap": "-1",
+            "d": "1",
+            "abilities": [
+              "assault",
+              "rapid fire 3"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "HYLas rotary cannon",
+            "range": "24\"",
+            "a": "6",
+            "bs": "5+",
+            "s": "6",
+            "ap": "-1",
+            "d": "1",
+            "abilities": [
+              "heavy",
+              "sustained hits 1"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Ion blaster",
+            "range": "18\"",
+            "a": "1",
+            "bs": "4+",
+            "s": "5",
+            "ap": "-2",
+            "d": "1",
+            "abilities": [],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "L7 missile launcher – blast",
+            "range": "24\"",
+            "a": "D6",
+            "bs": "4+",
+            "s": "4",
+            "ap": "0",
+            "d": "1",
+            "abilities": [
+              "blast"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "L7 missile launcher – focused",
+            "range": "24\"",
+            "a": "1",
+            "bs": "4+",
+            "s": "9",
+            "ap": "-2",
+            "d": "D6",
+            "abilities": [],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Magna-rail rifle",
+            "range": "18\"",
+            "a": "1",
+            "bs": "5+",
+            "s": "12",
+            "ap": "-3",
+            "d": "D3+3",
+            "abilities": [
+              "devastating wounds",
+              "heavy"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Theyn’s pistol",
+            "range": "12\"",
+            "a": "1",
+            "bs": "4+",
+            "s": "8",
+            "ap": "-2",
+            "d": "1",
+            "abilities": [
+              "pistol"
+            ],
+            "inheritedAbilities": []
+          }
+        ],
+        "melee": [
+          {
+            "name": "Close combat weapon",
+            "a": "1",
+            "ws": "4+",
+            "s": "4",
+            "ap": "0",
+            "d": "1",
+            "abilities": [],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Plasma knife",
+            "a": "2",
+            "ws": "4+",
+            "s": "4",
+            "ap": "-2",
+            "d": "1",
+            "abilities": [],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Theyn’s melee weapon",
+            "a": "2",
+            "ws": "4+",
+            "s": "5",
+            "ap": "-2",
+            "d": "2",
+            "abilities": [],
+            "inheritedAbilities": []
+          }
+        ]
+      },
+      "points": 100,
+      "models": 9,
+      "type": [
+        "Battleline",
+        "Infantry"
+      ],
+      "keywords": [
+        "INFANTRY",
+        "BATTLELINE",
+        "GRENADES",
+        "HEARTHKYN WARRIORS"
+      ],
+      "factionKeywords": [
+        "LEAGUES OF VOTANN"
+      ],
+      "isLeader": false,
+      "abilities": [
+        "luck-has-need-keeps-toil-earns",
+        "panspectral-scanning"
+      ],
+      "coreAbilities": [
+        "feel-no-pain-6"
+      ],
+      "factionAbility": "Prioritised Efficiency",
+      "wargear": [
+        "weavefield-crest"
+      ],
+      "wargearOptions": [
+        "Any number of Hearthkyn Warriors can each have their Autoch-pattern bolter replaced with 1 ion blaster.",
+        "Up to 2 Hearthkyn Warriors can each have their Autoch-pattern bolter or ion blaster replaced with one of the following (duplicates are not allowed): 1 HYLas auto rifle",
+        "Up to 2 Hearthkyn Warriors can each have their Autoch-pattern bolter or ion blaster replaced with one of the following (duplicates are not allowed): 1 HYLas rotary cannon",
+        "Up to 2 Hearthkyn Warriors can each have their Autoch-pattern bolter or ion blaster replaced with one of the following (duplicates are not allowed): 1 L7 missile launcher",
+        "Up to 2 Hearthkyn Warriors can each have their Autoch-pattern bolter or ion blaster replaced with one of the following (duplicates are not allowed): 1 EtaCarn plasma beamer",
+        "Up to 2 Hearthkyn Warriors can each have their Autoch-pattern bolter or ion blaster replaced with one of the following (duplicates are not allowed): 1 magna-rail rifle",
+        "Up to 2 Hearthkyn Warriors can each have their Autoch-pattern bolter or ion blaster replaced with 1 plasma knife.",
+        "The Theyn’s Autoch-pattern bolter can be replaced with one of the following: 1 ion blaster",
+        "The Theyn’s Autoch-pattern bolter can be replaced with one of the following: 1 Theyn’s pistol",
+        "The Theyn can be equipped with 1 Theyn’s melee weapon."
+      ]
+    },
+    {
+      "id": "kapricus-carrier",
+      "name": "Kapricus Carrier",
+      "baseSize": "⌀105 x 70mm",
+      "stats": {
+        "m": "12\"",
+        "t": 7,
+        "sv": "4+",
+        "w": 7,
+        "ld": "7+",
+        "oc": 2
+      },
+      "invulnerableSave": null,
+      "weapons": {
+        "ranged": [
+          {
+            "name": "Magna-coil autocannon",
+            "range": "24\"",
+            "a": "3",
+            "bs": "4+",
+            "s": "7",
+            "ap": "-1",
+            "d": "2",
+            "abilities": [],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Twin magna-coil autocannon",
+            "range": "24\"",
+            "a": "3",
+            "bs": "4+",
+            "s": "7",
+            "ap": "-1",
+            "d": "2",
+            "abilities": [
+              "twin-linked"
+            ],
+            "inheritedAbilities": []
+          }
+        ],
+        "melee": [
+          {
+            "name": "Armoured hull",
+            "a": "3",
+            "ws": "4+",
+            "s": "6",
+            "ap": "0",
+            "d": "1",
+            "abilities": [],
+            "inheritedAbilities": []
+          }
+        ]
+      },
+      "points": 75,
+      "models": 1,
+      "type": [
+        "Dedicated Transport",
+        "Vehicle"
+      ],
+      "keywords": [
+        "VEHICLE",
+        "FLY",
+        "TRANSPORT",
+        "DEDICATED TRANSPORT",
+        "HERNKYN",
+        "KAPRICUS",
+        "CARRIER"
+      ],
+      "factionKeywords": [
+        "LEAGUES OF VOTANN"
+      ],
+      "isLeader": false,
+      "transportCapacity": 5,
+      "deadlyDemise": "1",
+      "abilities": [
+        "scanner-uplinks",
+        "deadly-demise"
+      ],
+      "coreAbilities": [
+        "deadly-demise-1",
+        "firing-deck-5",
+        "scouts-9"
+      ],
+      "factionAbility": "Prioritised Efficiency",
+      "wargear": [
+        "smoke-launcher"
+      ],
+      "wargearOptions": [
+        "This model can be equipped with 1 smoke launcher."
+      ]
+    },
+    {
+      "id": "sagitaur",
+      "name": "Sagitaur",
+      "baseSize": "⌀Use model",
+      "stats": {
+        "m": "12\"",
+        "t": 9,
+        "sv": "3+",
+        "w": 9,
+        "ld": "7+",
+        "oc": 2
+      },
+      "invulnerableSave": null,
+      "weapons": {
+        "ranged": [
+          {
+            "name": "HYLas beam cannon",
+            "range": "24\"",
+            "a": "2",
+            "bs": "4+",
+            "s": "12",
+            "ap": "-3",
+            "d": "D6+1",
+            "abilities": [],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "L7 missile launcher – blast",
+            "range": "36\"",
+            "a": "D6",
+            "bs": "4+",
+            "s": "4",
+            "ap": "0",
+            "d": "1",
+            "abilities": [
+              "blast"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "L7 missile launcher – focused",
+            "range": "36\"",
+            "a": "1",
+            "bs": "4+",
+            "s": "9",
+            "ap": "-2",
+            "d": "D6",
+            "abilities": [],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "MATR autocannon",
+            "range": "24\"",
+            "a": "6",
+            "bs": "4+",
+            "s": "7",
+            "ap": "-1",
+            "d": "2",
+            "abilities": [
+              "assault",
+              "sustained hits 1"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Sagitaur missile launcher",
+            "range": "36\"",
+            "a": "2",
+            "bs": "4+",
+            "s": "10",
+            "ap": "-3",
+            "d": "3",
+            "abilities": [],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Twin bolt cannon",
+            "range": "36\"",
+            "a": "3",
+            "bs": "4+",
+            "s": "6",
+            "ap": "-1",
+            "d": "2",
+            "abilities": [
+              "sustained hits 2",
+              "twin-linked"
+            ],
+            "inheritedAbilities": []
+          }
+        ],
+        "melee": [
+          {
+            "name": "Armoured wheels",
+            "a": "3",
+            "ws": "4+",
+            "s": "6",
+            "ap": "0",
+            "d": "1",
+            "abilities": [],
+            "inheritedAbilities": []
+          }
+        ]
+      },
+      "points": 90,
+      "models": 1,
+      "type": [
+        "Dedicated Transport",
+        "Vehicle"
+      ],
+      "keywords": [
+        "VEHICLE",
+        "TRANSPORT",
+        "DEDICATED TRANSPORT",
+        "SAGITAUR"
+      ],
+      "factionKeywords": [
+        "LEAGUES OF VOTANN"
+      ],
+      "isLeader": false,
+      "transportCapacity": 6,
+      "deadlyDemise": "1",
+      "abilities": [
+        "blistering-advance",
+        "deadly-demise"
+      ],
+      "coreAbilities": [
+        "deadly-demise-1"
+      ],
+      "factionAbility": "Prioritised Efficiency",
+      "wargear": [],
+      "wargearOptions": [
+        "This model’s HYLas beam cannon can be replaced with one of the following: 1 L7 missile launcher and 1 Sagitaur missile launcher",
+        "This model’s HYLas beam cannon can be replaced with one of the following: 1 MATR autocannon"
+      ]
+    },
+    {
+      "id": "brokhyr-thunderkyn",
+      "name": "Brôkhyr Thunderkyn",
+      "baseSize": "⌀40mm",
+      "stats": {
+        "m": "5\"",
+        "t": 6,
+        "sv": "3+",
+        "w": 2,
+        "ld": "7+",
+        "oc": 1
+      },
+      "invulnerableSave": null,
+      "weapons": {
+        "ranged": [
+          {
+            "name": "Bolt cannon",
+            "range": "36\"",
+            "a": "3",
+            "bs": "4+",
+            "s": "6",
+            "ap": "-1",
+            "d": "2",
+            "abilities": [
+              "sustained hits 2"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Graviton blast cannon",
+            "range": "24\"",
+            "a": "3",
+            "bs": "4+",
+            "s": "5",
+            "ap": "-2",
+            "d": "3",
+            "abilities": [
+              "anti-monster 3+",
+              "anti-vehicle 3+"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "SP conversion beamer",
+            "range": "24\"",
+            "a": "2",
+            "bs": "4+",
+            "s": "7",
+            "ap": "-2",
+            "d": "3",
+            "abilities": [
+              "conversion",
+              "lethal hits"
+            ],
+            "inheritedAbilities": []
+          }
+        ],
+        "melee": [
+          {
+            "name": "Close combat weapon",
+            "a": "2",
+            "ws": "4+",
+            "s": "4",
+            "ap": "0",
+            "d": "1",
+            "abilities": [],
+            "inheritedAbilities": []
+          }
+        ]
+      },
+      "points": 80,
+      "models": 3,
+      "type": [
+        "Other",
+        "Infantry",
+        "Exoframe"
+      ],
+      "keywords": [
+        "INFANTRY",
+        "EXOFRAME",
+        "BRÔKHYR",
+        "THUNDERKYN"
+      ],
+      "factionKeywords": [
+        "LEAGUES OF VOTANN"
+      ],
+      "isLeader": false,
+      "abilities": [
+        "breaching-fire"
+      ],
+      "coreAbilities": [],
+      "factionAbility": "Prioritised Efficiency",
+      "wargear": [],
+      "wargearOptions": [
+        "All models in this unit can each have their bolt cannon replaced with 1 graviton blast cannon.",
+        "All models in this unit can each have their bolt cannon replaced with 1 SP conversion beamer."
+      ]
+    },
+    {
+      "id": "cthonian-beserks",
+      "name": "Cthonian Beserks",
+      "baseSize": "⌀28.5mm50mm with mole grenade launcher",
+      "stats": {
+        "m": "6\"",
+        "t": 6,
+        "sv": "5+",
+        "w": 1,
+        "ld": "7+",
+        "oc": 1
+      },
+      "invulnerableSave": null,
+      "weapons": {
+        "ranged": [
+          {
+            "name": "Mole grenade launcher",
+            "range": "18\"",
+            "a": "D6",
+            "bs": "5+",
+            "s": "5",
+            "ap": "-1",
+            "d": "1",
+            "abilities": [
+              "blast",
+              "indirect fire"
+            ],
+            "inheritedAbilities": []
+          }
+        ],
+        "melee": [
+          {
+            "name": "Concussion maul",
+            "a": "3",
+            "ws": "4+",
+            "s": "5",
+            "ap": "-2",
+            "d": "3",
+            "abilities": [
+              "anti-monster 3+",
+              "anti-vehicle 3+"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Heavy plasma axe",
+            "a": "3",
+            "ws": "4+",
+            "s": "7",
+            "ap": "-2",
+            "d": "3",
+            "abilities": [],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Twin concussion gauntlet",
+            "a": "4",
+            "ws": "4+",
+            "s": "9",
+            "ap": "-2",
+            "d": "2",
+            "abilities": [
+              "twin-linked"
+            ],
+            "inheritedAbilities": []
+          }
+        ]
+      },
+      "points": 100,
+      "models": 5,
+      "type": [
+        "Other",
+        "Infantry"
+      ],
+      "keywords": [
+        "INFANTRY",
+        "CTHONIAN",
+        "BESERKS"
+      ],
+      "factionKeywords": [
+        "LEAGUES OF VOTANN"
+      ],
+      "isLeader": false,
+      "abilities": [
+        "cyberstimms",
+        "subterranean-explosives"
+      ],
+      "coreAbilities": [
+        "feel-no-pain-4"
+      ],
+      "factionAbility": "Prioritised Efficiency",
+      "wargear": [],
+      "wargearOptions": [
+        "All models in this unit can each have their heavy plasma axe replaced with 1 concussion maul.",
+        "For every 5 models in this unit, 1 model that is not equipped with a mole grenade launcher can have its heavy plasma axe or concussion maul replaced with 1 twin concussion gauntlet.",
+        "For every 5 models in this unit, 1 model that is not equipped with a twin concussion gauntlet or a mole grenade launcher can be equipped with 1 mole grenade launcher.*"
+      ]
+    },
+    {
+      "id": "cthonian-earthshakers",
+      "name": "Cthonian Earthshakers",
+      "baseSize": "⌀80mm",
+      "stats": {
+        "m": "4\"",
+        "t": 6,
+        "sv": "4+",
+        "w": 6,
+        "ld": "7+",
+        "oc": 2
+      },
+      "invulnerableSave": null,
+      "weapons": {
+        "ranged": [
+          {
+            "name": "Autoch-pattern bolt pistol",
+            "range": "12\"",
+            "a": "1",
+            "bs": "4+",
+            "s": "4",
+            "ap": "0",
+            "d": "1",
+            "abilities": [
+              "pistol"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Breacher ordnance",
+            "range": "24\"",
+            "a": "D6+1",
+            "bs": "5+",
+            "s": "10",
+            "ap": "-1",
+            "d": "2",
+            "abilities": [
+              "blast",
+              "heavy",
+              "indirect fire"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Tremor shells",
+            "range": "36\"",
+            "a": "D6+4",
+            "bs": "5+",
+            "s": "6",
+            "ap": "-1",
+            "d": "1",
+            "abilities": [
+              "blast",
+              "heavy",
+              "indirect fire"
+            ],
+            "inheritedAbilities": []
+          }
+        ],
+        "melee": [
+          {
+            "name": "Plasma picks",
+            "a": "4",
+            "ws": "3+",
+            "s": "5",
+            "ap": "-2",
+            "d": "1",
+            "abilities": [],
+            "inheritedAbilities": []
+          }
+        ]
+      },
+      "points": 110,
+      "models": 2,
+      "type": [
+        "Other",
+        "Infantry",
+        "Artillery"
+      ],
+      "keywords": [
+        "INFANTRY",
+        "ARTILLERY",
+        "CTHONIAN",
+        "EARTHSHAKERS"
+      ],
+      "factionKeywords": [
+        "LEAGUES OF VOTANN"
+      ],
+      "isLeader": false,
+      "abilities": [
+        "destabilising-quakes",
+        "geomantic-hunters"
+      ],
+      "coreAbilities": [],
+      "factionAbility": "Prioritised Efficiency",
+      "wargear": [],
+      "wargearOptions": [
+        "All models in this unit can each have their breacher ordnance replaced with 1 tremor shells."
+      ]
+    },
+    {
+      "id": "einhyr-hearthguard",
+      "name": "Einhyr Hearthguard",
+      "baseSize": "⌀32mm",
+      "stats": {
+        "m": "5\"",
+        "t": 5,
+        "sv": "2+",
+        "w": 2,
+        "ld": "7+",
+        "oc": 1
+      },
+      "invulnerableSave": null,
+      "weapons": {
+        "ranged": [
+          {
+            "name": "EtaCarn plasma gun",
+            "range": "24\"",
+            "a": "1",
+            "bs": "3+",
+            "s": "7",
+            "ap": "-3",
+            "d": "2",
+            "abilities": [
+              "rapid fire 1"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Exoarmour grenade launcher",
+            "range": "24\"",
+            "a": "D3",
+            "bs": "3+",
+            "s": "3",
+            "ap": "0",
+            "d": "1",
+            "abilities": [
+              "blast"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Volkanite disintegrator",
+            "range": "24\"",
+            "a": "3",
+            "bs": "3+",
+            "s": "5",
+            "ap": "0",
+            "d": "1",
+            "abilities": [
+              "devastating wounds"
+            ],
+            "inheritedAbilities": []
+          }
+        ],
+        "melee": [
+          {
+            "name": "Concussion gauntlet",
+            "a": "2",
+            "ws": "3+",
+            "s": "8",
+            "ap": "-2",
+            "d": "2",
+            "abilities": [],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Graviton hammer",
+            "a": "3",
+            "ws": "4+",
+            "s": "9",
+            "ap": "-1",
+            "d": "3",
+            "abilities": [
+              "anti-monster 3+",
+              "anti-vehicle 3+"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Plasma blade gauntlet",
+            "a": "3",
+            "ws": "3+",
+            "s": "6",
+            "ap": "-2",
+            "d": "1",
+            "abilities": [],
+            "inheritedAbilities": []
+          }
+        ]
+      },
+      "points": 135,
+      "models": 4,
+      "type": [
+        "Other",
+        "Infantry",
+        "Exo-armour"
+      ],
+      "keywords": [
+        "INFANTRY",
+        "EXOARMOUR",
+        "EINHYR HEARTHGUARD"
+      ],
+      "factionKeywords": [
+        "LEAGUES OF VOTANN"
+      ],
+      "isLeader": false,
+      "abilities": [
+        "decisive-destruction"
+      ],
+      "coreAbilities": [],
+      "factionAbility": "Prioritised Efficiency",
+      "wargear": [
+        "teleport-crest",
+        "weavefield-crest"
+      ],
+      "wargearOptions": [
+        "All models in this unit can each have their EtaCarn plasma gun replaced with 1 volkanite disintegrator.",
+        "All models in this unit can each have their concussion gauntlet replaced with 1 plasma blade gauntlet.",
+        "The Hesyr’s concussion gauntlet or plasma blade gauntlet can be replaced with 1 graviton hammer.",
+        "The Hesyr’s weavefield crest can be replaced with 1 teleport crest."
+      ]
+    },
+    {
+      "id": "hekaton-land-fortress",
+      "name": "Hekaton Land Fortress",
+      "baseSize": "⌀Use model",
+      "stats": {
+        "m": "10\"",
+        "t": 12,
+        "sv": "2+",
+        "w": 16,
+        "ld": "7+",
+        "oc": 5
+      },
+      "invulnerableSave": null,
+      "weapons": {
+        "ranged": [
+          {
+            "name": "Cyclic ion cannon",
+            "range": "24\"",
+            "a": "D6+2",
+            "bs": "4+",
+            "s": "7",
+            "ap": "-2",
+            "d": "2",
+            "abilities": [
+              "blast"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Heavy magna-rail cannon",
+            "range": "30\"",
+            "a": "2",
+            "bs": "4+",
+            "s": "18",
+            "ap": "-4",
+            "d": "D6+4",
+            "abilities": [
+              "devastating wounds",
+              "heavy"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Hekaton warhead",
+            "range": "36\"",
+            "a": "D6+3",
+            "bs": "4+",
+            "s": "7",
+            "ap": "-2",
+            "d": "2",
+            "abilities": [
+              "blast",
+              "one shot"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "MATR autocannon",
+            "range": "24\"",
+            "a": "6",
+            "bs": "4+",
+            "s": "7",
+            "ap": "-1",
+            "d": "2",
+            "abilities": [
+              "assault",
+              "sustained hits 1"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "SP heavy conversion beamer",
+            "range": "24\"",
+            "a": "4",
+            "bs": "4+",
+            "s": "10",
+            "ap": "-2",
+            "d": "4",
+            "abilities": [
+              "conversion",
+              "lethal hits"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Twin bolt cannon",
+            "range": "36\"",
+            "a": "3",
+            "bs": "4+",
+            "s": "6",
+            "ap": "-1",
+            "d": "2",
+            "abilities": [
+              "sustained hits 2",
+              "twin-linked"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Twin ion beamer",
+            "range": "18\"",
+            "a": "D3+1",
+            "bs": "4+",
+            "s": "8",
+            "ap": "-2",
+            "d": "1",
+            "abilities": [
+              "blast",
+              "twin-linked"
+            ],
+            "inheritedAbilities": []
+          }
+        ],
+        "melee": [
+          {
+            "name": "Armoured wheels",
+            "a": "6",
+            "ws": "4+",
+            "s": "8",
+            "ap": "0",
+            "d": "1",
+            "abilities": [],
+            "inheritedAbilities": []
+          }
+        ]
+      },
+      "points": 240,
+      "models": 1,
+      "type": [
+        "Other",
+        "Vehicle"
+      ],
+      "keywords": [
+        "VEHICLE",
+        "TRANSPORT",
+        "HEKATON LAND FORTRESS"
+      ],
+      "factionKeywords": [
+        "LEAGUES OF VOTANN"
+      ],
+      "isLeader": false,
+      "transportCapacity": 14,
+      "damagedProfile": "1-5",
+      "deadlyDemise": "D6",
+      "abilities": [
+        "multicog-targeting",
+        "deadly-demise"
+      ],
+      "coreAbilities": [
+        "deadly-demise-d6"
+      ],
+      "factionAbility": "Prioritised Efficiency",
+      "wargear": [
+        "panspectral-scanner"
+      ],
+      "wargearOptions": [
+        "This model’s 2 twin bolt cannons can be replaced with one of the following: 1 twin bolt cannon and 1 twin ion beamer",
+        "This model’s 2 twin bolt cannons can be replaced with one of the following: 2 twin ion beamers",
+        "This model’s cyclic ion cannon can be replaced with one of the following: 1 SP heavy conversion beamer",
+        "This model’s cyclic ion cannon can be replaced with one of the following: 1 heavy magna-rail cannon",
+        "This model’s panspectral scanner can be replaced with 1 Hekaton warhead."
+      ]
+    },
+    {
+      "id": "hernkyn-pioneers",
+      "name": "Hernkyn Pioneers",
+      "baseSize": "⌀90 x 52mm",
+      "stats": {
+        "m": "12\"",
+        "t": 6,
+        "sv": "4+",
+        "w": 3,
+        "ld": "7+",
+        "oc": 2
+      },
+      "invulnerableSave": null,
+      "weapons": {
+        "ranged": [
+          {
+            "name": "Bolt revolver",
+            "range": "12\"",
+            "a": "1",
+            "bs": "4+",
+            "s": "5",
+            "ap": "0",
+            "d": "1",
+            "abilities": [
+              "pistol"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Bolt shotgun",
+            "range": "18\"",
+            "a": "2",
+            "bs": "4+",
+            "s": "5",
+            "ap": "0",
+            "d": "1",
+            "abilities": [
+              "assault"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "HYLas rotary cannon",
+            "range": "24\"",
+            "a": "6",
+            "bs": "4+",
+            "s": "6",
+            "ap": "-1",
+            "d": "1",
+            "abilities": [
+              "sustained hits 1"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Ion beamer",
+            "range": "18\"",
+            "a": "D3+1",
+            "bs": "4+",
+            "s": "8",
+            "ap": "-2",
+            "d": "1",
+            "abilities": [
+              "blast"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Magna-coil autocannon",
+            "range": "24\"",
+            "a": "3",
+            "bs": "4+",
+            "s": "7",
+            "ap": "-1",
+            "d": "2",
+            "abilities": [],
+            "inheritedAbilities": []
+          }
+        ],
+        "melee": [
+          {
+            "name": "Plasma knife",
+            "a": "2",
+            "ws": "4+",
+            "s": "4",
+            "ap": "-2",
+            "d": "1",
+            "abilities": [],
+            "inheritedAbilities": []
+          }
+        ]
+      },
+      "points": 80,
+      "models": 3,
+      "type": [
+        "Other",
+        "Mounted"
+      ],
+      "keywords": [
+        "MOUNTED",
+        "GRENADES",
+        "FLY",
+        "HERNKYN",
+        "PIONEERS"
+      ],
+      "factionKeywords": [
+        "LEAGUES OF VOTANN"
+      ],
+      "isLeader": false,
+      "abilities": [
+        "outflanking-mag-riders"
+      ],
+      "coreAbilities": [
+        "scouts-9"
+      ],
+      "factionAbility": "Prioritised Efficiency",
+      "wargear": [
+        "multiwave-comms-array",
+        "panspectral-scanner",
+        "rollbar-searchlight"
+      ],
+      "wargearOptions": [
+        "For every 3 models in this unit, 1 model can be equipped with one of the following:: 1 HYLas rotary cannon",
+        "For every 3 models in this unit, 1 model can be equipped with one of the following:: 1 ion beamer",
+        "1 model that is not equipped with either a HYLas rotary cannon or an ion beamer can be equipped with 1 multiwave comms array.*",
+        "1 model that is not equipped with either a HYLas rotary cannon or an ion beamer can be equipped with 1 panspectral scanner.*",
+        "1 model that is not equipped with either a HYLas rotary cannon or an ion beamer can be equipped with 1 rollbar searchlight.*"
+      ]
+    },
+    {
+      "id": "hernkyn-yaegirs",
+      "name": "Hernkyn Yaegirs",
+      "baseSize": "⌀28.5mm",
+      "stats": {
+        "m": "6\"",
+        "t": 5,
+        "sv": "5+",
+        "w": 1,
+        "ld": "7+",
+        "oc": 1
+      },
+      "invulnerableSave": null,
+      "weapons": {
+        "ranged": [
+          {
+            "name": "APM launcher",
+            "range": "24\"",
+            "a": "1",
+            "bs": "4+",
+            "s": "6",
+            "ap": "-2",
+            "d": "D6",
+            "abilities": [
+              "anti-monster 3+",
+              "anti-vehicle 3+"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Bolt revolver",
+            "range": "12\"",
+            "a": "1",
+            "bs": "4+",
+            "s": "5",
+            "ap": "0",
+            "d": "1",
+            "abilities": [
+              "pistol"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Bolt shotgun",
+            "range": "18\"",
+            "a": "2",
+            "bs": "4+",
+            "s": "5",
+            "ap": "0",
+            "d": "1",
+            "abilities": [
+              "assault"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Magna-coil rifle",
+            "range": "24\"",
+            "a": "1",
+            "bs": "4+",
+            "s": "5",
+            "ap": "-2",
+            "d": "2",
+            "abilities": [
+              "ignores cover",
+              "precision"
+            ],
+            "inheritedAbilities": []
+          }
+        ],
+        "melee": [
+          {
+            "name": "Close combat weapon",
+            "a": "1",
+            "ws": "4+",
+            "s": "4",
+            "ap": "0",
+            "d": "1",
+            "abilities": [],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Plasma knife",
+            "a": "2",
+            "ws": "4+",
+            "s": "4",
+            "ap": "-2",
+            "d": "1",
+            "abilities": [],
+            "inheritedAbilities": []
+          }
+        ]
+      },
+      "points": 90,
+      "models": 9,
+      "type": [
+        "Other",
+        "Infantry"
+      ],
+      "keywords": [
+        "INFANTRY",
+        "GRENADES",
+        "HERNKYN",
+        "YAEGIRS"
+      ],
+      "factionKeywords": [
+        "LEAGUES OF VOTANN"
+      ],
+      "isLeader": false,
+      "abilities": [
+        "pragmatic-hunters"
+      ],
+      "coreAbilities": [
+        "infiltrators"
+      ],
+      "factionAbility": "Prioritised Efficiency",
+      "wargear": [],
+      "wargearOptions": [
+        "All models in this unit can each have their bolt shotgun replaced with 1 bolt revolver and 1 plasma knife.",
+        "1 Hernkyn Yaegir can have its bolt revolver and plasma knife or its bolt shotgun replaced with 1 magna-coil rifle.",
+        "1 Hernkyn Yaegir can have its bolt revolver and plasma knife or its bolt shotgun replaced with 1 APM launcher."
+      ]
+    },
+    {
+      "id": "ironkin-steeljacks-with-heavy-volkanite-disintegrators",
+      "name": "Ironkin Steeljacks with Heavy Volkanite Disintegrators",
+      "baseSize": "⌀40mm",
+      "stats": {
+        "m": "5\"",
+        "t": 6,
+        "sv": "2+",
+        "w": 3,
+        "ld": "7+",
+        "oc": 1
+      },
+      "invulnerableSave": null,
+      "weapons": {
+        "ranged": [
+          {
+            "name": "Autoch-pattern bolter",
+            "range": "24\"",
+            "a": "2",
+            "bs": "4+",
+            "s": "4",
+            "ap": "0",
+            "d": "1",
+            "abilities": [
+              "pistol"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Heavy volkanite disintegrator",
+            "range": "24\"",
+            "a": "6",
+            "bs": "4+",
+            "s": "6",
+            "ap": "-1",
+            "d": "1",
+            "abilities": [
+              "devastating wounds"
+            ],
+            "inheritedAbilities": []
+          }
+        ],
+        "melee": [
+          {
+            "name": "Plasma knife",
+            "a": "2",
+            "ws": "3+",
+            "s": "6",
+            "ap": "-2",
+            "d": "1",
+            "abilities": [],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Plasma sword",
+            "a": "6",
+            "ws": "3+",
+            "s": "6",
+            "ap": "-2",
+            "d": "1",
+            "abilities": [
+              "sustained hits 1"
+            ],
+            "inheritedAbilities": []
+          }
+        ]
+      },
+      "points": 85,
+      "models": 2,
+      "type": [
+        "Other",
+        "Infantry"
+      ],
+      "keywords": [
+        "INFANTRY",
+        "IRONKIN STEELJACKS",
+        "IRONKIN STEELJACKS WITH HEAVY VOLKANITE DISINTEGRATORS"
+      ],
+      "factionKeywords": [
+        "LEAGUES OF VOTANN"
+      ],
+      "isLeader": false,
+      "abilities": [
+        "purge-response"
+      ],
+      "coreAbilities": [],
+      "factionAbility": "Prioritised Efficiency",
+      "wargear": [
+        "preymark-crest"
+      ],
+      "wargearOptions": [
+        "The Steeljack Theyn’s heavy volkanite disintegrator and plasma knife can be replaced with 1 Autoch-pattern bolter and 1 plasma sword."
+      ]
+    },
+    {
+      "id": "ironkin-steeljacks-with-melee-weapons",
+      "name": "Ironkin Steeljacks with Melee Weapons",
+      "baseSize": "⌀40mm",
+      "stats": {
+        "m": "5\"",
+        "t": 6,
+        "sv": "2+",
+        "w": 3,
+        "ld": "7+",
+        "oc": 1
+      },
+      "invulnerableSave": null,
+      "weapons": {
+        "ranged": [
+          {
+            "name": "Autoch-pattern bolter",
+            "range": "24\"",
+            "a": "2",
+            "bs": "4+",
+            "s": "4",
+            "ap": "0",
+            "d": "1",
+            "abilities": [
+              "pistol"
+            ],
+            "inheritedAbilities": []
+          }
+        ],
+        "melee": [
+          {
+            "name": "Concussion gauntlet",
+            "a": "3",
+            "ws": "4+",
+            "s": "10",
+            "ap": "-2",
+            "d": "2",
+            "abilities": [
+              "lethal hits"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Plasma sword",
+            "a": "6",
+            "ws": "3+",
+            "s": "6",
+            "ap": "-2",
+            "d": "1",
+            "abilities": [
+              "sustained hits 1"
+            ],
+            "inheritedAbilities": []
+          }
+        ]
+      },
+      "points": 85,
+      "models": 2,
+      "type": [
+        "Other",
+        "Infantry"
+      ],
+      "keywords": [
+        "INFANTRY",
+        "IRONKIN STEELJACKS",
+        "IRONKIN STEELJACKS WITH MELEE WEAPONS"
+      ],
+      "factionKeywords": [
+        "LEAGUES OF VOTANN"
+      ],
+      "isLeader": false,
+      "abilities": [
+        "merciless-eradication"
+      ],
+      "coreAbilities": [],
+      "factionAbility": "Prioritised Efficiency",
+      "wargear": [
+        "preymark-crest"
+      ],
+      "wargearOptions": [
+        "Any number of models in this unit can each have their plasma sword replaced with 1 concussion gauntlet."
+      ]
+    },
+    {
+      "id": "kapricus-defenders",
+      "name": "Kapricus Defenders",
+      "baseSize": "⌀105 x 70mm",
+      "stats": {
+        "m": "12\"",
+        "t": 7,
+        "sv": "4+",
+        "w": 7,
+        "ld": "7+",
+        "oc": 2
+      },
+      "invulnerableSave": null,
+      "weapons": {
+        "ranged": [
+          {
+            "name": "HYLas rotary cannon",
+            "range": "24\"",
+            "a": "6",
+            "bs": "4+",
+            "s": "6",
+            "ap": "-1",
+            "d": "2",
+            "abilities": [
+              "sustained hits 1"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Magna-rail cannon",
+            "range": "24\"",
+            "a": "1",
+            "bs": "4+",
+            "s": "14",
+            "ap": "-4",
+            "d": "D3+3",
+            "abilities": [
+              "devastating wounds",
+              "heavy"
+            ],
+            "inheritedAbilities": []
+          },
+          {
+            "name": "Twin magna-coil autocannon",
+            "range": "24\"",
+            "a": "3",
+            "bs": "4+",
+            "s": "7",
+            "ap": "-1",
+            "d": "2",
+            "abilities": [
+              "twin-linked"
+            ],
+            "inheritedAbilities": []
+          }
+        ],
+        "melee": [
+          {
+            "name": "Armoured hull",
+            "a": "3",
+            "ws": "4+",
+            "s": "6",
+            "ap": "0",
+            "d": "1",
+            "abilities": [],
+            "inheritedAbilities": []
+          }
+        ]
+      },
+      "points": 70,
+      "models": 1,
+      "type": [
+        "Other",
+        "Vehicle"
+      ],
+      "keywords": [
+        "VEHICLE",
+        "FLY",
+        "HERNKYN",
+        "KAPRICUS",
+        "DEFENDERS"
+      ],
+      "factionKeywords": [
+        "LEAGUES OF VOTANN"
+      ],
+      "isLeader": false,
+      "deadlyDemise": "1",
+      "abilities": [
+        "opportunistic-manoeuvre",
+        "deadly-demise"
+      ],
+      "coreAbilities": [
+        "deadly-demise-1",
+        "scouts-9"
+      ],
+      "factionAbility": "Prioritised Efficiency",
+      "wargear": [
+        "smoke-launcher"
+      ],
+      "wargearOptions": [
+        "Any number of models in this unit can each have their magna-rail cannon replaced with 1 HYLas rotary cannon.",
+        "Any number of models can each be equipped with 1 smoke launcher."
+      ]
+    }
+  ]
+}

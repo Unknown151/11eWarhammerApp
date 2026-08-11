@@ -1,0 +1,71 @@
+{
+  "id": "ironkin-steeljacks-melee",
+  "name": "Ironkin Steeljacks with Melee Weapons",
+  "type": ["Infantry"],
+  "keywords": ["INFANTRY", "IRONKIN STEELJACKS", "IRONKIN STEELJACKS WITH MELEE WEAPONS"],
+  "isLeader": false,
+  "points": 80,
+  "models": 3,
+  "baseModels": 3,
+  "maxModels": 6,
+  "costing": {
+    "escalationAfter": 2,
+    "tiers": [
+      [{ "models": 3, "points": 80 }, { "models": 6, "points": 160 }],
+      [{ "models": 3, "points": 90 }, { "models": 6, "points": 170 }]
+    ]
+  },
+  "stats": {
+    "m": "5\"",
+    "t": 6,
+    "sv": "2+",
+    "w": 3,
+    "ld": "7+",
+    "oc": 1
+  },
+  "invulnerableSave": null,
+  "weapons": {
+    "ranged": [
+      {
+        "name": "Autoch-pattern bolter",
+        "range": "24\"",
+        "a": "2",
+        "bs": "4+",
+        "s": "4",
+        "ap": "0",
+        "d": "1",
+        "abilities": ["pistol"],
+        "inheritedAbilities": []
+      }
+    ],
+    "melee": [
+      {
+        "name": "Concussion gauntlet",
+        "a": "3",
+        "ws": "4+",
+        "s": "10",
+        "ap": "-2",
+        "d": "2",
+        "abilities": ["lethal-hits"],
+        "inheritedAbilities": []
+      },
+      {
+        "name": "Plasma sword",
+        "a": "6",
+        "ws": "3+",
+        "s": "6",
+        "ap": "-2",
+        "d": "1",
+        "abilities": [{"id": "sustained-hits", "display": "Sustained Hits 1"}],
+        "inheritedAbilities": []
+      }
+    ]
+  },
+  "abilities": ["merciless-eradication"],
+  "coreAbilities": [],
+  "wargear": ["preymark-crest"],
+  "wargearOptions": [
+    "Any number of models in this unit can each have their plasma sword replaced with 1 concussion gauntlet."
+  ],
+  "canBeLeadBy": ["memnyr-strategist"]
+}

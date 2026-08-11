@@ -1,0 +1,83 @@
+{
+  "id": "thunderkyn",
+  "name": "Brôkhyr Thunderkyn",
+  "type": ["Infantry", "Exo-frame"],
+  "keywords": ["INFANTRY", "EXO-FRAME", "BRÔKHYR", "THUNDERKYN"],
+  "isLeader": false,
+  "points": 80,
+  "models": 3,
+  "baseModels": 3,
+  "maxModels": 6,
+  "costing": {
+    "escalationAfter": 2,
+    "tiers": [
+      [{ "models": 3, "points": 80 }, { "models": 6, "points": 160 }],
+      [{ "models": 3, "points": 90 }, { "models": 6, "points": 170 }]
+    ]
+  },
+  "stats": {
+    "m": "5\"",
+    "t": 6,
+    "sv": "3+",
+    "w": 2,
+    "ld": "7+",
+    "oc": 1
+  },
+  "invulnerableSave": null,
+  "weapons": {
+    "ranged": [
+      {
+        "name": "Bolt cannon",
+        "count": 6,
+        "range": "36\"",
+        "a": "3",
+        "bs": "4+",
+        "s": "6",
+        "ap": "-1",
+        "d": "2",
+        "abilities": [{"id": "sustained-hits", "display": "Sustained Hits 2"}],
+        "inheritedAbilities": []
+      },
+      {
+        "name": "Graviton blast cannon",
+        "count": 6,
+        "range": "24\"",
+        "a": "3",
+        "bs": "4+",
+        "s": "5",
+        "ap": "-2",
+        "d": "3",
+        "abilities": ["anti-vehicle", "anti-monster"],
+        "inheritedAbilities": []
+      },
+      {
+        "name": "SP conversion beamer",
+        "count": 6,
+        "range": "24\"",
+        "a": "2",
+        "bs": "4+",
+        "s": "7",
+        "ap": "-2",
+        "d": "3",
+        "abilities": ["conversion", "lethal-hits"],
+        "inheritedAbilities": []
+      }
+    ],
+    "melee": [
+      {
+        "name": "Close combat weapon",
+        "count": 6,
+        "a": "2",
+        "ws": "4+",
+        "s": "4",
+        "ap": "0",
+        "d": "1",
+        "abilities": [],
+        "inheritedAbilities": []
+      }
+    ]
+  },
+  "abilities": ["breaching-fire"],
+  "wargear": [],
+  "canBeLeadBy": ["iron-master"]
+}

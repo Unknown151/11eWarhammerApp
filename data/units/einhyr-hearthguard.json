@@ -1,0 +1,105 @@
+{
+  "id": "einhyr-hearthguard",
+  "name": "Einhyr Hearthguard",
+  "type": ["Infantry", "Exo-armour"],
+  "keywords": ["INFANTRY", "EXO-ARMOUR", "EINHYR HEARTHGUARD"],
+  "isLeader": false,
+  "points": 130,
+  "models": 5,
+  "baseModels": 5,
+  "maxModels": 10,
+  "modelBreakdown": "1 Hesyr + 4 Hearthguard",
+  "costing": {
+    "escalationAfter": 2,
+    "tiers": [
+      [{ "models": 5, "points": 130 }, { "models": 10, "points": 270 }],
+      [{ "models": 5, "points": 140 }, { "models": 10, "points": 280 }]
+    ]
+  },
+  "stats": {
+    "m": "5\"",
+    "t": 5,
+    "sv": "2+",
+    "w": 2,
+    "ld": "7+",
+    "oc": 1
+  },
+  "wargearExclusiveChoices": ["weavefield-crest-hesyr", "teleport-crest"],
+  "weapons": {
+    "ranged": [
+      {
+        "name": "EtaCarn plasma gun",
+        "count": 5,
+        "range": "24\"",
+        "a": "1",
+        "bs": "3+",
+        "s": "7",
+        "ap": "-3",
+        "d": "2",
+        "abilities": [{"id": "rapid-fire", "display": "Rapid Fire 1"}],
+        "inheritedAbilities": []
+      },
+      {
+        "name": "Exo-armour grenade launcher",
+        "count": 5,
+        "range": "24\"",
+        "a": "D3",
+        "bs": "3+",
+        "s": "3",
+        "ap": "0",
+        "d": "1",
+        "abilities": ["blast"],
+        "inheritedAbilities": []
+      },
+      {
+        "name": "Volkanite disintegrator",
+        "count": 5,
+        "range": "24\"",
+        "a": "3",
+        "bs": "3+",
+        "s": "5",
+        "ap": "0",
+        "d": "1",
+        "abilities": ["devastating-wounds"],
+        "inheritedAbilities": []
+      }
+    ],
+    "melee": [
+      {
+        "name": "Concussion gauntlet",
+        "count": 4,
+        "a": "2",
+        "ws": "3+",
+        "s": "8",
+        "ap": "-2",
+        "d": "2",
+        "abilities": [],
+        "inheritedAbilities": []
+      },
+      {
+        "name": "Graviton hammer",
+        "model": "Hesyr",
+        "a": "3",
+        "ws": "4+",
+        "s": "9",
+        "ap": "-1",
+        "d": "3",
+        "abilities": ["anti-vehicle", "anti-monster"],
+        "inheritedAbilities": []
+      },
+      {
+        "name": "Plasma blade gauntlet",
+        "count": 4,
+        "a": "3",
+        "ws": "3+",
+        "s": "6",
+        "ap": "-2",
+        "d": "1",
+        "abilities": [],
+        "inheritedAbilities": []
+      }
+    ]
+  },
+  "abilities": ["decisive-destruction"],
+  "canBeLeadBy": ["kahl", "einhyr-champion", "uthar"]
+}
