@@ -4,7 +4,7 @@
   "type": ["Infantry", "Artillery"],
   "keywords": ["INFANTRY", "ARTILLERY", "CTHONIAN", "EARTHSHAKERS"],
   "isLeader": false,
-  "points": 110,
+  "points": 100,
   "models": 2,
   "stats": {
     "m": "4\"",

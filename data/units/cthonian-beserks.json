@@ -4,13 +4,13 @@
   "type": ["Infantry"],
   "keywords": ["INFANTRY", "CTHONIAN", "BESERKS"],
   "isLeader": false,
-  "points": 100,
+  "points": 95,
   "models": 5,
   "baseModels": 5,
   "maxModels": 10,
   "costing": {
     "tiers": [
-      [{ "models": 5, "points": 100 }, { "models": 10, "points": 200 }]
+      [{ "models": 5, "points": 95 }, { "models": 10, "points": 190 }]
     ]
   },
   "stats": {

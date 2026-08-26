@@ -5,7 +5,7 @@
   "keywords": ["INFANTRY", "BATTLELINE", "GRENADES", "HEARTHKYN WARRIORS"],
   "isLeader": false,
   "isBattleline": true,
-  "points": 100,
+  "points": 90,
   "models": 10,
   "modelBreakdown": "1 Theyn + 9 Warriors",
   "stats": {

@@ -11,8 +11,8 @@
   "costing": {
     "escalationAfter": 2,
     "tiers": [
-      [{ "models": 3, "points": 80 }, { "models": 6, "points": 160 }],
-      [{ "models": 3, "points": 90 }, { "models": 6, "points": 170 }]
+      [{ "models": 3, "points": 80 }, { "models": 6, "points": 170 }],
+      [{ "models": 3, "points": 90 }, { "models": 6, "points": 180 }]
     ]
   },
   "stats": {
